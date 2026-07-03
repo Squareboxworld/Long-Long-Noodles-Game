@@ -41,11 +41,14 @@ Status: final Version 0.1 local manual test checklist
 ## Screens
 
 - Welcome page shows the game name and enter-game action.
-- Farm page shows a placeholder farm area.
+- Farm page shows the farm background PNG when available, with CSS fallback if the image is missing.
 - Farm page shows land count.
 - Farm page shows 16 crop slots.
-- Farm page shows every crop slot as `empty`.
+- Farm page shows every crop slot as `empty` with soil tile art when available.
 - Farm page shows inventory summary for gold, wheat seeds, and wheat.
+- Farm page shows resource icons for gold, wheat seeds, wheat, and water where available.
+- Farm page shows Squarebox idle art as a decorative farm character when available.
+- Farm action buttons remain readable while using button PNG art where available.
 - Farm page shows `Dev Fast Growth Mode`.
 - Inventory page shows Gold `0`, Wheat Seeds `4`, and Wheat `0`.
 - Pawn Shop page is separate from the Farm page.
@@ -62,6 +65,7 @@ Status: final Version 0.1 local manual test checklist
 - Select an empty crop slot.
 - Click `Plant Wheat`.
 - Confirm the selected slot status changes to `planted`.
+- Confirm the planted slot shows the wheat seed stage image.
 - Confirm Wheat Seeds decreases from `4` to `3`.
 - Confirm selected slot details show crop type `wheat`, planted timestamp, and growth started timestamp.
 - Click `Water`.
@@ -75,8 +79,10 @@ Status: final Version 0.1 local manual test checklist
 - Select an empty slot and click `Water`.
 - Confirm the friendly message says `There is no crop here to water.`
 - After planting and watering wheat, confirm growth progress starts increasing.
+- Confirm wheat visuals progress from sprout to small to growing as progress increases.
 - Wait for the dev fast-growth duration to pass.
 - Confirm the watered crop reaches status `mature`, Mature `yes`, and Growth Progress `100%`.
+- Confirm mature wheat shows the mature wheat image.
 - Confirm selected crop details show Can Harvest `yes`.
 - Click `Harvest`.
 - Confirm feedback says `You harvested 1 wheat.`
@@ -121,10 +127,22 @@ Status: final Version 0.1 local manual test checklist
 
 - Buttons are easy to tap on a phone-sized viewport.
 - Navigation does not overflow on mobile.
-- Farm crop slots remain readable on mobile.
+- Farm crop slots and crop art remain readable on mobile.
 - Crop progress bars fit inside crop slots on mobile.
 - Text does not overlap with farm or shop placeholder elements.
 - Pages do not require awkward horizontal scrolling at phone widths.
+
+## Art Integration Checks
+
+- Confirm `src/data/assetManifest.js` marks detected Farm PNG assets as `available`.
+- Confirm unknown or missing asset IDs still fall back safely through `getAssetPath()`.
+- Confirm no broken-image icon blocks a crop slot, button, resource row, or Squarebox decoration.
+- Confirm decorative crop images do not block crop slot clicks or taps.
+- Confirm dry wheat art is not used yet because dry crop logic is not active.
+- Confirm temporary PNG assets look acceptable even if a file has a solid or imperfect background.
+- Confirm soil, wheat, icon, Squarebox, and button images do not stretch outside their containers.
+- Confirm action button text remains readable over button art in valid and invalid states.
+- Confirm final handmade art can replace the temporary PNG files later using the same filenames without changing gameplay.
 
 ## localStorage Safety Checks
 

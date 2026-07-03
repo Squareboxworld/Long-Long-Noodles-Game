@@ -69,6 +69,12 @@ The visible `Reset Dev State` button returns the app to this starting state duri
 
 The Help page is a GitHub-style tester guide with sections for Getting Started, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
+## Art Assets
+
+Art assets are organized through an asset manifest. The Farm page now uses available PNGs for the farm background, soil tiles, wheat stages, resource icons, Squarebox idle art, and action button art. CSS fallback visuals remain in place if an image is missing or broken. See [docs/art-asset-manifest.md](docs/art-asset-manifest.md) for folders, IDs, and current paths.
+
+These PNG assets are temporary test assets for layout and integration. Final handmade art may replace them later by using the same filenames and manifest IDs. Transparency imperfections are acceptable at this stage as long as gameplay remains readable and stable.
+
 ## Important Exclusions
 
 The following systems are intentionally not included:
@@ -90,6 +96,6 @@ The following systems are intentionally not included:
 - Tools
 - Land expansion
 - Wandering Merchant
-- Final art assets
+- Generated final art beyond the provided PNGs
 
 See [docs/version-0.1-scope.md](docs/version-0.1-scope.md) for the active scope.

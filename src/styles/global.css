@@ -229,6 +229,62 @@ summary:focus-visible {
   color: #4b3514;
 }
 
+.farm-art-action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 148px;
+  overflow: hidden;
+  border: 2px solid rgba(75, 52, 30, 0.18);
+  background-color: rgba(255, 247, 223, 0.94);
+  background-image:
+    linear-gradient(180deg, rgba(255, 252, 243, 0.9), rgba(255, 235, 183, 0.82)),
+    var(--button-art);
+  background-position:
+    center,
+    12px center;
+  background-repeat: no-repeat;
+  background-size:
+    100% 100%,
+    auto 82%;
+  box-shadow: inset 0 -3px 0 rgba(80, 52, 24, 0.12);
+  isolation: isolate;
+}
+
+.farm-art-action::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 252, 243, 0.68), rgba(255, 252, 243, 0.28)),
+    rgba(255, 249, 226, 0.18);
+  content: "";
+}
+
+.action-icon,
+.action-text {
+  position: relative;
+  z-index: 1;
+}
+
+.action-icon {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.action-text {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 252, 243, 0.64);
+  color: #352715;
+  line-height: 1.1;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
 .shop-action {
   width: 100%;
   margin-top: 14px;
@@ -238,8 +294,8 @@ summary:focus-visible {
 
 .action-softened {
   cursor: pointer;
-  filter: saturate(0.65);
-  opacity: 0.58;
+  filter: saturate(0.62);
+  opacity: 0.68;
 }
 
 .cloud-card {
@@ -329,11 +385,32 @@ summary:focus-visible {
 }
 
 .farm-scene {
+  position: relative;
   min-width: 0;
   overflow: hidden;
   border: 3px solid rgba(94, 123, 62, 0.22);
   border-radius: 32px;
-  background: linear-gradient(180deg, #cceff2 0%, #f7edbf 42%, #9fc978 42%, #8dba64 100%);
+  background-color: #cceff2;
+  background-image: linear-gradient(180deg, #cceff2 0%, #f7edbf 42%, #9fc978 42%, #8dba64 100%);
+  background-position: center bottom;
+  background-size: cover;
+}
+
+.farm-scene-art {
+  min-height: 640px;
+  border-color: rgba(77, 111, 66, 0.26);
+  background-repeat: no-repeat;
+}
+
+.farm-scene-art::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.36), transparent 24%),
+    linear-gradient(180deg, rgba(255, 253, 241, 0.08), rgba(86, 118, 63, 0.14));
+  content: "";
+  pointer-events: none;
 }
 
 .growth-mode-label {
@@ -350,10 +427,66 @@ summary:focus-visible {
 }
 
 .farm-sky {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   padding: 28px 36px;
   font-size: 2.5rem;
+}
+
+.farm-sky span {
+  position: relative;
+  display: block;
+  width: 102px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+}
+
+.farm-sky span::before,
+.farm-sky span::after {
+  position: absolute;
+  content: "";
+  border-radius: 999px;
+  background: inherit;
+}
+
+.farm-sky span::before {
+  top: -17px;
+  left: 18px;
+  width: 42px;
+  height: 42px;
+}
+
+.farm-sky span::after {
+  top: -12px;
+  right: 17px;
+  width: 50px;
+  height: 50px;
+}
+
+.farm-character-perch {
+  position: absolute;
+  right: 28px;
+  bottom: 112px;
+  z-index: 1;
+  display: grid;
+  width: min(168px, 28%);
+  aspect-ratio: 1;
+  place-items: end center;
+  overflow: hidden;
+  border-radius: 22px;
+  background: rgba(255, 252, 243, 0.18);
+  pointer-events: none;
+}
+
+.farm-character-image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 18px rgba(54, 76, 42, 0.24));
 }
 
 .farm-state-bar {
@@ -370,6 +503,23 @@ summary:focus-visible {
   background: #fff9ea;
 }
 
+.farm-resource-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+}
+
+.farm-resource-icon {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255, 252, 243, 0.58);
+}
+
 .farm-state-bar span {
   display: block;
   color: #6f6552;
@@ -377,19 +527,33 @@ summary:focus-visible {
   font-weight: 800;
 }
 
+.farm-state-bar .farm-resource-label {
+  display: flex;
+}
+
 .farm-state-bar strong {
   display: block;
   color: #31535c;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   line-height: 1.1;
 }
 
 .crop-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-auto-rows: 1fr;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-  padding: 0 24px 24px;
+  margin: 0 24px 24px;
+  padding: 18px;
+  border: 2px solid rgba(255, 252, 243, 0.62);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 243, 0.46), rgba(229, 205, 145, 0.22)),
+    rgba(255, 249, 226, 0.36);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 18px 32px rgba(58, 78, 45, 0.12);
 }
 
 .crop-slot {
@@ -400,7 +564,8 @@ summary:focus-visible {
   justify-content: center;
   gap: 6px;
   min-width: 0;
-  min-height: 98px;
+  aspect-ratio: 1 / 0.86;
+  min-height: 112px;
   padding: 12px 8px;
   border: 2px solid rgba(95, 71, 48, 0.16);
   border-radius: 18px;
@@ -412,23 +577,100 @@ summary:focus-visible {
     border-color 160ms ease,
     box-shadow 160ms ease,
     transform 160ms ease;
+  overflow: hidden;
+}
+
+.crop-slot::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 252, 243, 0.1), rgba(65, 73, 36, 0.08));
+  content: "";
+  pointer-events: none;
+}
+
+.crop-slot > *:not(.crop-slot-art) {
+  position: relative;
+  z-index: 2;
+}
+
+.crop-slot-with-art {
+  background:
+    linear-gradient(180deg, rgba(255, 250, 230, 0.74), rgba(201, 150, 91, 0.28)),
+    rgba(255, 246, 216, 0.58);
+}
+
+.crop-slot-art {
+  position: absolute;
+  inset: 8px;
+  z-index: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 243, 0.34), rgba(109, 86, 54, 0.1)),
+    rgba(225, 181, 114, 0.32);
+  pointer-events: none;
+}
+
+.slot-soil-image,
+.slot-wheat-image,
+.slot-overlay-image {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.slot-soil-image {
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 14px;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+}
+
+.slot-wheat-image {
+  right: 10%;
+  bottom: 13px;
+  left: 10%;
+  width: 80%;
+  height: 66%;
+  max-width: 84%;
+  max-height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 7px rgba(58, 74, 39, 0.2));
+}
+
+.slot-overlay-image {
+  top: 8px;
+  right: 8px;
+  width: min(34%, 42px);
+  height: min(34%, 42px);
+  object-fit: contain;
+  filter: drop-shadow(0 4px 5px rgba(43, 54, 38, 0.16));
 }
 
 .crop-slot-empty {
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 42%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 42%),
     #d2a36d;
 }
 
 .crop-slot-planted {
   background:
-    linear-gradient(180deg, rgba(196, 232, 153, 0.58), rgba(163, 198, 112, 0.18)),
+    linear-gradient(180deg, rgba(205, 238, 164, 0.72), rgba(163, 198, 112, 0.28)),
     #c8945a;
 }
 
 .crop-slot-growing {
   background:
-    linear-gradient(180deg, rgba(206, 239, 154, 0.72), rgba(149, 196, 105, 0.28)),
+    linear-gradient(180deg, rgba(211, 244, 154, 0.82), rgba(124, 185, 96, 0.34)),
     #be9259;
 }
 
@@ -441,16 +683,17 @@ summary:focus-visible {
 
 .crop-slot-mature {
   background:
-    linear-gradient(180deg, rgba(255, 226, 123, 0.86), rgba(241, 174, 86, 0.42)),
+    linear-gradient(180deg, rgba(255, 230, 121, 0.94), rgba(244, 174, 70, 0.5)),
     #c88c44;
-  border-color: rgba(125, 87, 27, 0.52);
+  border-color: rgba(123, 84, 20, 0.66);
 }
 
 .crop-slot-selected {
-  border-color: #31535c;
+  border-color: #243f47;
   box-shadow:
-    0 0 0 4px rgba(255, 249, 220, 0.92),
-    0 12px 20px rgba(62, 78, 57, 0.2);
+    0 0 0 4px rgba(255, 249, 220, 0.96),
+    0 0 0 8px rgba(49, 83, 92, 0.24),
+    0 14px 24px rgba(40, 61, 46, 0.24);
   transform: translateY(-2px);
 }
 
@@ -468,7 +711,11 @@ summary:focus-visible {
   position: absolute;
   top: 8px;
   left: 10px;
-  color: rgba(70, 45, 24, 0.52);
+  min-width: 24px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(255, 252, 243, 0.68);
+  color: rgba(70, 45, 24, 0.66);
   font-size: 0.78rem;
   font-weight: 800;
 }
@@ -477,9 +724,10 @@ summary:focus-visible {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 999px;
-  background: rgba(255, 248, 226, 0.76);
+  background: rgba(255, 248, 226, 0.9);
+  box-shadow: 0 3px 8px rgba(60, 45, 27, 0.08);
   color: #4a3925;
-  font-size: 0.88rem;
+  font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -497,10 +745,12 @@ summary:focus-visible {
 
 .slot-progress {
   width: min(92px, 84%);
-  height: 9px;
+  height: 10px;
   overflow: hidden;
+  border: 1px solid rgba(61, 48, 31, 0.18);
   border-radius: 999px;
-  background: rgba(78, 54, 31, 0.2);
+  background: rgba(255, 252, 243, 0.78);
+  box-shadow: 0 3px 8px rgba(60, 45, 27, 0.1);
 }
 
 .slot-progress span {
@@ -511,7 +761,10 @@ summary:focus-visible {
 }
 
 .slot-progress-label {
-  color: #3f4f2e;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 252, 243, 0.72);
+  color: #334329;
   font-size: 0.76rem;
   font-weight: 900;
 }
@@ -525,9 +778,13 @@ summary:focus-visible {
 }
 
 .farm-note {
+  position: relative;
+  z-index: 2;
   padding: 16px 24px 22px;
-  background: rgba(255, 252, 243, 0.72);
+  border-top: 1px solid rgba(255, 252, 243, 0.54);
+  background: rgba(255, 252, 243, 0.82);
   color: #586253;
+  backdrop-filter: blur(4px);
 }
 
 .selected-slot-panel {
@@ -889,9 +1146,17 @@ summary:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .farm-scene-art {
+    min-height: 560px;
+  }
+
   .farm-sky {
     padding: 22px 24px;
     font-size: 2rem;
+  }
+
+  .farm-character-perch {
+    width: min(128px, 30%);
   }
 }
 
@@ -945,9 +1210,24 @@ summary:focus-visible {
     gap: 4px;
   }
 
+  .crop-slot-art {
+    inset: 6px;
+    border-radius: 12px;
+  }
+
+  .slot-wheat-image {
+    bottom: 10px;
+    height: 62%;
+  }
+
   .crop-grid {
     gap: 8px;
-    padding: 0 12px 14px;
+    margin: 0 12px 14px;
+    padding: 12px;
+  }
+
+  .farm-scene-art {
+    min-height: 520px;
   }
 
   .slot-status {
@@ -966,6 +1246,32 @@ summary:focus-visible {
   .farm-sky {
     padding: 18px 18px;
     font-size: 1.7rem;
+  }
+
+  .farm-sky span {
+    width: 74px;
+    height: 25px;
+  }
+
+  .farm-sky span::before {
+    top: -12px;
+    left: 13px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .farm-sky span::after {
+    top: -9px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .farm-character-perch {
+    right: 16px;
+    bottom: 96px;
+    width: 94px;
+    border-radius: 16px;
   }
 
   .farm-note,
