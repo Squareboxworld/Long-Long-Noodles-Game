@@ -25,6 +25,16 @@ const actionAssetIds = {
   wheatSeedIcon: 'icon_wheat_seed',
 };
 
+const objectiveCueAssetIds = {
+  buy: 'icon_wheat_seed',
+  harvest: 'icon_wheat',
+  plant: 'icon_wheat_seed',
+  sell: 'icon_gold_coin',
+  stuck: 'icon_wheat_seed',
+  wait: 'icon_water_drop',
+  water: 'icon_water_drop',
+};
+
 const beginnerLoopSteps = [
   'Plant wheat seeds.',
   'Water planted wheat.',
@@ -56,6 +66,8 @@ function getCurrentObjective(gameState) {
 
   if (hasMatureWheat) {
     return {
+      action: 'harvest',
+      cue: 'Harvest wheat',
       detail: 'Mature wheat gives 1 wheat and clears the crop slot.',
       label: 'Ready to harvest',
       title: 'Harvest your mature wheat.',
@@ -64,6 +76,8 @@ function getCurrentObjective(gameState) {
 
   if (hasUnwateredWheat) {
     return {
+      action: 'water',
+      cue: 'Water planted wheat',
       detail: 'Watered wheat can start growing toward maturity.',
       label: 'Care for crops',
       title: 'Water your planted wheat so it can grow.',
@@ -72,6 +86,8 @@ function getCurrentObjective(gameState) {
 
   if (inventory.wheat > 0) {
     return {
+      action: 'sell',
+      cue: 'Sell wheat',
       detail: `Pawn Shop buys 1 wheat for ${PAWN_SHOP_WHEAT_SELL_PRICE} gold. Wheat does not automatically become seed.`,
       label: 'Visit shop',
       title: 'Go to the Pawn Shop and sell wheat for gold.',
@@ -80,6 +96,8 @@ function getCurrentObjective(gameState) {
 
   if (inventory.gold >= WHEAT_SEED_COST && inventory.wheatSeeds === 0) {
     return {
+      action: 'buy',
+      cue: 'Buy seeds',
       detail: `A wheat seed costs ${WHEAT_SEED_COST} gold.`,
       label: 'Buy seed',
       title: 'Buy wheat seeds from the Pawn Shop.',
@@ -88,6 +106,8 @@ function getCurrentObjective(gameState) {
 
   if (hasWateredGrowingWheat) {
     return {
+      action: 'wait',
+      cue: 'Growing',
       detail: 'Dev Fast Growth Mode makes this faster for testing.',
       label: 'Growing',
       title: 'Wait for your wheat to grow.',
@@ -96,6 +116,8 @@ function getCurrentObjective(gameState) {
 
   if (inventory.wheatSeeds > 0 && hasEmptySlot) {
     return {
+      action: 'plant',
+      cue: 'Plant seeds',
       detail: 'Select an empty soil slot, then use Plant Wheat.',
       label: 'Start here',
       title: 'Plant your wheat seeds in empty soil slots.',
@@ -104,6 +126,8 @@ function getCurrentObjective(gameState) {
 
   if (inventory.wheatSeeds === 0 && inventory.wheat === 0 && inventory.gold < WHEAT_SEED_COST) {
     return {
+      action: 'stuck',
+      cue: 'Reset if stuck',
       detail: 'This guidance does not add rescue rewards. Reset only restarts the local test state.',
       label: 'Test build',
       title: 'You are stuck in this test build. Use Reset Dev State to restart.',
@@ -111,9 +135,85 @@ function getCurrentObjective(gameState) {
   }
 
   return {
+    action: 'loop',
+    cue: 'Follow the loop',
     detail: 'Follow the farm loop: plant, water, grow, harvest, sell, buy seed, repeat.',
     label: 'Loop',
     title: 'Keep the wheat loop moving.',
+  };
+}
+
+function getCropSlotVisualHint(gameState, slot) {
+  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
+    return {
+      className: 'crop-slot-hint-harvest',
+      label: 'Harvest',
+    };
+  }
+
+  if (isWheatCrop(slot) && !slot.isWatered && !slot.isMature) {
+    return {
+      className: 'crop-slot-hint-water',
+      label: 'Needs water',
+    };
+  }
+
+  if (isWheatCrop(slot) && slot.isWatered && !slot.isMature) {
+    return {
+      className: 'crop-slot-hint-growing',
+      label: 'Growing',
+    };
+  }
+
+  if (gameState.inventory.wheatSeeds > 0 && slot.status === CROP_SLOT_STATUS.EMPTY) {
+    return {
+      className: 'crop-slot-hint-plant',
+      label: 'Plant here',
+    };
+  }
+
+  return null;
+}
+
+function getSuggestedFarmAction(selectedSlot, plantIsValid, waterIsValid, harvestIsValid) {
+  if (!selectedSlot) {
+    return {
+      action: 'select',
+      message: 'Select a soil slot first.',
+    };
+  }
+
+  if (harvestIsValid) {
+    return {
+      action: 'harvest',
+      message: 'Harvest is the useful action for this mature wheat.',
+    };
+  }
+
+  if (waterIsValid) {
+    return {
+      action: 'water',
+      message: 'Water is the useful action for this planted wheat.',
+    };
+  }
+
+  if (plantIsValid) {
+    return {
+      action: 'plant',
+      message: 'Plant Wheat is the useful action for this empty soil slot.',
+    };
+  }
+
+  if (isWheatCrop(selectedSlot) && selectedSlot.isWatered && !selectedSlot.isMature) {
+    return {
+      action: 'wait',
+      message: 'This wheat is growing. Wait until it reaches 100%.',
+    };
+  }
+
+  return {
+    action: 'none',
+    message: 'This slot has no useful farm action right now.',
   };
 }
 
@@ -196,10 +296,11 @@ function getCropSlotArt(slot) {
   };
 }
 
-function getActionClassName(baseClassName, isValid, assetPath) {
+function getActionClassName(baseClassName, isValid, assetPath, isSuggested = false) {
   return [
     baseClassName,
     isValid ? '' : 'action-softened',
+    isSuggested ? 'action-suggested' : '',
     assetPath ? 'farm-art-action' : '',
   ]
     .filter(Boolean)
@@ -259,6 +360,12 @@ export default function FarmPage({
   const plantIsValid = canPlantWheat(gameState, selectedSlot?.slotId);
   const waterIsValid = canWaterCrop(gameState, selectedSlot?.slotId);
   const harvestIsValid = canHarvestWheat(gameState, selectedSlot?.slotId);
+  const suggestedFarmAction = getSuggestedFarmAction(
+    selectedSlot,
+    plantIsValid,
+    waterIsValid,
+    harvestIsValid,
+  );
   const farmBackgroundPath = getAssetPath('bg_farm_main');
   const squareboxIdlePath = getAssetPath('character_squarebox_idle');
   const plantButtonPath = getAssetPath(actionAssetIds.plantButton);
@@ -267,6 +374,7 @@ export default function FarmPage({
   const wheatSeedIconPath = getAssetPath(actionAssetIds.wheatSeedIcon);
   const waterIconPath = getAssetPath(actionAssetIds.waterIcon);
   const wheatIconPath = getAssetPath(actionAssetIds.wheatIcon);
+  const currentObjectiveIconPath = getAssetPath(objectiveCueAssetIds[currentObjective.action]);
   const farmSceneStyle = farmBackgroundPath
     ? {
         backgroundImage:
@@ -358,6 +466,10 @@ export default function FarmPage({
             <span className="objective-label">{currentObjective.label}</span>
           </div>
           <h3>{currentObjective.title}</h3>
+          <div className={`objective-cue objective-cue-${currentObjective.action}`}>
+            <DecorativeImage className="objective-cue-icon" path={currentObjectiveIconPath} />
+            <span>{currentObjective.cue}</span>
+          </div>
           <p>{currentObjective.detail}</p>
         </section>
 
@@ -397,6 +509,7 @@ export default function FarmPage({
         <div className="crop-grid" aria-label="Crop slots">
           {farm.cropSlots.map((slot, index) => {
             const slotArt = getCropSlotArt(slot);
+            const slotVisualHint = getCropSlotVisualHint(gameState, slot);
 
             return (
               <button
@@ -405,6 +518,7 @@ export default function FarmPage({
                   `crop-slot-${slot.status}`,
                   slotArt.soilPath ? 'crop-slot-with-art' : '',
                   slot.isWatered ? 'crop-slot-watered' : '',
+                  slotVisualHint?.className ?? '',
                   slot.slotId === selectedSlot?.slotId ? 'crop-slot-selected' : '',
                 ]
                   .filter(Boolean)
@@ -423,6 +537,9 @@ export default function FarmPage({
                 <span className="slot-number">{index + 1}</span>
                 <span className="slot-status">{slot.status}</span>
                 {slot.isWatered ? <span className="slot-watered">watered</span> : null}
+                {slotVisualHint ? (
+                  <span className="slot-action-hint">{slotVisualHint.label}</span>
+                ) : null}
                 {slot.cropType ? (
                   <div
                     className="slot-progress"
@@ -500,9 +617,18 @@ export default function FarmPage({
           </dl>
         ) : null}
 
+        <p className={`action-helper action-helper-${suggestedFarmAction.action}`}>
+          {suggestedFarmAction.message}
+        </p>
+
         <div className="farm-actions">
           <button
-            className={getActionClassName('primary-action', plantIsValid, plantButtonPath)}
+            className={getActionClassName(
+              'primary-action',
+              plantIsValid,
+              plantButtonPath,
+              suggestedFarmAction.action === 'plant',
+            )}
             style={getActionStyle(plantButtonPath)}
             type="button"
             aria-disabled={!plantIsValid}
@@ -512,7 +638,12 @@ export default function FarmPage({
             <span className="action-text">Plant Wheat</span>
           </button>
           <button
-            className={getActionClassName('secondary-action', waterIsValid, waterButtonPath)}
+            className={getActionClassName(
+              'secondary-action',
+              waterIsValid,
+              waterButtonPath,
+              suggestedFarmAction.action === 'water',
+            )}
             style={getActionStyle(waterButtonPath)}
             type="button"
             aria-disabled={!waterIsValid}
@@ -522,7 +653,12 @@ export default function FarmPage({
             <span className="action-text">Water</span>
           </button>
           <button
-            className={getActionClassName('harvest-action', harvestIsValid, harvestButtonPath)}
+            className={getActionClassName(
+              'harvest-action',
+              harvestIsValid,
+              harvestButtonPath,
+              suggestedFarmAction.action === 'harvest',
+            )}
             style={getActionStyle(harvestButtonPath)}
             type="button"
             aria-disabled={!harvestIsValid}

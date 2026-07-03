@@ -34,6 +34,7 @@ Status: Version 0.2 local manual test checklist
 ## Version 0.2 Beginner Guidance Checks
 
 - Farm page shows a `Current Goal` panel.
+- Current Goal panel shows a simple visual action cue for the suggested next step.
 - At the starting state, Current Goal tells the player to plant wheat seeds in empty soil slots.
 - After planting unwatered wheat, Current Goal tells the player to water planted wheat.
 - After watering wheat before maturity, Current Goal tells the player to wait for wheat to grow.
@@ -45,6 +46,23 @@ Status: Version 0.2 local manual test checklist
 - Beginner loop guide is explanation only and does not grant rewards or change state.
 - Current Goal panel is guidance only and does not grant rewards or change state.
 - The new guidance panels fit on mobile without covering crop slots or action buttons.
+
+## Version 0.2 Visual Objective Feedback Checks
+
+- At the starting state, empty crop slots show a gentle `Plant here` hint while wheat seeds are available.
+- Selected crop slot outline remains stronger than any plant, water, growing, or harvest hint.
+- After planting wheat, the planted unwatered slot shows a `Needs water` visual hint.
+- After watering wheat, the watered growing slot shows a calm `Growing` visual state without aggressive flashing.
+- After wheat reaches maturity, the mature slot shows a clear `Harvest` visual hint.
+- With no slot selected, the Farm action helper says to select a soil slot first.
+- Selecting an empty slot with seed available visually emphasizes the Plant Wheat button.
+- Selecting unwatered wheat visually emphasizes the Water button.
+- Selecting mature wheat visually emphasizes the Harvest button.
+- Non-useful action buttons stay clickable and readable so friendly error messages still work.
+- On the Pawn Shop page, Sell Wheat is visually highlighted when wheat is available.
+- On the Pawn Shop page, Buy Wheat Seed is visually highlighted when gold is at least `100`.
+- If no shop action is ready, the Pawn Shop shows a gentle explanation to harvest wheat first.
+- Visual guidance does not change inventory, crop state, prices, growth timing, harvest output, or localStorage behavior.
 
 ## Navigation
 
@@ -66,6 +84,7 @@ Status: Version 0.2 local manual test checklist
 - Farm action buttons remain readable while using button PNG art where available.
 - Farm page shows `Dev Fast Growth Mode`.
 - Farm page shows a Current Goal panel and beginner loop guide.
+- Farm page shows visual next-action hints on crop slots and action buttons.
 - Inventory page shows Gold `0`, Wheat Seeds `4`, and Wheat `0`.
 - Pawn Shop page is separate from the Farm page.
 - Pawn Shop page shows current gold, wheat seeds, and wheat.
@@ -74,6 +93,7 @@ Status: Version 0.2 local manual test checklist
 - Pawn Shop page explains that selling 1 wheat gives `110` gold.
 - Pawn Shop page explains that buying 1 wheat seed costs `100` gold.
 - Pawn Shop page explains that harvesting gives wheat, not seed.
+- Pawn Shop page visually highlights available buy/sell actions.
 - Help / Manual page uses a readable GitHub-style documentation layout.
 - Help / Manual page shows a Version 0.2 guidance status label and last updated text.
 
@@ -149,6 +169,7 @@ Status: Version 0.2 local manual test checklist
 - Buttons are easy to tap on a phone-sized viewport.
 - Navigation does not overflow on mobile.
 - Farm crop slots and crop art remain readable on mobile.
+- Farm visual hints do not cover slot content or block taps on mobile.
 - Crop progress bars fit inside crop slots on mobile.
 - Text does not overlap with farm or shop placeholder elements.
 - Pages do not require awkward horizontal scrolling at phone widths.

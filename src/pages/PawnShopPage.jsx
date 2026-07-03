@@ -8,6 +8,22 @@ const shopInventoryItems = [
   ['wheat', 'Wheat'],
 ];
 
+function getShopGuidance(buyIsValid, sellIsValid) {
+  if (sellIsValid && buyIsValid) {
+    return 'You can sell wheat for gold or buy another seed now.';
+  }
+
+  if (sellIsValid) {
+    return 'Useful next action: sell wheat for gold.';
+  }
+
+  if (buyIsValid) {
+    return 'Useful next action: buy a wheat seed with gold.';
+  }
+
+  return 'No shop action is ready yet. Harvest wheat first, then sell it here.';
+}
+
 export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat }) {
   const { inventory } = gameState;
   const [feedbackMessage, setFeedbackMessage] = useState(
@@ -15,6 +31,7 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
   );
   const buyIsValid = canBuyWheatSeed(gameState);
   const sellIsValid = canSellWheat(gameState);
+  const shopGuidance = getShopGuidance(buyIsValid, sellIsValid);
 
   function handleBuyWheatSeed() {
     if (!buyIsValid) {
@@ -78,8 +95,10 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
             </li>
           </ul>
         </section>
+        <p className="shop-next-note">{shopGuidance}</p>
         <div className="shop-counter">
-          <article className="shop-offer">
+          <article className={sellIsValid ? 'shop-offer shop-offer-suggested' : 'shop-offer'}>
+            {sellIsValid ? <span className="shop-offer-cue">Useful now</span> : null}
             <h3>Sell Wheat</h3>
             <p>Pawn Shop buys 1 wheat for {PAWN_SHOP_WHEAT_SELL_PRICE} gold.</p>
             <p className="shop-offer-status">
@@ -94,7 +113,8 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
               Sell 1 Wheat
             </button>
           </article>
-          <article className="shop-offer">
+          <article className={buyIsValid ? 'shop-offer shop-offer-suggested' : 'shop-offer'}>
+            {buyIsValid ? <span className="shop-offer-cue">Available</span> : null}
             <h3>Buy Wheat Seed</h3>
             <p>1 wheat seed costs {WHEAT_SEED_COST} gold.</p>
             <p className="shop-offer-status">

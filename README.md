@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.2 is a beginner guidance pass on top of the stable Version 0.1 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, and clearer player guidance.
+Version 0.2 is a beginner guidance and visual clarity pass on top of the stable Version 0.1 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, and clearer player guidance.
 
 ## Run Locally
 
@@ -61,9 +61,10 @@ The visible `Reset Dev State` button returns the app to this starting state duri
 
 ## Version 0.2 Guidance
 
-Version 0.2 improves beginner clarity only. It adds a Farm page `Current Goal` panel, a simple beginner loop guide, clearer invalid-action feedback, Pawn Shop helper text, and Help / Manual updates.
+Version 0.2 improves beginner clarity only. It adds a Farm page `Current Goal` panel, a simple beginner loop guide, clearer invalid-action feedback, visual next-action highlights, Pawn Shop helper text, and Help / Manual updates.
 
 - The objective panel is guidance only and does not grant rewards.
+- Crop slot highlights, Current Goal cues, action button emphasis, and Pawn Shop offer highlights are derived from existing state.
 - The beginner tutorial does not create quests, prizes, or saved tutorial progress.
 - Core balance is unchanged: 4 starting wheat seeds, 100 gold seed cost, 110 gold wheat sell price, and 1 wheat per harvest.
 - Dev Fast Growth Mode remains active for local testing.
