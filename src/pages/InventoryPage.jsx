@@ -24,6 +24,17 @@ const inventoryCards = [
   },
 ];
 
+const progressCards = [
+  ['lifetimeWheatPlanted', 'Wheat planted'],
+  ['lifetimeWheatWatered', 'Wheat watered'],
+  ['lifetimeWheatHarvested', 'Wheat harvested'],
+  ['lifetimeWheatSold', 'Wheat sold'],
+  ['lifetimeSeedsBought', 'Seeds bought'],
+  ['lifetimeGoldEarned', 'Gold earned'],
+  ['lifetimeGoldSpent', 'Gold spent'],
+  ['totalResets', 'Reset count'],
+];
+
 function hideBrokenImage(event) {
   event.currentTarget.hidden = true;
 }
@@ -52,6 +63,7 @@ function InventoryIcon({ assetId, fallback }) {
 
 export default function InventoryPage({ gameState }) {
   const { inventory } = gameState;
+  const progress = gameState.progress ?? {};
 
   return (
     <section className="inventory-page">
@@ -73,6 +85,29 @@ export default function InventoryPage({ gameState }) {
           </article>
         ))}
       </div>
+
+      <section className="progress-tracking-panel" aria-labelledby="progress-tracking-heading">
+        <div>
+          <p className="eyebrow">Version 0.3 check</p>
+          <h3 id="progress-tracking-heading">Progress Tracking</h3>
+          <p>
+            Read-only lifetime counters for testing the local progress data foundation.
+          </p>
+        </div>
+
+        <div className="progress-tracking-grid">
+          {progressCards.map(([key, label]) => {
+            const value = Number.isFinite(progress[key]) ? progress[key] : 0;
+
+            return (
+              <article className="progress-tracking-card" key={key}>
+                <span>{label}</span>
+                <strong>{value}</strong>
+              </article>
+            );
+          })}
+        </div>
+      </section>
     </section>
   );
 }

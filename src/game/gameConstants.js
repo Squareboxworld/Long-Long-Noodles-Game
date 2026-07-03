@@ -21,6 +21,17 @@ export const INITIAL_INVENTORY = Object.freeze({
   wheat: 0,
 });
 
+export const INITIAL_PROGRESS = Object.freeze({
+  lifetimeWheatPlanted: 0,
+  lifetimeWheatWatered: 0,
+  lifetimeWheatHarvested: 0,
+  lifetimeWheatSold: 0,
+  lifetimeSeedsBought: 0,
+  lifetimeGoldEarned: 0,
+  lifetimeGoldSpent: 0,
+  totalResets: 0,
+});
+
 export const WHEAT_SEED_COST = 100;
 export const PAWN_SHOP_WHEAT_SELL_PRICE = 110;
 

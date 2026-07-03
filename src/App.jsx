@@ -102,9 +102,16 @@ export default function App() {
 
   function handleResetDevState() {
     const resetState = createInitialGameState();
+    const totalResets = (gameState.progress?.totalResets ?? 0) + 1;
 
     clearGameState();
-    commitGameState(resetState);
+    commitGameState({
+      ...resetState,
+      progress: {
+        ...resetState.progress,
+        totalResets,
+      },
+    });
   }
 
   return (

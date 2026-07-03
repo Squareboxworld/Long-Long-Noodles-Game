@@ -1,6 +1,6 @@
 # Manual Test Checklist
 
-Status: Version 0.2 local manual test checklist
+Status: Version 0.3 local manual test checklist
 
 ## Setup
 
@@ -70,6 +70,21 @@ Status: Version 0.2 local manual test checklist
 - If no Pawn Shop action is ready, the Pawn Shop shows a gentle explanation to harvest wheat first.
 - Visual guidance does not change inventory, crop state, prices, growth timing, harvest output, or localStorage behavior.
 
+## Version 0.3 Progress Data Checks
+
+- New game state includes a top-level `progress` object.
+- Existing localStorage saves without `progress` load safely and receive default progress values.
+- Successful `Plant Wheat` increments `progress.lifetimeWheatPlanted`.
+- Successful `Water` increments `progress.lifetimeWheatWatered`.
+- Successful `Harvest` increments `progress.lifetimeWheatHarvested`.
+- Successful `Sell 1 Wheat` increments `progress.lifetimeWheatSold` and `progress.lifetimeGoldEarned`.
+- Successful `Buy 1 Wheat Seed` increments `progress.lifetimeSeedsBought` and `progress.lifetimeGoldSpent`.
+- Invalid actions do not increment progress fields.
+- Reset Dev State returns farm and inventory to the test starting state and increments `progress.totalResets`.
+- Inventory page shows a temporary read-only `Progress Tracking` panel.
+- Progress Tracking shows wheat planted, wheat watered, wheat harvested, wheat sold, seeds bought, gold earned, gold spent, and reset count.
+- Progress Tracking does not include rewards, achievements, quests, claim buttons, backend, account system, or online save.
+
 ## Navigation
 
 - `Start Farming` on Welcome opens the Farm page.
@@ -97,6 +112,7 @@ Status: Version 0.2 local manual test checklist
 - Inventory page explains that gold buys wheat seeds.
 - Inventory page explains that wheat seeds are planted on empty soil slots.
 - Inventory page explains that wheat is sold at the Pawn Shop for gold.
+- Inventory page shows the temporary read-only Progress Tracking panel without crashing if older saved state has no progress data.
 - Pawn Shop page is separate from the Farm page.
 - Pawn Shop page shows current gold, wheat seeds, and wheat.
 - Pawn Shop page shows wheat seed price `100` gold.

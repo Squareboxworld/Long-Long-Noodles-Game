@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.2 is a beginner guidance, visual clarity, and first-time player flow pass on top of the stable Version 0.1 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, and clearer player guidance.
+Version 0.3 starts progress data foundation work on top of the stable Version 0.2 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, and lifetime progress fields.
 
 ## Run Locally
 
@@ -71,6 +71,16 @@ Version 0.2 improves beginner clarity only. It adds a Farm page `Current Goal` p
 - Core balance is unchanged: 4 starting wheat seeds, 100 gold seed cost, 110 gold wheat sell price, and 1 wheat per harvest.
 - Dev Fast Growth Mode remains active for local testing.
 
+## Version 0.3 Progress Data
+
+Version 0.3 starts a safe progress data foundation. The saved game state now includes a top-level `progress` object for lifetime farming statistics.
+
+- Progress fields are added automatically to older localStorage saves.
+- Existing actions increment progress only after successful plant, water, harvest, sell, and buy actions.
+- Reset Dev State increments `totalResets` while returning the farm and inventory to the local test starting state.
+- The Inventory page includes a temporary read-only `Progress Tracking` panel so testers can inspect the fields.
+- No rewards, achievements, quests, account system, online save, or backend were added.
+
 ## Growth Mode
 
 - Real design: wheat takes 7 real-life days.
@@ -112,4 +122,4 @@ The following systems are intentionally not included:
 - Wandering Merchant
 - Generated final art beyond the provided PNGs
 
-See [docs/version-0.1-scope.md](docs/version-0.1-scope.md) for the farming prototype scope and [docs/version-0.2-plan.md](docs/version-0.2-plan.md) for the beginner guidance pass.
+See [docs/version-0.1-scope.md](docs/version-0.1-scope.md) for the farming prototype scope, [docs/version-0.2-plan.md](docs/version-0.2-plan.md) for the beginner guidance pass, and [docs/version-0.3-plan.md](docs/version-0.3-plan.md) for progress data foundation notes.

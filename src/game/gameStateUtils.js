@@ -4,6 +4,7 @@ import {
   CROP_SLOTS_PER_LAND,
   GAME_VERSION,
   INITIAL_INVENTORY,
+  INITIAL_PROGRESS,
   STARTING_LAND_COUNT,
 } from './gameConstants.js';
 
@@ -61,6 +62,9 @@ export function createInitialGameState(now = new Date().toISOString()) {
     inventory: {
       ...INITIAL_INVENTORY,
     },
+    progress: {
+      ...INITIAL_PROGRESS,
+    },
   };
 }
 
@@ -74,6 +78,15 @@ function safeTimestamp(value, fallback = null) {
 
 function safeBoolean(value, fallback) {
   return typeof value === 'boolean' ? value : fallback;
+}
+
+function normalizeProgress(savedProgress) {
+  return Object.fromEntries(
+    Object.entries(INITIAL_PROGRESS).map(([key, fallback]) => [
+      key,
+      Math.max(0, safeNumber(savedProgress?.[key], fallback)),
+    ]),
+  );
 }
 
 function normalizeCropSlot(savedSlot, baseSlot) {
@@ -132,5 +145,6 @@ export function normalizeGameState(savedState) {
       ),
       wheat: Math.max(0, safeNumber(savedState.inventory?.wheat, INITIAL_INVENTORY.wheat)),
     },
+    progress: normalizeProgress(savedState.progress),
   };
 }
