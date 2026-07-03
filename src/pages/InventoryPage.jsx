@@ -1,4 +1,5 @@
 import { getAssetPath } from '../utils/assets.js';
+import { CROP_SLOT_STATUS, CROP_TYPES } from '../game/gameConstants.js';
 
 const inventoryCards = [
   {
@@ -24,16 +25,111 @@ const inventoryCards = [
   },
 ];
 
-const progressCards = [
-  ['lifetimeWheatPlanted', 'Wheat planted'],
-  ['lifetimeWheatWatered', 'Wheat watered'],
-  ['lifetimeWheatHarvested', 'Wheat harvested'],
-  ['lifetimeWheatSold', 'Wheat sold'],
-  ['lifetimeSeedsBought', 'Seeds bought'],
-  ['lifetimeGoldEarned', 'Gold earned'],
-  ['lifetimeGoldSpent', 'Gold spent'],
-  ['totalResets', 'Reset count'],
+const progressGroups = [
+  {
+    title: 'Farming',
+    assetId: 'icon_wheat',
+    stats: [
+      ['lifetimeWheatPlanted', 'Wheat planted'],
+      ['lifetimeWheatWatered', 'Wheat watered'],
+      ['lifetimeWheatHarvested', 'Wheat harvested'],
+    ],
+  },
+  {
+    title: 'Trading',
+    assetId: 'icon_gold_coin',
+    stats: [
+      ['lifetimeWheatSold', 'Wheat sold'],
+      ['lifetimeSeedsBought', 'Seeds bought'],
+      ['lifetimeGoldEarned', 'Gold earned'],
+      ['lifetimeGoldSpent', 'Gold spent'],
+    ],
+  },
+  {
+    title: 'Save / Debug',
+    assetId: 'icon_water_drop',
+    stats: [
+      ['totalResets', 'Reset count'],
+    ],
+  },
 ];
+
+function getProgressValue(progress, key) {
+  return Number.isFinite(progress?.[key]) ? progress[key] : 0;
+}
+
+function isActiveWheatSlot(slot) {
+  return slot.cropType === CROP_TYPES.WHEAT && slot.status !== CROP_SLOT_STATUS.EMPTY;
+}
+
+function isMatureWheatSlot(slot) {
+  return isActiveWheatSlot(slot) &&
+    (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE || slot.growthProgress >= 100);
+}
+
+function getCurrentFarmStatus(farm) {
+  const cropSlots = farm.cropSlots ?? [];
+
+  return [
+    {
+      label: 'Empty slots',
+      value: cropSlots.filter((slot) => slot.status === CROP_SLOT_STATUS.EMPTY).length,
+      note: 'Ready for future planting.',
+    },
+    {
+      label: 'Planted wheat slots',
+      value: cropSlots.filter(isActiveWheatSlot).length,
+      note: 'Any wheat currently in soil.',
+    },
+    {
+      label: 'Unwatered wheat slots',
+      value: cropSlots.filter((slot) => isActiveWheatSlot(slot) && !slot.isWatered && !slot.isMature).length,
+      note: 'Needs water before growth.',
+    },
+    {
+      label: 'Growing wheat slots',
+      value: cropSlots.filter((slot) => isActiveWheatSlot(slot) && slot.isWatered && !isMatureWheatSlot(slot)).length,
+      note: 'Watered and not mature yet.',
+    },
+    {
+      label: 'Mature wheat slots',
+      value: cropSlots.filter(isMatureWheatSlot).length,
+      note: 'Ready to harvest.',
+    },
+  ];
+}
+
+function getProgressSummary(gameState) {
+  const progress = gameState.progress ?? {};
+  const farm = gameState.farm;
+  const cropSlots = farm.cropSlots ?? [];
+  const totalCycleActions =
+    getProgressValue(progress, 'lifetimeWheatPlanted') +
+    getProgressValue(progress, 'lifetimeWheatWatered') +
+    getProgressValue(progress, 'lifetimeWheatHarvested');
+  const netGold =
+    getProgressValue(progress, 'lifetimeGoldEarned') -
+    getProgressValue(progress, 'lifetimeGoldSpent');
+  const farmCapacity = cropSlots.length || farm.landCount * farm.cropSlotsPerLand;
+
+  return [
+    {
+      label: 'Total wheat cycle actions',
+      value: totalCycleActions,
+      note: 'Planted + watered + harvested.',
+    },
+    {
+      label: 'Net gold from trading',
+      value: netGold,
+      note: 'Gold earned minus gold spent.',
+    },
+    {
+      label: 'Current farming capacity',
+      value: farmCapacity,
+      note: `${farm.landCount} land x ${farm.cropSlotsPerLand} crop slots.`,
+    },
+  ];
+}
 
 function hideBrokenImage(event) {
   event.currentTarget.hidden = true;
@@ -62,8 +158,10 @@ function InventoryIcon({ assetId, fallback }) {
 }
 
 export default function InventoryPage({ gameState }) {
-  const { inventory } = gameState;
+  const { farm, inventory } = gameState;
   const progress = gameState.progress ?? {};
+  const farmStatus = getCurrentFarmStatus(farm);
+  const progressSummary = getProgressSummary(gameState);
 
   return (
     <section className="inventory-page">
@@ -87,25 +185,77 @@ export default function InventoryPage({ gameState }) {
       </div>
 
       <section className="progress-tracking-panel" aria-labelledby="progress-tracking-heading">
-        <div>
-          <p className="eyebrow">Version 0.3 check</p>
-          <h3 id="progress-tracking-heading">Progress Tracking</h3>
+        <div className="stats-panel-header">
+          <div>
+            <p className="eyebrow">Version 0.3 statistics</p>
+            <h3 id="progress-tracking-heading">Progress Tracking</h3>
+          </div>
           <p>
-            Read-only lifetime counters for testing the local progress data foundation.
+            Read-only lifetime counters stored in this browser for prototype testing.
           </p>
         </div>
 
-        <div className="progress-tracking-grid">
-          {progressCards.map(([key, label]) => {
-            const value = Number.isFinite(progress[key]) ? progress[key] : 0;
+        <div className="stats-group-grid">
+          {progressGroups.map((group) => (
+            <article className="stats-group-card" key={group.title}>
+              <div className="stats-group-heading">
+                <InventoryIcon assetId={group.assetId} fallback="" />
+                <h4>{group.title}</h4>
+              </div>
+              <dl className="stat-list">
+                {group.stats.map(([key, label]) => (
+                  <div className="stat-row" key={key}>
+                    <dt>{label}</dt>
+                    <dd>{getProgressValue(progress, key)}</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))}
+        </div>
+      </section>
 
-            return (
-              <article className="progress-tracking-card" key={key}>
-                <span>{label}</span>
-                <strong>{value}</strong>
-              </article>
-            );
-          })}
+      <section className="farm-status-panel" aria-labelledby="farm-status-heading">
+        <div className="stats-panel-header">
+          <div>
+            <p className="eyebrow">Farm at a glance</p>
+            <h3 id="farm-status-heading">Current Farm Status</h3>
+          </div>
+          <p>
+            These counts are derived from the current crop slots and are not stored separately.
+          </p>
+        </div>
+
+        <div className="farm-status-grid">
+          {farmStatus.map((item) => (
+            <article className="farm-status-card" key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+              <p>{item.note}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="progress-summary-panel" aria-labelledby="progress-summary-heading">
+        <div className="stats-panel-header">
+          <div>
+            <p className="eyebrow">Simple summary</p>
+            <h3 id="progress-summary-heading">Progress Summary</h3>
+          </div>
+          <p>
+            Short derived totals for checking the local farming loop. No levels or rewards.
+          </p>
+        </div>
+
+        <div className="progress-summary-grid">
+          {progressSummary.map((item) => (
+            <article className="progress-summary-card" key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+              <p>{item.note}</p>
+            </article>
+          ))}
         </div>
       </section>
     </section>

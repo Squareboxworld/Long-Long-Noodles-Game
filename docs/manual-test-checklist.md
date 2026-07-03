@@ -81,9 +81,17 @@ Status: Version 0.3 local manual test checklist
 - Successful `Buy 1 Wheat Seed` increments `progress.lifetimeSeedsBought` and `progress.lifetimeGoldSpent`.
 - Invalid actions do not increment progress fields.
 - Reset Dev State returns farm and inventory to the test starting state and increments `progress.totalResets`.
-- Inventory page shows a temporary read-only `Progress Tracking` panel.
-- Progress Tracking shows wheat planted, wheat watered, wheat harvested, wheat sold, seeds bought, gold earned, gold spent, and reset count.
-- Progress Tracking does not include rewards, achievements, quests, claim buttons, backend, account system, or online save.
+- Inventory page shows a grouped read-only `Progress Tracking` panel.
+- Progress Tracking groups stats into Farming, Trading, and Save / Debug.
+- Farming shows wheat planted, wheat watered, and wheat harvested.
+- Trading shows wheat sold, seeds bought, gold earned, and gold spent.
+- Save / Debug shows reset count.
+- Inventory page shows `Current Farm Status`.
+- Current Farm Status shows empty slots, planted wheat slots, unwatered wheat slots, growing wheat slots, and mature wheat slots.
+- Current Farm Status values are derived from current crop slots and are not stored separately.
+- Inventory page shows `Progress Summary`.
+- Progress Summary shows total wheat cycle actions, net gold from trading, and current farming capacity.
+- Progress Tracking, Current Farm Status, and Progress Summary do not include rewards, achievements, quests, claim buttons, backend, account system, or online save.
 
 ## Navigation
 
@@ -112,7 +120,8 @@ Status: Version 0.3 local manual test checklist
 - Inventory page explains that gold buys wheat seeds.
 - Inventory page explains that wheat seeds are planted on empty soil slots.
 - Inventory page explains that wheat is sold at the Pawn Shop for gold.
-- Inventory page shows the temporary read-only Progress Tracking panel without crashing if older saved state has no progress data.
+- Inventory page shows the read-only Progress Tracking panel without crashing if older saved state has no progress data.
+- Inventory page shows Current Farm Status and Progress Summary in compact mobile-friendly cards.
 - Pawn Shop page is separate from the Farm page.
 - Pawn Shop page shows current gold, wheat seeds, and wheat.
 - Pawn Shop page shows wheat seed price `100` gold.
@@ -122,7 +131,7 @@ Status: Version 0.3 local manual test checklist
 - Pawn Shop page explains that harvesting gives wheat, not seed.
 - Pawn Shop page visually highlights available buy/sell actions.
 - Help / Manual page uses a readable GitHub-style documentation layout.
-- Help / Manual page shows a Version 0.2 guidance status label and last updated text.
+- Help / Manual page shows a Version 0.3 statistics status label and last updated text.
 - Help / Manual page includes a First-Time Player Path section.
 
 ## Gameplay Checks
@@ -184,15 +193,16 @@ Status: Version 0.3 local manual test checklist
 
 - Open Help from the main navigation.
 - Confirm the Help page has section navigation buttons.
-- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
+- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
 - Confirm Getting Started lists 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
 - Confirm First-Time Player Path lists: start on Farm, select empty soil, plant wheat, water wheat, wait, harvest, go to Pawn Shop, sell wheat, buy wheat seeds, return to Farm.
 - Confirm First-Time Player Path mentions Dev Fast Growth Mode, temporary art, and Reset Dev State.
 - Confirm Version 0.2 Guidance explains beginner loop clarity, Current Goal, Pawn Shop continuation, no seed return, stuck-state reset, and temporary art.
+- Confirm Version 0.3 Statistics explains lifetime stats, Current Farm Status, Progress Summary, localStorage, no rewards, no achievements, no quests, and no online account save.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
-- Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying wheat seeds, selling wheat, stuck test state, Current Goal, future save transfer, and excluded future systems.
-- Confirm Known Exclusions lists Noodles, soup, customers, premium, payment, monetization, Long Long Coin, admin panel, account system, backend, Firebase, online save, notifications, harvest minigame, Wheat Fragment, tools, land expansion, and Wandering Merchant.
+- Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying wheat seeds, selling wheat, stuck test state, Current Goal, statistics rewards, future save transfer, and excluded future systems.
+- Confirm Known Exclusions lists Noodles, soup, customers, premium, payment, monetization, Long Long Coin, admin panel, account system, backend, Firebase, online save, notifications, achievements, quest rewards, reward-claim buttons, harvest minigame, Wheat Fragment, tools, land expansion, and Wandering Merchant.
 
 ## Responsive Checks
 

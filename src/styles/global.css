@@ -1145,7 +1145,9 @@ summary:focus-visible {
   font-size: 2.2rem;
 }
 
-.progress-tracking-panel {
+.progress-tracking-panel,
+.farm-status-panel,
+.progress-summary-panel {
   display: grid;
   gap: 18px;
   margin-top: 22px;
@@ -1156,23 +1158,51 @@ summary:focus-visible {
   box-shadow: 0 14px 30px rgba(72, 99, 97, 0.08);
 }
 
-.progress-tracking-panel h3 {
+.farm-status-panel,
+.progress-summary-panel {
+  background: rgba(237, 248, 229, 0.78);
+}
+
+.stats-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.stats-panel-header h3 {
   margin: 0 0 8px;
   color: #31535c;
 }
 
-.progress-tracking-panel p {
+.stats-panel-header p {
   margin: 0;
   color: #5c625a;
+  max-width: 520px;
 }
 
-.progress-tracking-grid {
+.stats-group-grid,
+.farm-status-grid,
+.progress-summary-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
-.progress-tracking-card {
+.stats-group-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.farm-status-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.progress-summary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stats-group-card,
+.farm-status-card,
+.progress-summary-card {
   min-width: 0;
   padding: 14px;
   border: 1px solid rgba(117, 91, 68, 0.13);
@@ -1180,19 +1210,76 @@ summary:focus-visible {
   background: #fff9ea;
 }
 
-.progress-tracking-card span {
+.stats-group-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.stats-group-heading .inventory-icon {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 0;
+  border-radius: 14px;
+  font-size: 1.2rem;
+}
+
+.stats-group-heading .inventory-image-icon {
+  padding: 6px;
+}
+
+.stats-group-heading h4 {
+  margin: 0;
+  color: #31535c;
+  font-size: 1.05rem;
+}
+
+.stat-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.stat-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(91, 133, 135, 0.22);
+}
+
+.stat-row dt,
+.farm-status-card span,
+.progress-summary-card span {
   display: block;
   color: #657066;
   font-size: 0.92rem;
   font-weight: 800;
 }
 
-.progress-tracking-card strong {
+.stat-row dd {
+  margin: 0;
+  color: #31535c;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.farm-status-card strong,
+.progress-summary-card strong {
   display: block;
   margin-top: 6px;
   color: #31535c;
   font-size: 1.55rem;
   line-height: 1;
+}
+
+.farm-status-card p,
+.progress-summary-card p {
+  margin: 8px 0 0;
+  color: #5c625a;
+  font-size: 0.9rem;
 }
 
 .shop-board {
@@ -1502,7 +1589,9 @@ summary:focus-visible {
   .primary-nav,
   .page-grid,
   .inventory-grid,
-  .progress-tracking-grid,
+  .stats-group-grid,
+  .farm-status-grid,
+  .progress-summary-grid,
   .farm-state-bar,
   .farm-guidance-grid,
   .shop-counter,
@@ -1511,6 +1600,10 @@ summary:focus-visible {
   .manual-layout,
   .slot-detail-grid {
     grid-template-columns: 1fr;
+  }
+
+  .stats-panel-header {
+    flex-direction: column;
   }
 
   .manual-header {

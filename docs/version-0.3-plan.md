@@ -1,8 +1,8 @@
-# Road to Long Long Noodles - Version 0.3 Progress Data Plan
+# Road to Long Long Noodles - Version 0.3 Progress Data and Statistics Plan
 
-Status: progress data foundation for the existing local farming prototype
+Status: progress data foundation and read-only farm statistics UI for the existing local farming prototype
 
-Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. It also includes a temporary read-only Inventory page Progress Tracking panel for testing the data foundation. It does not add rewards, achievements, quests, account system, online save, backend, or new gameplay systems.
+Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Version 0.3 Prompt 2 turns those fields into a clearer read-only Farm Statistics UI on the Inventory page. It does not add rewards, achievements, quests, account system, online save, backend, or new gameplay systems.
 
 ## Included In Version 0.3 Prompt 1
 
@@ -12,6 +12,14 @@ Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. It 
 - Progress increments for successful existing Pawn Shop actions
 - Reset Dev State `totalResets` tracking
 - Temporary read-only Inventory page `Progress Tracking` panel
+- Documentation and manual test checklist updates
+
+## Included In Version 0.3 Prompt 2
+
+- Grouped read-only `Progress Tracking` panel on Inventory
+- `Current Farm Status` counts derived from current crop slots
+- `Progress Summary` values derived from progress and farm state
+- Help / Manual explanation for local-only statistics
 - Documentation and manual test checklist updates
 
 ## Progress Fields
@@ -39,20 +47,42 @@ progress: {
 - Reset Dev State: resets farm and inventory to the local test starting state and increments `totalResets`
 - Invalid actions do not increment progress
 
-## Temporary Display
+## Statistics Display
 
-The Inventory page shows a compact read-only `Progress Tracking` panel with these fields:
+The Inventory page shows a compact read-only `Progress Tracking` panel grouped by:
+
+### Farming
 
 - Wheat planted
 - Wheat watered
 - Wheat harvested
+
+### Trading
+
 - Wheat sold
 - Seeds bought
 - Gold earned
 - Gold spent
+
+### Save / Debug
+
 - Reset count
 
-This panel is only for Version 0.3 local testing. It has no rewards, achievement completion, milestone logic, claim buttons, or gameplay effects.
+The Inventory page also shows `Current Farm Status`, derived from `farm.cropSlots`:
+
+- Empty slots
+- Planted wheat slots
+- Unwatered wheat slots
+- Growing wheat slots
+- Mature wheat slots
+
+The Inventory page also shows `Progress Summary`, derived from existing local state:
+
+- Total wheat cycle actions: wheat planted + wheat watered + wheat harvested
+- Net gold from trading: lifetime gold earned - lifetime gold spent
+- Current farming capacity: current crop slot count
+
+These sections are only for Version 0.3 local testing and player clarity. They have no rewards, achievement completion, milestone logic, claim buttons, levels, or gameplay effects.
 
 ## Balance Unchanged
 
@@ -70,10 +100,13 @@ This panel is only for Version 0.3 local testing. It has no rewards, achievement
 
 ## Explicitly Not Included
 
-- Permanent progress UI
+- Permanent rewarded progression screen
 - Progress rewards
 - Achievements
+- Achievement completion logic
+- Milestones
 - Quest rewards
+- Reward-claim buttons
 - Daily login rewards
 - Account system
 - Online save

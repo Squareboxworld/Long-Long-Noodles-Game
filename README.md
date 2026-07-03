@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.3 starts progress data foundation work on top of the stable Version 0.2 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, and lifetime progress fields.
+Version 0.3 adds progress data and read-only farm statistics UI on top of the stable Version 0.2 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, and farm statistics summaries.
 
 ## Run Locally
 
@@ -73,12 +73,14 @@ Version 0.2 improves beginner clarity only. It adds a Farm page `Current Goal` p
 
 ## Version 0.3 Progress Data
 
-Version 0.3 starts a safe progress data foundation. The saved game state now includes a top-level `progress` object for lifetime farming statistics.
+Version 0.3 starts a safe progress data foundation. The saved game state now includes a top-level `progress` object for lifetime farming statistics, and the Inventory page shows read-only statistics derived from local state.
 
 - Progress fields are added automatically to older localStorage saves.
 - Existing actions increment progress only after successful plant, water, harvest, sell, and buy actions.
 - Reset Dev State increments `totalResets` while returning the farm and inventory to the local test starting state.
-- The Inventory page includes a temporary read-only `Progress Tracking` panel so testers can inspect the fields.
+- The Inventory page includes a grouped read-only `Progress Tracking` panel.
+- The Inventory page also shows `Current Farm Status` counts derived from crop slots.
+- `Progress Summary` shows derived totals such as total wheat cycle actions, net gold from trading, and current farming capacity.
 - No rewards, achievements, quests, account system, online save, or backend were added.
 
 ## Growth Mode
@@ -89,7 +91,7 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 

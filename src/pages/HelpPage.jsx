@@ -12,6 +12,7 @@ const sectionLinks = [
   ['getting-started', 'Getting Started'],
   ['first-time-path', 'First-Time Player Path'],
   ['version-0-2-guidance', 'Version 0.2 Guidance'],
+  ['version-0-3-statistics', 'Version 0.3 Statistics'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -53,6 +54,9 @@ const knownExclusions = [
   'Firebase',
   'Online save',
   'Notifications',
+  'Achievements',
+  'Quest rewards',
+  'Reward-claim buttons',
   'Harvest minigame',
   'Wheat Fragment',
   'Tools',
@@ -90,6 +94,10 @@ const faqItems = [
     'It reads the current farm and inventory state and suggests the next helpful action. It is guidance only and does not give rewards.',
   ],
   [
+    'Do the statistics give rewards?',
+    'No. Version 0.3 statistics are read-only local prototype data. They help testers understand the farming loop but do not unlock rewards, achievements, or quests.',
+  ],
+  [
     'Will this save transfer to the future official game?',
     'Version 0.1 uses browser localStorage for testing. Early test saves may be reset or changed later and are not server/account saves.',
   ],
@@ -107,9 +115,9 @@ export default function HelpPage() {
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
           <p>Read the guide if you are unsure what to do next.</p>
-          <p>Status: Version 0.2 first-time player guide. Last updated: July 3, 2026.</p>
+          <p>Status: Version 0.3 statistics guide. Last updated: July 3, 2026.</p>
         </div>
-        <span className="manual-status-label">Version 0.2 guidance</span>
+        <span className="manual-status-label">Version 0.3 statistics</span>
       </header>
 
       <div className="manual-layout">
@@ -185,6 +193,34 @@ export default function HelpPage() {
             </p>
           </section>
 
+          <section className="manual-section" id="version-0-3-statistics">
+            <h3>Version 0.3 Farm Statistics</h3>
+            <p>
+              Version 0.3 adds read-only statistics to help testers understand the farming loop.
+              These stats are local-only prototype data stored in browser localStorage.
+            </p>
+            <ul>
+              <li>
+                Lifetime stats count successful farming and Pawn Shop actions such as planting,
+                watering, harvesting, selling wheat, buying wheat seeds, and reset use.
+              </li>
+              <li>
+                Current Farm Status is derived from the crop slots and shows empty, planted,
+                unwatered, growing, and mature wheat slot counts.
+              </li>
+              <li>
+                Progress Summary derives total wheat cycle actions, net gold from trading, and
+                current farming capacity from existing local state.
+              </li>
+              <li>
+                Statistics do not give rewards, achievements, quests, levels, or claim buttons.
+              </li>
+              <li>
+                This is not online account data, backend data, or an official transferable save.
+              </li>
+            </ul>
+          </section>
+
           <section className="manual-section" id="farming-basics">
             <h3>Farming Basics</h3>
             <ol>
@@ -227,6 +263,10 @@ export default function HelpPage() {
               summary. Planting uses wheat seeds, harvesting gives wheat, selling wheat gives
               gold, and buying seeds uses gold.
             </p>
+            <p>
+              The Inventory page also shows read-only Version 0.3 statistics: lifetime action
+              counts, current farm slot status, and simple derived progress summary values.
+            </p>
           </section>
 
           <section className="manual-section" id="pawn-shop">
@@ -244,12 +284,13 @@ export default function HelpPage() {
           <section className="manual-section" id="saving">
             <h3>Saving / localStorage</h3>
             <p>
-              Version 0.1 saves progress in this browser using localStorage. Refreshing or
-              reopening the browser should keep progress.
+              Version 0.1 saves game state in this browser using localStorage. Refreshing or
+              reopening the browser should keep inventory, crop state, and Version 0.3 lifetime
+              statistics.
             </p>
             <p>
-              Early test saves may be reset or changed later. This is not a server/account
-              save yet.
+              Early test saves may be reset or changed later. This is not a server/account save,
+              online save, or official transferable profile.
             </p>
           </section>
 
