@@ -17,11 +17,23 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
   const sellIsValid = canSellWheat(gameState);
 
   function handleBuyWheatSeed() {
+    if (!buyIsValid) {
+      setFeedbackMessage(
+        `You need ${WHEAT_SEED_COST} gold to buy 1 wheat seed. Sell wheat to earn gold.`,
+      );
+      return;
+    }
+
     const result = onBuyWheatSeed();
     setFeedbackMessage(result.message);
   }
 
   function handleSellWheat() {
+    if (!sellIsValid) {
+      setFeedbackMessage('You do not have wheat to sell yet. Harvest mature wheat first.');
+      return;
+    }
+
     const result = onSellWheat();
     setFeedbackMessage(result.message);
   }
@@ -46,6 +58,26 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
             </article>
           ))}
         </div>
+        <section className="shop-helper-panel" aria-label="How the Pawn Shop works">
+          <div>
+            <p className="eyebrow">How the shop works</p>
+            <h3>Harvest wheat, sell wheat, buy seeds.</h3>
+            <p>
+              Harvesting gives wheat, not seed. The Pawn Shop is how the loop continues
+              after harvest.
+            </p>
+          </div>
+          <ul className="shop-helper-list">
+            <li>
+              <span>Sell 1 wheat</span>
+              <strong>+{PAWN_SHOP_WHEAT_SELL_PRICE} gold</strong>
+            </li>
+            <li>
+              <span>Buy 1 wheat seed</span>
+              <strong>-{WHEAT_SEED_COST} gold</strong>
+            </li>
+          </ul>
+        </section>
         <div className="shop-counter">
           <article className="shop-offer">
             <h3>Sell Wheat</h3>

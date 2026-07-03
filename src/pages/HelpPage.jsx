@@ -10,6 +10,7 @@ const devGrowthSeconds = DEV_WHEAT_GROWTH_DURATION_MS / 1000;
 
 const sectionLinks = [
   ['getting-started', 'Getting Started'],
+  ['version-0-2-guidance', 'Version 0.2 Guidance'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -78,6 +79,14 @@ const faqItems = [
     'You need at least 1 harvested wheat in inventory before the Pawn Shop can buy wheat.',
   ],
   [
+    'What should I do if I get stuck in the test build?',
+    'If you have no seeds, no wheat, and not enough gold, use Reset Dev State to restart the local test state.',
+  ],
+  [
+    'Why is there a Current Goal panel?',
+    'It reads the current farm and inventory state and suggests the next helpful action. It is guidance only and does not give rewards.',
+  ],
+  [
     'Will this save transfer to the future official game?',
     'Version 0.1 uses browser localStorage for testing. Early test saves may be reset or changed later and are not server/account saves.',
   ],
@@ -94,9 +103,9 @@ export default function HelpPage() {
         <div>
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
-          <p>Status: Version 0.1 tester guide. Last updated: July 3, 2026.</p>
+          <p>Status: Version 0.2 beginner guidance guide. Last updated: July 3, 2026.</p>
         </div>
-        <span className="manual-status-label">Version 0.1</span>
+        <span className="manual-status-label">Version 0.2 guidance</span>
       </header>
 
       <div className="manual-layout">
@@ -115,6 +124,40 @@ export default function HelpPage() {
               You start with 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
               The goal of Version 0.1 is to test the basic farming loop: plant, water,
               grow, harvest, sell wheat, buy seed, and plant again.
+            </p>
+          </section>
+
+          <section className="manual-section" id="version-0-2-guidance">
+            <h3>Version 0.2 Beginner Guidance</h3>
+            <p>
+              Version 0.2 improves explanation around the existing farming loop. It does
+              not add rewards, quests, balance changes, or new gameplay systems.
+            </p>
+            <ul>
+              <li>
+                The Current Goal panel reads your farm and inventory state, then suggests
+                a helpful next action.
+              </li>
+              <li>
+                The beginner loop reminder explains: plant, water, wait, harvest, sell,
+                buy seed, and repeat.
+              </li>
+              <li>
+                The Pawn Shop explains that selling 1 wheat gives {PAWN_SHOP_WHEAT_SELL_PRICE}{' '}
+                gold and buying 1 wheat seed costs {WHEAT_SEED_COST} gold.
+              </li>
+              <li>
+                Wheat does not turn back into seed. Harvesting gives wheat, then the Pawn
+                Shop lets you turn wheat into gold and gold into seeds.
+              </li>
+              <li>
+                If you are stuck with no seeds, no wheat, and not enough gold, use Reset
+                Dev State to restart this local test build.
+              </li>
+            </ul>
+            <p>
+              The current PNG assets are temporary test art for layout and integration.
+              Final handmade art may replace them later.
             </p>
           </section>
 

@@ -538,6 +538,93 @@ summary:focus-visible {
   line-height: 1.1;
 }
 
+.farm-guidance-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 14px;
+  margin: 0 0 20px;
+}
+
+.current-objective-panel,
+.beginner-guide-panel {
+  border: 2px solid rgba(117, 91, 68, 0.14);
+  border-radius: 22px;
+  background: rgba(255, 249, 234, 0.92);
+  box-shadow: 0 14px 30px rgba(77, 57, 43, 0.08);
+}
+
+.current-objective-panel {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  padding: 18px;
+}
+
+.current-objective-panel h3,
+.beginner-guide-panel h3 {
+  margin: 0;
+  color: #31535c;
+  font-size: 1.25rem;
+}
+
+.current-objective-panel p,
+.beginner-guide-panel p {
+  margin: 0;
+  color: #5b6358;
+}
+
+.objective-label {
+  display: inline-flex;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #d9edc2;
+  color: #324a27;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.beginner-guide-panel {
+  padding: 16px 18px;
+}
+
+.beginner-guide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.beginner-guide-avatar {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 auto;
+  border-radius: 18px;
+  background: rgba(232, 246, 255, 0.58);
+  object-fit: contain;
+}
+
+.beginner-guide-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 14px;
+  margin: 14px 0 10px;
+  padding-left: 22px;
+}
+
+.beginner-guide-steps li {
+  color: #465246;
+  font-weight: 800;
+}
+
+.guide-note {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(232, 246, 255, 0.66);
+  font-size: 0.94rem;
+  font-weight: 800;
+}
+
 .crop-grid {
   position: relative;
   z-index: 2;
@@ -946,6 +1033,55 @@ summary:focus-visible {
   line-height: 1.1;
 }
 
+.shop-helper-panel {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
+  gap: 16px;
+  margin: 20px 20px 0;
+  padding: 18px;
+  border: 2px solid rgba(117, 91, 68, 0.14);
+  border-radius: 22px;
+  background: rgba(255, 249, 234, 0.92);
+  box-shadow: 0 14px 30px rgba(77, 57, 43, 0.08);
+}
+
+.shop-helper-panel h3 {
+  margin: 0 0 8px;
+  color: #31535c;
+  font-size: 1.3rem;
+}
+
+.shop-helper-panel p {
+  margin: 0;
+  color: #5b6358;
+}
+
+.shop-helper-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shop-helper-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(232, 246, 255, 0.72);
+  color: #31535c;
+  font-weight: 900;
+}
+
+.shop-helper-list span,
+.shop-helper-list strong {
+  overflow-wrap: anywhere;
+}
+
 .shop-offer {
   display: flex;
   flex-direction: column;
@@ -1117,7 +1253,9 @@ summary:focus-visible {
   .page-grid,
   .inventory-grid,
   .farm-state-bar,
+  .farm-guidance-grid,
   .shop-counter,
+  .shop-helper-panel,
   .shop-inventory-summary,
   .manual-layout,
   .slot-detail-grid {
@@ -1193,6 +1331,42 @@ summary:focus-visible {
 
   .button-row {
     flex-direction: column;
+  }
+
+  .farm-guidance-grid {
+    gap: 12px;
+  }
+
+  .current-objective-panel,
+  .beginner-guide-panel,
+  .shop-helper-panel {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .beginner-guide-header {
+    align-items: flex-start;
+  }
+
+  .beginner-guide-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 15px;
+  }
+
+  .beginner-guide-steps {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .shop-helper-panel {
+    margin: 16px 16px 0;
+  }
+
+  .shop-helper-list li {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .primary-action,

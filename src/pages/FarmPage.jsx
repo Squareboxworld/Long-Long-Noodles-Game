@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { canHarvestWheat, canPlantWheat, canWaterCrop } from '../game/gameActions.js';
 import {
   ACTIVE_GROWTH_MODE_LABEL,
+  CROP_SLOT_STATUS,
   CROP_TYPES,
   GROWTH_RECALCULATION_INTERVAL_MS,
+  PAWN_SHOP_WHEAT_SELL_PRICE,
+  WHEAT_SEED_COST,
 } from '../game/gameConstants.js';
 import { getAssetPath } from '../utils/assets.js';
 
@@ -21,6 +24,142 @@ const actionAssetIds = {
   wheatIcon: 'icon_wheat',
   wheatSeedIcon: 'icon_wheat_seed',
 };
+
+const beginnerLoopSteps = [
+  'Plant wheat seeds.',
+  'Water planted wheat.',
+  'Wait until the wheat becomes mature.',
+  'Harvest wheat.',
+  'Sell wheat at the Pawn Shop.',
+  'Use gold to buy more wheat seeds.',
+];
+
+function isWheatCrop(slot) {
+  return slot.cropType === CROP_TYPES.WHEAT && slot.status !== CROP_SLOT_STATUS.EMPTY;
+}
+
+function getCurrentObjective(gameState) {
+  const { farm, inventory } = gameState;
+  const slots = farm.cropSlots;
+  const hasEmptySlot = slots.some((slot) => slot.status === CROP_SLOT_STATUS.EMPTY);
+  const hasMatureWheat = slots.some(
+    (slot) =>
+      isWheatCrop(slot) &&
+      (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE || slot.growthProgress >= 100),
+  );
+  const hasUnwateredWheat = slots.some(
+    (slot) => isWheatCrop(slot) && !slot.isWatered && !slot.isMature,
+  );
+  const hasWateredGrowingWheat = slots.some(
+    (slot) => isWheatCrop(slot) && slot.isWatered && !slot.isMature,
+  );
+
+  if (hasMatureWheat) {
+    return {
+      detail: 'Mature wheat gives 1 wheat and clears the crop slot.',
+      label: 'Ready to harvest',
+      title: 'Harvest your mature wheat.',
+    };
+  }
+
+  if (hasUnwateredWheat) {
+    return {
+      detail: 'Watered wheat can start growing toward maturity.',
+      label: 'Care for crops',
+      title: 'Water your planted wheat so it can grow.',
+    };
+  }
+
+  if (inventory.wheat > 0) {
+    return {
+      detail: `Pawn Shop buys 1 wheat for ${PAWN_SHOP_WHEAT_SELL_PRICE} gold. Wheat does not automatically become seed.`,
+      label: 'Visit shop',
+      title: 'Go to the Pawn Shop and sell wheat for gold.',
+    };
+  }
+
+  if (inventory.gold >= WHEAT_SEED_COST && inventory.wheatSeeds === 0) {
+    return {
+      detail: `A wheat seed costs ${WHEAT_SEED_COST} gold.`,
+      label: 'Buy seed',
+      title: 'Buy wheat seeds from the Pawn Shop.',
+    };
+  }
+
+  if (hasWateredGrowingWheat) {
+    return {
+      detail: 'Dev Fast Growth Mode makes this faster for testing.',
+      label: 'Growing',
+      title: 'Wait for your wheat to grow.',
+    };
+  }
+
+  if (inventory.wheatSeeds > 0 && hasEmptySlot) {
+    return {
+      detail: 'Select an empty soil slot, then use Plant Wheat.',
+      label: 'Start here',
+      title: 'Plant your wheat seeds in empty soil slots.',
+    };
+  }
+
+  if (inventory.wheatSeeds === 0 && inventory.wheat === 0 && inventory.gold < WHEAT_SEED_COST) {
+    return {
+      detail: 'This guidance does not add rescue rewards. Reset only restarts the local test state.',
+      label: 'Test build',
+      title: 'You are stuck in this test build. Use Reset Dev State to restart.',
+    };
+  }
+
+  return {
+    detail: 'Follow the farm loop: plant, water, grow, harvest, sell, buy seed, repeat.',
+    label: 'Loop',
+    title: 'Keep the wheat loop moving.',
+  };
+}
+
+function getPlantBlockedMessage(gameState, selectedSlot) {
+  if (!selectedSlot) {
+    return 'Select an empty soil slot first.';
+  }
+
+  if (selectedSlot.status !== CROP_SLOT_STATUS.EMPTY) {
+    return 'Choose an empty soil slot before planting.';
+  }
+
+  if (gameState.inventory.wheatSeeds < 1) {
+    return 'You need wheat seeds. Sell wheat for gold, then buy seeds at the Pawn Shop.';
+  }
+
+  return 'Select an empty soil slot first.';
+}
+
+function getWaterBlockedMessage(selectedSlot) {
+  if (!selectedSlot || selectedSlot.status === CROP_SLOT_STATUS.EMPTY) {
+    return 'Select planted wheat first.';
+  }
+
+  if (selectedSlot.cropType !== CROP_TYPES.WHEAT) {
+    return 'Select planted wheat first.';
+  }
+
+  if (selectedSlot.isMature) {
+    return 'This wheat is already mature. Harvest it instead.';
+  }
+
+  return 'Select planted wheat first.';
+}
+
+function getHarvestBlockedMessage(selectedSlot) {
+  if (!selectedSlot) {
+    return 'Select a crop slot first.';
+  }
+
+  if (selectedSlot.status === CROP_SLOT_STATUS.EMPTY || selectedSlot.cropType !== CROP_TYPES.WHEAT) {
+    return 'There is no wheat here to harvest.';
+  }
+
+  return 'This wheat is still growing. Wait until it reaches 100%.';
+}
 
 function getWheatStageAssetId(slot) {
   if (slot.cropType !== CROP_TYPES.WHEAT) {
@@ -111,12 +250,12 @@ export default function FarmPage({
   onWaterCrop,
 }) {
   const { farm, inventory } = gameState;
-  const [selectedSlotId, setSelectedSlotId] = useState(farm.cropSlots[0]?.slotId ?? null);
+  const [selectedSlotId, setSelectedSlotId] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState(
     'Select a crop slot, then plant or water wheat.',
   );
-  const selectedSlot =
-    farm.cropSlots.find((slot) => slot.slotId === selectedSlotId) ?? farm.cropSlots[0];
+  const selectedSlot = farm.cropSlots.find((slot) => slot.slotId === selectedSlotId) ?? null;
+  const currentObjective = getCurrentObjective(gameState);
   const plantIsValid = canPlantWheat(gameState, selectedSlot?.slotId);
   const waterIsValid = canWaterCrop(gameState, selectedSlot?.slotId);
   const harvestIsValid = canHarvestWheat(gameState, selectedSlot?.slotId);
@@ -147,16 +286,31 @@ export default function FarmPage({
   }, [onRecalculateGrowth]);
 
   function handlePlantWheat() {
+    if (!plantIsValid) {
+      setFeedbackMessage(getPlantBlockedMessage(gameState, selectedSlot));
+      return;
+    }
+
     const result = onPlantWheat(selectedSlot?.slotId);
     setFeedbackMessage(result.message);
   }
 
   function handleWaterCrop() {
+    if (!waterIsValid) {
+      setFeedbackMessage(getWaterBlockedMessage(selectedSlot));
+      return;
+    }
+
     const result = onWaterCrop(selectedSlot?.slotId);
     setFeedbackMessage(result.message);
   }
 
   function handleHarvestWheat() {
+    if (!harvestIsValid) {
+      setFeedbackMessage(getHarvestBlockedMessage(selectedSlot));
+      return;
+    }
+
     const result = onHarvestWheat(selectedSlot?.slotId);
     setFeedbackMessage(result.message);
   }
@@ -195,6 +349,35 @@ export default function FarmPage({
             </article>
           );
         })}
+      </div>
+
+      <div className="farm-guidance-grid">
+        <section className="current-objective-panel" aria-live="polite">
+          <div>
+            <p className="eyebrow">Current Goal</p>
+            <span className="objective-label">{currentObjective.label}</span>
+          </div>
+          <h3>{currentObjective.title}</h3>
+          <p>{currentObjective.detail}</p>
+        </section>
+
+        <section className="beginner-guide-panel">
+          <div className="beginner-guide-header">
+            <div>
+              <p className="eyebrow">Beginner loop</p>
+              <h3>Squarebox says: keep it simple.</h3>
+            </div>
+            <DecorativeImage className="beginner-guide-avatar" path={squareboxIdlePath} />
+          </div>
+          <ol className="beginner-guide-steps">
+            {beginnerLoopSteps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+          <p className="guide-note">
+            This guide is only explanation. It does not give rewards or change the farm.
+          </p>
+        </section>
       </div>
 
       <div

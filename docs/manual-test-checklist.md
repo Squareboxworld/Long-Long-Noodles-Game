@@ -1,6 +1,6 @@
 # Manual Test Checklist
 
-Status: final Version 0.1 local manual test checklist
+Status: Version 0.2 local manual test checklist
 
 ## Setup
 
@@ -31,6 +31,21 @@ Status: final Version 0.1 local manual test checklist
 18. Reset Dev State.
 19. Confirm starting state returns.
 
+## Version 0.2 Beginner Guidance Checks
+
+- Farm page shows a `Current Goal` panel.
+- At the starting state, Current Goal tells the player to plant wheat seeds in empty soil slots.
+- After planting unwatered wheat, Current Goal tells the player to water planted wheat.
+- After watering wheat before maturity, Current Goal tells the player to wait for wheat to grow.
+- After wheat reaches mature status, Current Goal tells the player to harvest mature wheat.
+- After harvesting wheat, Current Goal tells the player to go to the Pawn Shop and sell wheat for gold.
+- With enough gold and no wheat seeds, Current Goal tells the player to buy wheat seeds from the Pawn Shop.
+- If the local test state has no seeds, no wheat, and not enough gold, Current Goal explains that Reset Dev State can restart the test build.
+- Farm page shows the beginner loop guide: plant, water, wait, harvest, sell, buy seed, repeat.
+- Beginner loop guide is explanation only and does not grant rewards or change state.
+- Current Goal panel is guidance only and does not grant rewards or change state.
+- The new guidance panels fit on mobile without covering crop slots or action buttons.
+
 ## Navigation
 
 - Welcome button opens the Farm page.
@@ -50,13 +65,17 @@ Status: final Version 0.1 local manual test checklist
 - Farm page shows Squarebox idle art as a decorative farm character when available.
 - Farm action buttons remain readable while using button PNG art where available.
 - Farm page shows `Dev Fast Growth Mode`.
+- Farm page shows a Current Goal panel and beginner loop guide.
 - Inventory page shows Gold `0`, Wheat Seeds `4`, and Wheat `0`.
 - Pawn Shop page is separate from the Farm page.
 - Pawn Shop page shows current gold, wheat seeds, and wheat.
 - Pawn Shop page shows wheat seed price `100` gold.
 - Pawn Shop page shows wheat sell price `110` gold.
+- Pawn Shop page explains that selling 1 wheat gives `110` gold.
+- Pawn Shop page explains that buying 1 wheat seed costs `100` gold.
+- Pawn Shop page explains that harvesting gives wheat, not seed.
 - Help / Manual page uses a readable GitHub-style documentation layout.
-- Help / Manual page shows a Version 0.1 status label and last updated text.
+- Help / Manual page shows a Version 0.2 guidance status label and last updated text.
 
 ## Gameplay Checks
 
@@ -75,9 +94,10 @@ Status: final Version 0.1 local manual test checklist
 - Click `Reset Dev State`.
 - Confirm localStorage-backed state returns to 16 empty slots and 4 wheat seeds.
 - With no seeds available after planting 4 slots, select another empty slot and click `Plant Wheat`.
-- Confirm the friendly message says `You do not have enough wheat seeds.`
+- Confirm the friendly message explains that wheat seeds are needed and the Pawn Shop is where seeds are bought.
 - Select an empty slot and click `Water`.
-- Confirm the friendly message says `There is no crop here to water.`
+- Confirm the friendly message says `Select planted wheat first.`
+- Without selecting a valid empty slot, click `Plant Wheat` and confirm the message says `Select an empty soil slot first.` or `Choose an empty soil slot before planting.`
 - After planting and watering wheat, confirm growth progress starts increasing.
 - Confirm wheat visuals progress from sprout to small to growing as progress increases.
 - Wait for the dev fast-growth duration to pass.
@@ -92,7 +112,7 @@ Status: final Version 0.1 local manual test checklist
 - Confirm the harvested wheat count and empty crop slot remain saved after refresh.
 - Confirm unwatered planted wheat remains at `0%` growth.
 - Select an empty slot and click `Harvest`; confirm the message says `There is no wheat here to harvest.`
-- Select planted or growing wheat and click `Harvest`; confirm the message says `This wheat is not ready yet.`
+- Select planted or growing wheat and click `Harvest`; confirm the message says `This wheat is still growing. Wait until it reaches 100%.`
 
 ## Pawn Shop Checks
 
@@ -108,19 +128,20 @@ Status: final Version 0.1 local manual test checklist
 - Confirm Wheat Seeds increases by `1`.
 - Refresh the browser.
 - Confirm the updated Gold, Wheat Seeds, and Wheat values remain saved.
-- With no wheat available, click `Sell 1 Wheat`; confirm the message says `You do not have wheat to sell.`
-- With less than 100 gold, click `Buy 1 Wheat Seed`; confirm the message says `You do not have enough gold.`
+- With no wheat available, click `Sell 1 Wheat`; confirm the message says `You do not have wheat to sell yet. Harvest mature wheat first.`
+- With less than 100 gold, click `Buy 1 Wheat Seed`; confirm the message says `You need 100 gold to buy 1 wheat seed. Sell wheat to earn gold.`
 - No first tutorial sale bonus, bulk buy/sell, Wandering Merchant, harvest minigame, Wheat Fragment, seed return, thirst timer, dry crop timer, weed timer, land expansion, or tools are active yet.
 
 ## Help / Manual Checks
 
 - Open Help from the main navigation.
 - Confirm the Help page has section navigation buttons.
-- Confirm these sections exist: Getting Started, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
+- Confirm these sections exist: Getting Started, Version 0.2 Guidance, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
 - Confirm Getting Started lists 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
+- Confirm Version 0.2 Guidance explains beginner loop clarity, Current Goal, Pawn Shop continuation, no seed return, stuck-state reset, and temporary art.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
-- Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying seeds, selling wheat, future save transfer, and excluded future systems.
+- Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying seeds, selling wheat, stuck test state, Current Goal, future save transfer, and excluded future systems.
 - Confirm Known Exclusions lists Noodles, soup, customers, premium, payment, monetization, Long Long Coin, admin panel, backend, Firebase, notifications, harvest minigame, Wheat Fragment, tools, land expansion, and Wandering Merchant.
 
 ## Responsive Checks

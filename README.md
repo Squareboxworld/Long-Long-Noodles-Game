@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.1 is a local frontend-only farming prototype ready for a first full manual test pass. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, and Pawn Shop buy/sell.
+Version 0.2 is a beginner guidance pass on top of the stable Version 0.1 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, and clearer player guidance.
 
 ## Run Locally
 
@@ -59,6 +59,15 @@ The visible `Reset Dev State` button returns the app to this starting state duri
 - Use the Pawn Shop to buy 1 wheat seed for 100 gold.
 - Planting, watering, harvesting, Pawn Shop actions, and reset actions are saved to localStorage under `roadToLongLongNoodlesSaveV01`.
 
+## Version 0.2 Guidance
+
+Version 0.2 improves beginner clarity only. It adds a Farm page `Current Goal` panel, a simple beginner loop guide, clearer invalid-action feedback, Pawn Shop helper text, and Help / Manual updates.
+
+- The objective panel is guidance only and does not grant rewards.
+- The beginner tutorial does not create quests, prizes, or saved tutorial progress.
+- Core balance is unchanged: 4 starting wheat seeds, 100 gold seed cost, 110 gold wheat sell price, and 1 wheat per harvest.
+- Dev Fast Growth Mode remains active for local testing.
+
 ## Growth Mode
 
 - Real design: wheat takes 7 real-life days.
@@ -67,7 +76,7 @@ The visible `Reset Dev State` button returns the app to this starting state duri
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, Version 0.2 Guidance, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 
@@ -98,4 +107,4 @@ The following systems are intentionally not included:
 - Wandering Merchant
 - Generated final art beyond the provided PNGs
 
-See [docs/version-0.1-scope.md](docs/version-0.1-scope.md) for the active scope.
+See [docs/version-0.1-scope.md](docs/version-0.1-scope.md) for the farming prototype scope and [docs/version-0.2-plan.md](docs/version-0.2-plan.md) for the beginner guidance pass.
