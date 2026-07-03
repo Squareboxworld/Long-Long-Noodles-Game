@@ -9,7 +9,7 @@ Version 0.2 currently improves clarity around the existing loop only. It does no
 - Farm page Current Goal panel derived from existing game state
 - Simple beginner loop guide for plant, water, wait, harvest, sell, buy wheat seeds, repeat
 - Clearer Farm action feedback for invalid plant, water, and harvest attempts
-- Pawn Shop helper text explaining how selling wheat and buying seeds continue the loop
+- Pawn Shop helper text explaining how selling wheat and buying wheat seeds continue the loop
 - Clearer Pawn Shop feedback for not enough gold and no wheat
 - Help / Manual Version 0.2 guidance section
 - Documentation and manual test checklist updates

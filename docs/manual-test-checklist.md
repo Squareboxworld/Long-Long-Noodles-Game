@@ -175,8 +175,8 @@ Status: Version 0.2 local manual test checklist
 - Confirm Version 0.2 Guidance explains beginner loop clarity, Current Goal, Pawn Shop continuation, no seed return, stuck-state reset, and temporary art.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
-- Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying seeds, selling wheat, stuck test state, Current Goal, future save transfer, and excluded future systems.
-- Confirm Known Exclusions lists Noodles, soup, customers, premium, payment, monetization, Long Long Coin, admin panel, backend, Firebase, notifications, harvest minigame, Wheat Fragment, tools, land expansion, and Wandering Merchant.
+- Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying wheat seeds, selling wheat, stuck test state, Current Goal, future save transfer, and excluded future systems.
+- Confirm Known Exclusions lists Noodles, soup, customers, premium, payment, monetization, Long Long Coin, admin panel, account system, backend, Firebase, online save, notifications, harvest minigame, Wheat Fragment, tools, land expansion, and Wandering Merchant.
 
 ## Responsive Checks
 
@@ -210,4 +210,4 @@ Status: Version 0.2 local manual test checklist
 ## Exclusion Checks
 
 - No Noodles page is present.
-- No customer, soup, premium, payment, Long Long Coin, admin, login, backend, Firebase, or notification system is present.
+- No customer, soup, premium, payment, Long Long Coin, admin, login, account system, backend, Firebase, online save, or notification system is present.

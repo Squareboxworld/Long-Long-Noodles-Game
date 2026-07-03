@@ -1,8 +1,10 @@
 # Road to Long Long Noodles - Version 0.1 Scope
 
-Status: Version 0.1 local prototype ready for final manual testing
+Status: Version 0.1 farming scope preserved under Version 0.2 guidance and clarity passes
 
 Version 0.1 is a frontend-only farming prototype. The farm is the main screen, with Inventory, Pawn Shop, and Help / Manual as separate pages.
+
+Version 0.2 adds beginner guidance, visual objective feedback, first-time player flow polish, and QA fixes on top of this scope. It does not add new gameplay systems or change the Version 0.1 farming balance.
 
 ## Included In Version 0.1
 
@@ -44,7 +46,7 @@ Version 0.1 is a frontend-only farming prototype. The farm is the main screen, w
 - Monetization
 - Long Long Coin
 - Admin panel
-- Login, backend, Firebase, or server validation
+- Login, account system, backend, Firebase, online save, or server validation
 - Real notifications
 - Thirst timers, dry crop timers, and weed timers
 - Harvest minigame, Wheat Fragment, seed return, and harvest result grades

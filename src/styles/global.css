@@ -335,6 +335,10 @@ summary:focus-visible {
   background: linear-gradient(180deg, #bfe8f2 0%, #f9f2ce 52%, #b7d88b 100%);
 }
 
+.farm-preview {
+  min-height: 500px;
+}
+
 .sun-dot {
   position: absolute;
   top: 34px;
@@ -437,7 +441,7 @@ summary:focus-visible {
   position: relative;
   z-index: 2;
   width: min(78%, 360px);
-  margin: 30px;
+  margin: 28px;
   padding: 18px;
   border: 2px solid rgba(117, 91, 68, 0.14);
   border-radius: 24px;
@@ -1537,6 +1541,10 @@ summary:focus-visible {
     width: auto;
     margin: 18px;
     padding: 14px;
+  }
+
+  .farm-preview {
+    min-height: 480px;
   }
 
   .welcome-loop-card h3 {

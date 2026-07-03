@@ -100,8 +100,10 @@ The following systems are intentionally not included:
 - Long Long Coin
 - Admin panel
 - Login
+- Account system
 - Backend
 - Firebase
+- Online save
 - Real notifications
 - Harvest minigame
 - Wheat Fragment

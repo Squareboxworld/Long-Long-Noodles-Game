@@ -1,10 +1,12 @@
 # Art Asset Manifest
 
-Status: Version 0.1 farm PNG integration active
+Status: Version 0.1 farm PNG integration active under Version 0.2 guidance polish
 
 The Farm page now uses the PNG assets listed in `src/data/assetManifest.js` where available. The asset manifest keeps stable IDs and public paths so art can be replaced later without changing gameplay logic.
 
 These PNG assets are temporary test assets for layout and integration. Final handmade art may replace them later. Some transparency or background imperfections are acceptable during Version 0.1 as long as the UI remains readable, crop slots remain clickable, and the farming loop remains stable.
+
+Version 0.2 guidance and QA work keeps the same manifest IDs and filenames. Replacing final art later should not require gameplay changes, backend work, account systems, online save, or a localStorage key change.
 
 ## Where Assets Go
 

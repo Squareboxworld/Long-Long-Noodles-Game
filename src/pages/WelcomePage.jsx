@@ -45,7 +45,7 @@ export default function WelcomePage({ onNavigate }) {
             ))}
           </ol>
         </div>
-        <div className="preview-field">
+        <div className="preview-field" aria-hidden="true">
           {Array.from({ length: 8 }).map((_, index) => (
             <span key={index} className="preview-sprout">
               🌱
