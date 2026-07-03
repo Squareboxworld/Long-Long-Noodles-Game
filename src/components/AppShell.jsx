@@ -6,7 +6,7 @@ export default function AppShell({ activePage, children, onNavigate, onResetDevS
     <div className="app-shell">
       <header className="site-header">
         <div>
-          <p className="eyebrow">Version 0.1 foundation</p>
+          <p className="eyebrow">Version 0.2 farming prototype</p>
           <h1>Road to Long Long Noodles</h1>
         </div>
         <div className="header-actions">

@@ -33,6 +33,11 @@ Status: Version 0.2 local manual test checklist
 
 ## Version 0.2 Beginner Guidance Checks
 
+- Welcome page explains that this is a cozy farming prototype focused on growing wheat.
+- Welcome page shows the basic wheat loop: plant, water, wait, harvest, sell, buy wheat seeds.
+- Welcome page has a clear `Start Farming` button that opens Farm.
+- Welcome page states that Farm is the recommended first page.
+- Farm navigation includes a small main-page cue.
 - Farm page shows a `Current Goal` panel.
 - Current Goal panel shows a simple visual action cue for the suggested next step.
 - At the starting state, Current Goal tells the player to plant wheat seeds in empty soil slots.
@@ -42,10 +47,11 @@ Status: Version 0.2 local manual test checklist
 - After harvesting wheat, Current Goal tells the player to go to the Pawn Shop and sell wheat for gold.
 - With enough gold and no wheat seeds, Current Goal tells the player to buy wheat seeds from the Pawn Shop.
 - If the local test state has no seeds, no wheat, and not enough gold, Current Goal explains that Reset Dev State can restart the test build.
-- Farm page shows the beginner loop guide: plant, water, wait, harvest, sell, buy seed, repeat.
+- Farm page shows the beginner loop guide: plant, water, wait, harvest, sell, buy wheat seeds, repeat.
 - Beginner loop guide is explanation only and does not grant rewards or change state.
 - Current Goal panel is guidance only and does not grant rewards or change state.
 - The new guidance panels fit on mobile without covering crop slots or action buttons.
+- Page purpose text is short and clear on Farm, Inventory, Pawn Shop, and Help.
 
 ## Version 0.2 Visual Objective Feedback Checks
 
@@ -61,19 +67,21 @@ Status: Version 0.2 local manual test checklist
 - Non-useful action buttons stay clickable and readable so friendly error messages still work.
 - On the Pawn Shop page, Sell Wheat is visually highlighted when wheat is available.
 - On the Pawn Shop page, Buy Wheat Seed is visually highlighted when gold is at least `100`.
-- If no shop action is ready, the Pawn Shop shows a gentle explanation to harvest wheat first.
+- If no Pawn Shop action is ready, the Pawn Shop shows a gentle explanation to harvest wheat first.
 - Visual guidance does not change inventory, crop state, prices, growth timing, harvest output, or localStorage behavior.
 
 ## Navigation
 
-- Welcome button opens the Farm page.
+- `Start Farming` on Welcome opens the Farm page.
 - Manual button opens the Help / Manual page.
 - Top navigation opens Welcome, Farm, Inventory, Pawn Shop, and Help.
 - Active navigation state is visually clear.
+- Farm is visually marked as the main page in navigation.
 
 ## Screens
 
 - Welcome page shows the game name and enter-game action.
+- Welcome page explains the first-time farming loop before the player enters Farm.
 - Farm page shows the farm background PNG when available, with CSS fallback if the image is missing.
 - Farm page shows land count.
 - Farm page shows 16 crop slots.
@@ -86,6 +94,9 @@ Status: Version 0.2 local manual test checklist
 - Farm page shows a Current Goal panel and beginner loop guide.
 - Farm page shows visual next-action hints on crop slots and action buttons.
 - Inventory page shows Gold `0`, Wheat Seeds `4`, and Wheat `0`.
+- Inventory page explains that gold buys wheat seeds.
+- Inventory page explains that wheat seeds are planted on empty soil slots.
+- Inventory page explains that wheat is sold at the Pawn Shop for gold.
 - Pawn Shop page is separate from the Farm page.
 - Pawn Shop page shows current gold, wheat seeds, and wheat.
 - Pawn Shop page shows wheat seed price `100` gold.
@@ -96,6 +107,7 @@ Status: Version 0.2 local manual test checklist
 - Pawn Shop page visually highlights available buy/sell actions.
 - Help / Manual page uses a readable GitHub-style documentation layout.
 - Help / Manual page shows a Version 0.2 guidance status label and last updated text.
+- Help / Manual page includes a First-Time Player Path section.
 
 ## Gameplay Checks
 
@@ -156,8 +168,10 @@ Status: Version 0.2 local manual test checklist
 
 - Open Help from the main navigation.
 - Confirm the Help page has section navigation buttons.
-- Confirm these sections exist: Getting Started, Version 0.2 Guidance, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
+- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
 - Confirm Getting Started lists 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
+- Confirm First-Time Player Path lists: start on Farm, select empty soil, plant wheat, water wheat, wait, harvest, go to Pawn Shop, sell wheat, buy wheat seeds, return to Farm.
+- Confirm First-Time Player Path mentions Dev Fast Growth Mode, temporary art, and Reset Dev State.
 - Confirm Version 0.2 Guidance explains beginner loop clarity, Current Goal, Pawn Shop continuation, no seed return, stuck-state reset, and temporary art.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.

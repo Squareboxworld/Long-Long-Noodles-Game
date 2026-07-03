@@ -1,23 +1,54 @@
+import { getAssetPath } from '../utils/assets.js';
+
 const inventoryCards = [
   {
     key: 'gold',
     label: 'Gold',
+    assetId: 'icon_gold_coin',
     icon: '🪙',
-    note: 'Earned by selling wheat at the Pawn Shop. Used to buy more wheat seeds.',
+    note: 'Used to buy wheat seeds.',
   },
   {
     key: 'wheatSeeds',
     label: 'Wheat Seeds',
+    assetId: 'icon_wheat_seed',
     icon: '🌰',
-    note: 'Used when planting wheat in an empty farm slot.',
+    note: 'Plant these on empty soil slots.',
   },
   {
     key: 'wheat',
     label: 'Wheat',
+    assetId: 'icon_wheat',
     icon: '🌾',
-    note: 'Gained by harvesting mature wheat. Sold at the Pawn Shop for gold.',
+    note: 'Sell this at the Pawn Shop for gold.',
   },
 ];
+
+function hideBrokenImage(event) {
+  event.currentTarget.hidden = true;
+}
+
+function InventoryIcon({ assetId, fallback }) {
+  const iconPath = getAssetPath(assetId);
+
+  if (iconPath) {
+    return (
+      <img
+        alt=""
+        className="inventory-icon inventory-image-icon"
+        draggable="false"
+        onError={hideBrokenImage}
+        src={iconPath}
+      />
+    );
+  }
+
+  return (
+    <span className="inventory-icon" aria-hidden="true">
+      {fallback}
+    </span>
+  );
+}
 
 export default function InventoryPage({ gameState }) {
   const { inventory } = gameState;
@@ -28,17 +59,14 @@ export default function InventoryPage({ gameState }) {
         <p className="eyebrow">Starter resources</p>
         <h2>Inventory</h2>
         <p>
-          Current Version 0.1 inventory state. Planting, harvesting, and Pawn Shop changes
-          are saved locally in this browser.
+          Check your gold, wheat seeds, and harvested wheat.
         </p>
       </div>
 
       <div className="inventory-grid">
         {inventoryCards.map((item) => (
           <article className="inventory-card" key={item.label}>
-            <span className="inventory-icon" aria-hidden="true">
-              {item.icon}
-            </span>
+            <InventoryIcon assetId={item.assetId} fallback={item.icon} />
             <h3>{item.label}</h3>
             <strong>{inventory[item.key]}</strong>
             <p>{item.note}</p>

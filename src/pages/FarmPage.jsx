@@ -68,7 +68,7 @@ function getCurrentObjective(gameState) {
     return {
       action: 'harvest',
       cue: 'Harvest wheat',
-      detail: 'Mature wheat gives 1 wheat and clears the crop slot.',
+      detail: 'Harvest mature wheat, then sell it at the Pawn Shop.',
       label: 'Ready to harvest',
       title: 'Harvest your mature wheat.',
     };
@@ -78,7 +78,7 @@ function getCurrentObjective(gameState) {
     return {
       action: 'water',
       cue: 'Water planted wheat',
-      detail: 'Watered wheat can start growing toward maturity.',
+      detail: 'Water planted wheat so it can grow.',
       label: 'Care for crops',
       title: 'Water your planted wheat so it can grow.',
     };
@@ -89,7 +89,7 @@ function getCurrentObjective(gameState) {
       action: 'sell',
       cue: 'Sell wheat',
       detail: `Pawn Shop buys 1 wheat for ${PAWN_SHOP_WHEAT_SELL_PRICE} gold. Wheat does not automatically become seed.`,
-      label: 'Visit shop',
+      label: 'Visit Pawn Shop',
       title: 'Go to the Pawn Shop and sell wheat for gold.',
     };
   }
@@ -97,7 +97,7 @@ function getCurrentObjective(gameState) {
   if (inventory.gold >= WHEAT_SEED_COST && inventory.wheatSeeds === 0) {
     return {
       action: 'buy',
-      cue: 'Buy seeds',
+      cue: 'Buy wheat seeds',
       detail: `A wheat seed costs ${WHEAT_SEED_COST} gold.`,
       label: 'Buy seed',
       title: 'Buy wheat seeds from the Pawn Shop.',
@@ -118,7 +118,7 @@ function getCurrentObjective(gameState) {
     return {
       action: 'plant',
       cue: 'Plant seeds',
-      detail: 'Select an empty soil slot, then use Plant Wheat.',
+      detail: 'Start by selecting an empty soil slot and planting wheat.',
       label: 'Start here',
       title: 'Plant your wheat seeds in empty soil slots.',
     };
@@ -128,7 +128,7 @@ function getCurrentObjective(gameState) {
     return {
       action: 'stuck',
       cue: 'Reset if stuck',
-      detail: 'This guidance does not add rescue rewards. Reset only restarts the local test state.',
+      detail: 'This test build can get stuck here. Use Reset Dev State to restart.',
       label: 'Test build',
       title: 'You are stuck in this test build. Use Reset Dev State to restart.',
     };
@@ -137,7 +137,7 @@ function getCurrentObjective(gameState) {
   return {
     action: 'loop',
     cue: 'Follow the loop',
-    detail: 'Follow the farm loop: plant, water, grow, harvest, sell, buy seed, repeat.',
+    detail: 'Follow the farm loop: plant, water, grow, harvest, sell, buy wheat seeds, repeat.',
     label: 'Loop',
     title: 'Keep the wheat loop moving.',
   };
@@ -227,7 +227,7 @@ function getPlantBlockedMessage(gameState, selectedSlot) {
   }
 
   if (gameState.inventory.wheatSeeds < 1) {
-    return 'You need wheat seeds. Sell wheat for gold, then buy seeds at the Pawn Shop.';
+    return 'You need wheat seeds. Sell wheat for gold, then buy wheat seeds at the Pawn Shop.';
   }
 
   return 'Select an empty soil slot first.';
@@ -429,8 +429,7 @@ export default function FarmPage({
         <p className="eyebrow">Main home screen</p>
         <h2>Farm</h2>
         <p>
-          Select a crop slot to plant wheat or water planted wheat. Watered wheat now grows from
-          real timestamps and can be harvested when mature.
+          Plant, water, and harvest wheat here.
         </p>
         <div className="growth-mode-label">{ACTIVE_GROWTH_MODE_LABEL}</div>
       </div>

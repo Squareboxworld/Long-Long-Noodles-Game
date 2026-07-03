@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.2 is a beginner guidance and visual clarity pass on top of the stable Version 0.1 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, and clearer player guidance.
+Version 0.2 is a beginner guidance, visual clarity, and first-time player flow pass on top of the stable Version 0.1 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, and clearer player guidance.
 
 ## Run Locally
 
@@ -33,7 +33,7 @@ npm.cmd run build
 
 The first playable loop is:
 
-Plant wheat -> water wheat -> wait by real timestamp -> harvest wheat -> sell wheat -> buy seeds -> repeat.
+Plant wheat -> water wheat -> wait by real timestamp -> harvest wheat -> sell wheat -> buy wheat seeds -> repeat.
 
 The current prototype supports planting wheat, watering wheat, growing watered wheat from real timestamps, harvesting mature wheat, selling wheat for gold, buying wheat seeds, and saving/loading with localStorage.
 
@@ -45,7 +45,7 @@ The current prototype supports planting wheat, watering wheat, growing watered w
 - 0 gold
 - 0 wheat
 
-The visible `Reset Dev State` button returns the app to this starting state during Version 0.1 testing.
+The visible `Reset Dev State` button returns the app to this starting state during local testing.
 
 ## Current Gameplay
 
@@ -61,10 +61,12 @@ The visible `Reset Dev State` button returns the app to this starting state duri
 
 ## Version 0.2 Guidance
 
-Version 0.2 improves beginner clarity only. It adds a Farm page `Current Goal` panel, a simple beginner loop guide, clearer invalid-action feedback, visual next-action highlights, Pawn Shop helper text, and Help / Manual updates.
+Version 0.2 improves beginner clarity only. It adds a Farm page `Current Goal` panel, a simple beginner loop guide, clearer invalid-action feedback, visual next-action highlights, first-time Welcome page flow, Pawn Shop helper text, and Help / Manual updates.
 
 - The objective panel is guidance only and does not grant rewards.
 - Crop slot highlights, Current Goal cues, action button emphasis, and Pawn Shop offer highlights are derived from existing state.
+- The Welcome page now guides first-time players toward Farm with a `Start Farming` action.
+- Page purpose text explains what Farm, Inventory, Pawn Shop, and Help are for.
 - The beginner tutorial does not create quests, prizes, or saved tutorial progress.
 - Core balance is unchanged: 4 starting wheat seeds, 100 gold seed cost, 110 gold wheat sell price, and 1 wheat per harvest.
 - Dev Fast Growth Mode remains active for local testing.
@@ -72,12 +74,12 @@ Version 0.2 improves beginner clarity only. It adds a Farm page `Current Goal` p
 ## Growth Mode
 
 - Real design: wheat takes 7 real-life days.
-- Version 0.1 testing: Dev Fast Growth Mode is active with a 60-second wheat growth duration.
+- Local testing: Dev Fast Growth Mode is active with a 60-second wheat growth duration.
 - Crop progress is recalculated from timestamps, so watered wheat continues progressing after refresh or reopen.
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, Version 0.2 Guidance, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 

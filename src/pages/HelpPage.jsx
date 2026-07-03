@@ -10,6 +10,7 @@ const devGrowthSeconds = DEV_WHEAT_GROWTH_DURATION_MS / 1000;
 
 const sectionLinks = [
   ['getting-started', 'Getting Started'],
+  ['first-time-path', 'First-Time Player Path'],
   ['version-0-2-guidance', 'Version 0.2 Guidance'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
@@ -34,7 +35,7 @@ const includedScope = [
   'Real-time growth test',
   'Harvest wheat',
   'Sell wheat',
-  'Buy seeds',
+  'Buy wheat seeds',
   'localStorage save/load',
 ];
 
@@ -68,10 +69,10 @@ const faqItems = [
   ],
   [
     'Why did harvesting not return seeds?',
-    'Harvesting intentionally gives 1 wheat only. Seeds must be bought later with gold from selling wheat.',
+    'Harvesting intentionally gives 1 wheat only. Wheat seeds must be bought later with gold from selling wheat.',
   ],
   [
-    'Why can I not buy seeds?',
+    'Why can I not buy wheat seeds?',
     `A wheat seed costs ${WHEAT_SEED_COST} gold. Sell wheat at the Pawn Shop first if you do not have enough gold.`,
   ],
   [
@@ -103,7 +104,8 @@ export default function HelpPage() {
         <div>
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
-          <p>Status: Version 0.2 beginner guidance guide. Last updated: July 3, 2026.</p>
+          <p>Read the guide if you are unsure what to do next.</p>
+          <p>Status: Version 0.2 first-time player guide. Last updated: July 3, 2026.</p>
         </div>
         <span className="manual-status-label">Version 0.2 guidance</span>
       </header>
@@ -123,7 +125,27 @@ export default function HelpPage() {
             <p>
               You start with 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
               The goal of Version 0.1 is to test the basic farming loop: plant, water,
-              grow, harvest, sell wheat, buy seed, and plant again.
+              grow, harvest, sell wheat, buy wheat seeds, and plant again.
+            </p>
+          </section>
+
+          <section className="manual-section" id="first-time-path">
+            <h3>First-Time Player Path</h3>
+            <ol>
+              <li>Start on Farm.</li>
+              <li>Select an empty soil slot.</li>
+              <li>Plant wheat.</li>
+              <li>Water wheat.</li>
+              <li>Wait until mature.</li>
+              <li>Harvest wheat.</li>
+              <li>Go to Pawn Shop.</li>
+              <li>Sell wheat.</li>
+              <li>Buy more wheat seeds.</li>
+              <li>Return to Farm.</li>
+            </ol>
+            <p>
+              Dev Fast Growth Mode is active for testing. Temporary art is for testing.
+              Reset Dev State restarts the prototype.
             </p>
           </section>
 
@@ -140,7 +162,7 @@ export default function HelpPage() {
               </li>
               <li>
                 The beginner loop reminder explains: plant, water, wait, harvest, sell,
-                buy seed, and repeat.
+                buy wheat seeds, and repeat.
               </li>
               <li>
                 The Pawn Shop explains that selling 1 wheat gives {PAWN_SHOP_WHEAT_SELL_PRICE}{' '}
@@ -148,7 +170,7 @@ export default function HelpPage() {
               </li>
               <li>
                 Wheat does not turn back into seed. Harvesting gives wheat, then the Pawn
-                Shop lets you turn wheat into gold and gold into seeds.
+                Shop lets you turn wheat into gold and gold into wheat seeds.
               </li>
               <li>
                 If you are stuck with no seeds, no wheat, and not enough gold, use Reset

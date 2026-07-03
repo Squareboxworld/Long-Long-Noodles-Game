@@ -151,7 +151,18 @@ summary:focus-visible {
   text-align: center;
 }
 
-.nav-button span:last-child {
+.nav-main-badge {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(244, 167, 95, 0.24);
+  color: #604226;
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.nav-button-label {
   min-width: 0;
   overflow-wrap: anywhere;
 }
@@ -159,6 +170,9 @@ summary:focus-visible {
 .nav-button-active {
   background: #a7d8c8;
   color: #203c3d;
+  box-shadow:
+    inset 0 -3px 0 rgba(37, 74, 74, 0.12),
+    0 8px 16px rgba(69, 103, 92, 0.14);
 }
 
 .page-frame {
@@ -201,6 +215,21 @@ summary:focus-visible {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 24px;
+}
+
+.welcome-start-note {
+  width: fit-content;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 2px solid rgba(49, 83, 92, 0.12);
+  border-radius: 16px;
+  background: rgba(232, 246, 255, 0.74);
+  color: #31535c;
+  font-weight: 900;
+}
+
+.welcome-start-action {
+  min-width: 170px;
 }
 
 .primary-action,
@@ -376,12 +405,61 @@ summary:focus-visible {
 }
 
 .preview-sprout {
+  position: relative;
   display: grid;
   min-height: 54px;
   place-items: center;
   border-radius: 16px;
   background: rgba(255, 241, 200, 0.76);
-  font-size: 1.7rem;
+  font-size: 0;
+}
+
+.preview-sprout::before {
+  width: 16px;
+  height: 26px;
+  border-radius: 999px 999px 0 999px;
+  background: #7eb66f;
+  content: "";
+  transform: rotate(-24deg);
+}
+
+.preview-sprout::after {
+  position: absolute;
+  width: 15px;
+  height: 24px;
+  border-radius: 999px 999px 999px 0;
+  background: #6aa95f;
+  content: "";
+  transform: translateX(12px) rotate(28deg);
+}
+
+.welcome-loop-card {
+  position: relative;
+  z-index: 2;
+  width: min(78%, 360px);
+  margin: 30px;
+  padding: 18px;
+  border: 2px solid rgba(117, 91, 68, 0.14);
+  border-radius: 24px;
+  background: rgba(255, 252, 243, 0.9);
+  box-shadow: 0 14px 30px rgba(77, 57, 43, 0.12);
+}
+
+.welcome-loop-card h3 {
+  margin: 0 0 10px;
+  color: #31535c;
+  font-size: 1.45rem;
+}
+
+.welcome-loop-card ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.welcome-loop-card li {
+  margin: 6px 0;
+  color: #465246;
+  font-weight: 850;
 }
 
 .farm-scene {
@@ -1046,6 +1124,11 @@ summary:focus-visible {
   font-size: 2rem;
 }
 
+.inventory-image-icon {
+  padding: 10px;
+  object-fit: contain;
+}
+
 .inventory-card h3,
 .shop-counter h3,
 .manual-page h3 {
@@ -1409,6 +1492,10 @@ summary:focus-visible {
   .farm-character-perch {
     width: min(128px, 30%);
   }
+
+  .welcome-loop-card {
+    width: min(86%, 380px);
+  }
 }
 
 @media (max-width: 520px) {
@@ -1444,6 +1531,21 @@ summary:focus-visible {
 
   .button-row {
     flex-direction: column;
+  }
+
+  .welcome-loop-card {
+    width: auto;
+    margin: 18px;
+    padding: 14px;
+  }
+
+  .welcome-loop-card h3 {
+    font-size: 1.18rem;
+  }
+
+  .welcome-loop-card li {
+    margin: 4px 0;
+    font-size: 0.92rem;
   }
 
   .farm-guidance-grid {

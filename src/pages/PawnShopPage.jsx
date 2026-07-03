@@ -10,7 +10,7 @@ const shopInventoryItems = [
 
 function getShopGuidance(buyIsValid, sellIsValid) {
   if (sellIsValid && buyIsValid) {
-    return 'You can sell wheat for gold or buy another seed now.';
+    return 'You can sell wheat for gold or buy another wheat seed now.';
   }
 
   if (sellIsValid) {
@@ -21,13 +21,13 @@ function getShopGuidance(buyIsValid, sellIsValid) {
     return 'Useful next action: buy a wheat seed with gold.';
   }
 
-  return 'No shop action is ready yet. Harvest wheat first, then sell it here.';
+  return 'No Pawn Shop action is ready yet. Harvest wheat first, then sell it here.';
 }
 
 export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat }) {
   const { inventory } = gameState;
   const [feedbackMessage, setFeedbackMessage] = useState(
-    'Sell harvested wheat, then buy seeds to keep farming.',
+    'Sell harvested wheat, then buy wheat seeds to keep farming.',
   );
   const buyIsValid = canBuyWheatSeed(gameState);
   const sellIsValid = canSellWheat(gameState);
@@ -61,7 +61,7 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
         <p className="eyebrow">Separate area</p>
         <h2>Pawn Shop</h2>
         <p>
-          The normal always-available shop for the Version 0.1 wheat loop.
+          Sell wheat for gold, then buy wheat seeds to continue farming.
         </p>
       </div>
 
@@ -77,8 +77,8 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
         </div>
         <section className="shop-helper-panel" aria-label="How the Pawn Shop works">
           <div>
-            <p className="eyebrow">How the shop works</p>
-            <h3>Harvest wheat, sell wheat, buy seeds.</h3>
+            <p className="eyebrow">How Pawn Shop works</p>
+            <h3>Harvest wheat, sell wheat, buy wheat seeds.</h3>
             <p>
               Harvesting gives wheat, not seed. The Pawn Shop is how the loop continues
               after harvest.
