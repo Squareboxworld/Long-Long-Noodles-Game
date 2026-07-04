@@ -1,6 +1,6 @@
 # Manual Test Checklist
 
-Status: Version 0.4 local manual test checklist
+Status: Version 0.5 local manual test checklist
 
 ## Setup
 
@@ -98,10 +98,10 @@ Status: Version 0.4 local manual test checklist
 - Farm Milestones show progress labels such as `0 / 1` or `1 / 5`.
 - Farm Milestones do not include rewards, XP, levels, unlocks, achievement logic, quests, claim buttons, backend, account system, or online save.
 - Inventory page shows `Local Save Info`.
-- Local Save Info shows save type, save location, online account status, backend status, Version 0.3 local prototype, Dev Fast Growth Mode, Created, and Last saved.
+- Local Save Info shows save type, save location, online account status, backend status, Version 0.5 local prototype, Dev Fast Growth Mode, Created, and Last saved.
 - Local Save Info date values show `Unknown` if a timestamp is missing or invalid.
 - Local Save Info explains that clearing browser data or using another device may remove or hide this local save.
-- App header shows a small `Version 0.3 Prototype` label.
+- App header shows a small `Version 0.5 Prototype` label.
 - Reset Dev State text explains that reset is mainly for development/testing and restarts this browser's prototype test state.
 - Reset Dev State confirmation explains that it may erase local progress in this browser and does not affect an online account because no online account exists.
 - Wheat growth starts after the first successful watering, not when the wheat is planted.
@@ -144,6 +144,25 @@ Status: Version 0.4 local manual test checklist
 - Reset Dev State clears the previous log and starts the fresh test state with `Reset Dev State.`
 - Activity Log is local-only and does not add rewards, quests, notifications, backend, account history, or online save.
 
+## Version 0.5 HUD / UI Shell Checks
+
+- App shell shows `Road to Long Long Noodles`.
+- App shell shows `Squarebox Farm`.
+- App shell shows `Version 0.5 Prototype`.
+- App shell shows `Local Prototype`.
+- App shell shows Dev Fast Growth Mode status.
+- Top resource HUD shows Gold, Wheat Seeds, and Wheat.
+- Top resource HUD values match the current local game state.
+- Planting wheat decreases the Wheat Seeds value in the top HUD.
+- Harvesting wheat increases the Wheat value in the top HUD.
+- Selling wheat increases Gold and decreases Wheat in the top HUD.
+- Buying wheat seed decreases Gold and increases Wheat Seeds in the top HUD.
+- Top navigation still includes only Welcome, Farm, Inventory, Pawn Shop, and Help.
+- Farm remains visually marked as the main page.
+- Current page navigation state is visually clear.
+- No fake Noodles, Quest, Event, Map, Leaderboard, premium, account, backend, or online-save buttons appear.
+- HUD and navigation wrap cleanly on phone-sized viewports without horizontal scrolling.
+
 ## Navigation
 
 - `Start Farming` on Welcome opens the Farm page.
@@ -155,7 +174,8 @@ Status: Version 0.4 local manual test checklist
 ## Screens
 
 - Welcome page shows the game name and enter-game action.
-- App header shows `Version 0.3 Prototype`.
+- App header shows `Version 0.5 Prototype`.
+- App header shows a compact resource HUD for Gold, Wheat Seeds, and Wheat.
 - Welcome page explains the first-time farming loop before the player enters Farm.
 - Farm page shows the farm background PNG when available, with CSS fallback if the image is missing.
 - Farm page shows land count.
@@ -188,7 +208,7 @@ Status: Version 0.4 local manual test checklist
 - Pawn Shop page explains that harvesting gives wheat, not seed.
 - Pawn Shop page visually highlights available buy/sell actions.
 - Help / Manual page uses a readable GitHub-style documentation layout.
-- Help / Manual page shows a Version 0.4 prototype guide status label and last updated text.
+- Help / Manual page shows a Version 0.5 prototype guide status label and last updated text.
 - Help / Manual page includes a First-Time Player Path section.
 
 ## Gameplay Checks
@@ -259,7 +279,7 @@ Status: Version 0.4 local manual test checklist
 
 - Open Help from the main navigation.
 - Confirm the Help page has section navigation buttons.
-- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
+- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
 - Confirm Getting Started lists 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
 - Confirm First-Time Player Path lists: start on Farm, select empty soil, plant wheat, water wheat, wait, harvest, go to Pawn Shop, sell wheat, buy wheat seeds, return to Farm.
 - Confirm First-Time Player Path mentions Dev Fast Growth Mode, temporary art, and Reset Dev State.
@@ -269,6 +289,7 @@ Status: Version 0.4 local manual test checklist
 - Confirm Version 0.4 Crop Detail explains that selecting a crop slot shows friendly status, progress, watered state, estimated ready time, and next action, and that the panel is read-only guidance.
 - Confirm Version 0.4 Activity Log explains recent local action history, capped entries, no rewards, no notifications, no backend, and no online history.
 - Confirm Version 0.4 Farm UX explains that Farm layout polish keeps crop details and action controls near the crop grid without changing gameplay.
+- Confirm Version 0.5 HUD explains the top resource HUD, real local inventory values, current real pages only, no new resources, no backend, and no balance changes.
 - Confirm Saving / localStorage explains Local Save Info, browser/device-only saves, browser data clearing risk, no online save, and Reset Dev State behavior.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress after first watering, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
@@ -279,12 +300,13 @@ Status: Version 0.4 local manual test checklist
 
 - Buttons are easy to tap on a phone-sized viewport.
 - Navigation does not overflow on mobile.
+- Top resource HUD wraps or stacks cleanly on mobile.
 - Farm crop slots and crop art remain readable on mobile.
 - Farm play area stacks cleanly on mobile and keeps the crop grid above the selected crop details.
 - Ready-time text and `Ready to Harvest` crop labels fit without overflowing their panels.
 - Farm visual hints do not cover slot content or block taps on mobile.
 - Crop Detail Panel does not cover crop slots or block taps on mobile.
-- Crop progress bars fit inside crop slots on mobile.
+- Crop tile progress percentages fit inside crop slots on mobile.
 - Text does not overlap with farm or shop placeholder elements.
 - Pages do not require awkward horizontal scrolling at phone widths.
 - Inventory statistics and Farm Milestones stack cleanly on phone-sized viewports.

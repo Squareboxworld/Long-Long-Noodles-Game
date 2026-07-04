@@ -17,6 +17,7 @@ const sectionLinks = [
   ['version-0-4-crop-detail', 'Version 0.4 Crop Detail'],
   ['version-0-4-activity-log', 'Version 0.4 Activity Log'],
   ['version-0-4-farm-ux', 'Version 0.4 Farm UX'],
+  ['version-0-5-hud', 'Version 0.5 HUD'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -130,9 +131,9 @@ export default function HelpPage() {
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
           <p>Read the guide if you are unsure what to do next.</p>
-          <p>Status: Version 0.4 Farm clarity guide. Last updated: July 4, 2026.</p>
+          <p>Status: Version 0.5 HUD / UI shell guide. Last updated: July 4, 2026.</p>
         </div>
-        <span className="manual-status-label">Version 0.4 prototype guide</span>
+        <span className="manual-status-label">Version 0.5 prototype guide</span>
       </header>
 
       <div className="manual-layout">
@@ -236,8 +237,8 @@ export default function HelpPage() {
                 status, version, dev mode, created time, and last saved time.
               </li>
               <li>
-                A small Version 0.3 Prototype label appears in the app header so testers know
-                which local prototype they are checking.
+                The app shell shows the current prototype version so testers know which local
+                prototype they are checking.
               </li>
               <li>
                 Statistics do not give rewards, achievements, quests, levels, or claim buttons.
@@ -315,6 +316,22 @@ export default function HelpPage() {
               <li>On smaller screens, Farm panels stack naturally without changing gameplay.</li>
               <li>Timing details are tucked into a small expandable section so next action and ready time are easier to scan.</li>
               <li>This polish does not change growth speed, prices, inventory, rewards, or save behavior.</li>
+            </ul>
+          </section>
+
+          <section className="manual-section" id="version-0-5-hud">
+            <h3>Version 0.5 Game HUD / UI Shell</h3>
+            <p>
+              Version 0.5 starts by making the existing pages feel more like one cozy local
+              farming game. The top shell now shows the game name, Squarebox Farm identity,
+              Version 0.5 Prototype status, Dev Fast Growth Mode, and current resources.
+            </p>
+            <ul>
+              <li>The HUD resource bar shows real gold, wheat seed, and wheat values.</li>
+              <li>Resource values update from the existing local game state.</li>
+              <li>Navigation still includes only Welcome, Farm, Inventory, Pawn Shop, and Help.</li>
+              <li>The HUD is local-only and does not add accounts, backend, online save, or new resources.</li>
+              <li>No gameplay balance, prices, growth timing, or rewards changed.</li>
             </ul>
           </section>
 

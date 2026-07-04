@@ -131,6 +131,7 @@ export default function App() {
   return (
     <AppShell
       activePage={activePage}
+      gameState={gameState}
       onNavigate={setActivePage}
       onResetDevState={handleResetDevState}
     >

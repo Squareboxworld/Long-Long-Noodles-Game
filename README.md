@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.4 adds Farm clarity on top of the stable Version 0.3 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, Farm UX polish, and a local Farm Activity Log.
+Version 0.5 begins a Game HUD / UI Shell foundation on top of the stable Version 0.4 farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, Farm UX polish, a local Farm Activity Log, and a compact top resource HUD.
 
 ## Run Locally
 
@@ -106,7 +106,7 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 - `Progress Summary` shows derived totals such as total wheat cycle actions, net gold from trading, and current farming capacity.
 - `Farm Milestones` show read-only progress markers derived from existing progress counters.
 - `Local Save Info` explains that saves are local browser/device data, not online account data.
-- The app header includes a small `Version 0.3 Prototype` label.
+- Version 0.3 introduced a prototype status label; the current app shell now shows `Version 0.5 Prototype`.
 - Reset Dev State now clearly warns that it restarts this browser's prototype test state and may erase local progress here.
 - No rewards, XP, levels, unlocks, achievement logic, quests, account system, online save, or backend were added.
 
@@ -129,6 +129,18 @@ Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a com
 - Detailed crop information such as watered state, ready time, next action, and timestamps stays in the `Selected Crop Slot` panel instead of covering the crop art.
 - The panel and wording polish are UI guidance only. They do not change gameplay balance, rewards, save keys, crop data, or economy values.
 
+## Version 0.5 Game HUD / UI Shell
+
+Version 0.5 starts by making the existing real pages feel more like one coherent cozy farming game.
+
+- The app shell now shows `Road to Long Long Noodles`, `Squarebox Farm`, `Version 0.5 Prototype`, `Local Prototype`, and Dev Fast Growth Mode status.
+- A compact top resource HUD shows real current values for gold, wheat seeds, and wheat.
+- The resource HUD updates from existing local game state when planting, harvesting, selling wheat, and buying wheat seeds.
+- Navigation still includes only Welcome, Farm, Inventory, Pawn Shop, and Help.
+- Page headings and navigation spacing were lightly polished for a more consistent game shell.
+- The HUD is local-only and does not add accounts, backend, online save, premium currency, XP, levels, rewards, or unavailable pages.
+- No gameplay balance, economy values, growth duration, save key, or crop behavior changed.
+
 ## Growth Mode
 
 - Real design: wheat takes 7 real-life days.
@@ -139,7 +151,7 @@ Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a com
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 
@@ -178,4 +190,4 @@ The following systems are intentionally not included:
 - Wandering Merchant
 - Generated final art beyond the provided PNGs
 
-See [docs/version-0.1-scope.md](docs/version-0.1-scope.md) for the farming prototype scope, [docs/version-0.2-plan.md](docs/version-0.2-plan.md) for the beginner guidance pass, [docs/version-0.3-plan.md](docs/version-0.3-plan.md) for progress data foundation notes, and [docs/version-0.4-plan.md](docs/version-0.4-plan.md) for Crop Detail Panel notes.
+See [docs/version-0.1-scope.md](docs/version-0.1-scope.md) for the farming prototype scope, [docs/version-0.2-plan.md](docs/version-0.2-plan.md) for the beginner guidance pass, [docs/version-0.3-plan.md](docs/version-0.3-plan.md) for progress data foundation notes, [docs/version-0.4-plan.md](docs/version-0.4-plan.md) for Farm clarity notes, and [docs/version-0.5-plan.md](docs/version-0.5-plan.md) for HUD / UI shell notes.
