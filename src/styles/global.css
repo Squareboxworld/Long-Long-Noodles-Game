@@ -804,12 +804,12 @@ summary:focus-visible {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
-  gap: 5px;
+  justify-content: flex-end;
+  gap: 4px;
   min-width: 0;
   aspect-ratio: 1 / 0.86;
   min-height: clamp(104px, 9vw, 126px);
-  padding: 12px 8px;
+  padding: 12px 8px 10px;
   border: 2px solid rgba(95, 71, 48, 0.16);
   border-radius: 18px;
   background: #d2a36d;
@@ -992,66 +992,29 @@ summary:focus-visible {
 .slot-status {
   display: inline-block;
   max-width: calc(100% - 8px);
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: rgba(255, 248, 226, 0.9);
-  box-shadow: 0 3px 8px rgba(60, 45, 27, 0.08);
-  color: #4a3925;
-  font-size: 0.78rem;
-  font-weight: 900;
-  line-height: 1.05;
-  overflow-wrap: anywhere;
-}
-
-.slot-watered {
-  display: inline-block;
   padding: 4px 9px;
   border-radius: 999px;
-  background: rgba(221, 248, 255, 0.86);
-  color: #245461;
-  font-size: 0.72rem;
-  font-weight: 900;
-  line-height: 1.05;
-}
-
-.slot-action-hint {
-  display: inline-block;
-  max-width: 100%;
-  padding: 4px 8px;
-  border: 1px solid rgba(75, 52, 30, 0.1);
-  border-radius: 999px;
-  background: rgba(255, 252, 243, 0.84);
-  color: #31535c;
-  font-size: 0.7rem;
+  background: rgba(255, 248, 226, 0.88);
+  box-shadow: 0 3px 8px rgba(60, 45, 27, 0.08);
+  color: #4a3925;
+  font-size: 0.74rem;
   font-weight: 900;
   line-height: 1.05;
   overflow-wrap: anywhere;
-}
-
-.slot-progress {
-  width: min(92px, 84%);
-  height: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(61, 48, 31, 0.18);
-  border-radius: 999px;
-  background: rgba(255, 252, 243, 0.78);
-  box-shadow: 0 3px 8px rgba(60, 45, 27, 0.1);
-}
-
-.slot-progress span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: #f7d86b;
+  text-wrap: balance;
 }
 
 .slot-progress-label {
+  display: inline-block;
+  min-width: 42px;
   padding: 2px 7px;
   border-radius: 999px;
-  background: rgba(255, 252, 243, 0.72);
+  background: rgba(255, 252, 243, 0.78);
+  box-shadow: 0 2px 6px rgba(60, 45, 27, 0.08);
   color: #334329;
   font-size: 0.76rem;
   font-weight: 900;
+  line-height: 1;
 }
 
 .farm-note {
@@ -2170,9 +2133,9 @@ summary:focus-visible {
 
   .crop-slot {
     min-height: 94px;
-    padding: 10px 6px;
+    padding: 10px 6px 8px;
     border-radius: 14px;
-    gap: 4px;
+    gap: 3px;
   }
 
   .crop-slot-art {
@@ -2197,7 +2160,13 @@ summary:focus-visible {
 
   .slot-status {
     max-width: calc(100% - 4px);
-    padding: 4px 6px;
+    padding: 3px 6px;
+    font-size: 0.66rem;
+  }
+
+  .slot-progress-label {
+    min-width: 36px;
+    padding: 2px 6px;
     font-size: 0.68rem;
   }
 
@@ -2205,15 +2174,6 @@ summary:focus-visible {
   .feedback-message {
     padding: 10px 12px;
     font-size: 0.9rem;
-  }
-
-  .slot-action-hint {
-    padding: 3px 6px;
-    font-size: 0.62rem;
-  }
-
-  .slot-watered {
-    font-size: 0.66rem;
   }
 
   .farm-sky {

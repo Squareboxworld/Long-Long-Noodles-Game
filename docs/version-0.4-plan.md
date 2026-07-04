@@ -1,8 +1,8 @@
 # Road to Long Long Noodles - Version 0.4 Farming Clarity Plan
 
-Status: Version 0.4 adds read-only Crop Detail Panel clarity, estimated ready time, a local Farm Activity Log, consistent crop state wording, and Farm UX polish for the existing local farming prototype
+Status: Version 0.4 adds read-only Crop Detail Panel clarity, estimated ready time, a local Farm Activity Log, consistent crop state wording, Farm UX polish, and final crop tile clutter cleanup for the existing local farming prototype
 
-Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Prompt 2 adds estimated ready time text for selected wheat crops. Version 0.4 Prompt 3 adds a capped local Farm Activity Log for recent successful actions. Version 0.4 Prompt 4 standardizes player-facing crop wording across the Farm page, Inventory, Pawn Shop, Help, and documentation. Version 0.4 Prompt 5 polishes Farm page layout, mobile readability, selected crop details, action controls, and crop grid clarity. These features are clarity/history only and derive from existing crop slot, inventory, action, and growth timing state. They do not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
+Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Prompt 2 adds estimated ready time text for selected wheat crops. Version 0.4 Prompt 3 adds a capped local Farm Activity Log for recent successful actions. Version 0.4 Prompt 4 standardizes player-facing crop wording across the Farm page, Inventory, Pawn Shop, Help, and documentation. Version 0.4 Prompt 5 polishes Farm page layout, mobile readability, selected crop details, action controls, and crop grid clarity. Version 0.4 Prompt 6 completes a final QA pass and simplifies crop tile labels so the crop art stays readable. These features are clarity/history only and derive from existing crop slot, inventory, action, and growth timing state. They do not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
 
 ## Included In Version 0.4 Prompt 1
 
@@ -30,6 +30,15 @@ Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Pro
 - Crop tile label spacing polished for long labels like `Ready to Harvest`
 - Action buttons kept large and readable near selected crop guidance
 - Help / Manual, README, and manual test checklist updates
+- No gameplay logic, balance, save key, or economy values were changed
+
+## Included In Version 0.4 Prompt 6
+
+- Final Version 0.4 QA and visual clutter cleanup
+- Crop tiles simplified to show only slot number, one main status label, and progress percentage when wheat is present
+- Extra crop tile text chips such as watered state and action hints removed from the tile itself
+- Detailed crop information remains in the `Selected Crop Slot` panel
+- Source/build checks for the existing Farm, Inventory, Pawn Shop, Help, stats, milestones, and activity log flows
 - No gameplay logic, balance, save key, or economy values were changed
 
 ## Included In Version 0.4 Prompt 2

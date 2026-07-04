@@ -663,18 +663,6 @@ export default function FarmPage({
                   </span>
                   <span className="slot-number">{index + 1}</span>
                   <span className="slot-status">{getCropStatusLabel(slot)}</span>
-                  {slot.isWatered ? <span className="slot-watered">Watered</span> : null}
-                  {slotVisualHint ? (
-                    <span className="slot-action-hint">{slotVisualHint.label}</span>
-                  ) : null}
-                  {slot.cropType ? (
-                    <div
-                      className="slot-progress"
-                      aria-label={`Growth progress ${formatProgress(slot.growthProgress)}`}
-                    >
-                      <span style={{ width: `${slot.growthProgress}%` }} />
-                    </div>
-                  ) : null}
                   {slot.cropType ? (
                     <span className="slot-progress-label">{formatProgress(slot.growthProgress)}</span>
                   ) : null}

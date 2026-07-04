@@ -125,6 +125,8 @@ Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a com
 - Farm UX polish keeps the crop grid and farm background as the main visual focus while placing crop details and action buttons nearby on wider screens.
 - Mobile Farm layout stacks naturally so crop slots, ready-time text, and action buttons remain readable.
 - Selected Crop Slot timing details are tucked into a small expandable section so the next action and ready time stay easy to scan.
+- The final Version 0.4 QA pass simplified crop tile labels so each tile shows only the slot number, one main status label, and progress percentage when wheat is present.
+- Detailed crop information such as watered state, ready time, next action, and timestamps stays in the `Selected Crop Slot` panel instead of covering the crop art.
 - The panel and wording polish are UI guidance only. They do not change gameplay balance, rewards, save keys, crop data, or economy values.
 
 ## Growth Mode

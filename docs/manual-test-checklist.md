@@ -121,6 +121,10 @@ Status: Version 0.4 local manual test checklist
 - The Crop Detail Panel does not cover crop slots or block crop slot clicks.
 - The Crop Detail Panel stacks cleanly on phone-sized viewports without horizontal scrolling.
 - Estimated Ready Time is derived from existing growth timing and does not change growth speed.
+- Crop tiles show only the slot number, one main status label, and a progress percentage when wheat is present.
+- Crop tiles do not show separate `Watered`, `Harvest`, duplicate `Growing`, or next-action text chips.
+- Watered state, next action, ready time, timestamps, and detailed progress remain available in the Selected Crop Slot panel.
+- Crop tile labels are compact, readable, and do not cover most of the crop art on desktop or mobile.
 
 ## Version 0.4 Farm Activity Log Checks
 
@@ -165,6 +169,7 @@ Status: Version 0.4 local manual test checklist
 - Farm page shows a Current Goal panel and beginner loop guide.
 - Farm page shows visual next-action hints on crop slots and action buttons.
 - Farm page shows a read-only Selected Crop Slot detail panel with friendly crop status wording, estimated ready time, and next-action guidance.
+- Farm crop tiles keep the crop art as the focus by showing only slot number, current status, and crop progress percentage when relevant.
 - Inventory page shows Gold `0`, Wheat Seeds `4`, and Wheat `0`.
 - Inventory page explains that gold buys wheat seeds.
 - Inventory page explains that wheat seeds are planted on empty soil slots.
@@ -223,7 +228,7 @@ Status: Version 0.4 local manual test checklist
 - Confirm feedback says `You harvested 1 wheat.`
 - Confirm Wheat inventory increases by `1`.
 - Confirm Farm Milestones shows First Harvest as completed after harvesting.
-- Confirm the crop slot returns to `empty`.
+- Confirm the crop slot returns to `Empty Soil`.
 - Refresh the browser.
 - Confirm the harvested wheat count, empty crop slot, and milestone progress remain saved after refresh.
 - Confirm wheat that needs water remains at `0%` growth.
