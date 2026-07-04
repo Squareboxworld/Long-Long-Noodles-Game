@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { canHarvestWheat, canPlantWheat, canWaterCrop } from '../game/gameActions.js';
 import {
   ACTIVE_GROWTH_MODE_LABEL,
+  ACTIVE_WHEAT_GROWTH_DURATION_MS,
   CROP_SLOT_STATUS,
   CROP_TYPES,
   GROWTH_RECALCULATION_INTERVAL_MS,
@@ -9,6 +10,7 @@ import {
   WHEAT_SEED_COST,
 } from '../game/gameConstants.js';
 import { getAssetPath } from '../utils/assets.js';
+import { formatDuration } from '../utils/timeFormat.js';
 
 const inventoryLabels = [
   ['gold', 'Gold', 'icon_gold_coin'],
@@ -279,6 +281,43 @@ function getSelectedCropNextAction(slot, inventory) {
   return 'No crop action is ready for this slot.';
 }
 
+function getSelectedCropReadyTime(slot, currentTimeMs = Date.now()) {
+  if (!slot) {
+    return 'Ready time: Select a soil slot first.';
+  }
+
+  if (slot.status === CROP_SLOT_STATUS.EMPTY) {
+    return 'Ready time: Plant wheat seed first.';
+  }
+
+  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
+    return 'Ready now. Harvest this wheat.';
+  }
+
+  if (isWheatCrop(slot) && !slot.isWatered) {
+    return 'Ready time: Water this wheat to start growth.';
+  }
+
+  if (isWheatCrop(slot)) {
+    const growthStartedAtMs = Date.parse(slot.growthStartedAt);
+
+    if (!Number.isFinite(growthStartedAtMs) || !Number.isFinite(currentTimeMs)) {
+      return 'Ready time: Unknown';
+    }
+
+    const readyAtMs = growthStartedAtMs + ACTIVE_WHEAT_GROWTH_DURATION_MS;
+    const remainingMs = readyAtMs - currentTimeMs;
+
+    if (remainingMs <= 0 || slot.growthProgress >= 100) {
+      return 'Ready now. Harvest this wheat.';
+    }
+
+    return `Ready in: ${formatDuration(remainingMs)}`;
+  }
+
+  return 'Ready time: Unknown';
+}
+
 function getSelectedCropSummary(slot, inventory) {
   if (!slot) {
     return 'Select a soil slot to see details.';
@@ -462,6 +501,7 @@ export default function FarmPage({
   const selectedCropStatus = getSelectedCropStatus(selectedSlot);
   const selectedCropStage = getSelectedCropStage(selectedSlot);
   const selectedCropNextAction = getSelectedCropNextAction(selectedSlot, inventory);
+  const selectedCropReadyTime = getSelectedCropReadyTime(selectedSlot);
   const selectedCropSummary = getSelectedCropSummary(selectedSlot, inventory);
   const currentObjective = getCurrentObjective(gameState);
   const plantIsValid = canPlantWheat(gameState, selectedSlot?.slotId);
@@ -712,6 +752,10 @@ export default function FarmPage({
                 <dt>Next action</dt>
                 <dd>{selectedCropNextAction}</dd>
               </div>
+              <div className="crop-detail-ready-time">
+                <dt>Ready time</dt>
+                <dd>{selectedCropReadyTime}</dd>
+              </div>
             </dl>
 
             <div
@@ -743,7 +787,9 @@ export default function FarmPage({
             </dl>
           </>
         ) : (
-          <p className="crop-detail-empty-message">Select a soil slot to see details.</p>
+          <div className="crop-detail-empty-message">
+            <strong>{selectedCropReadyTime}</strong>
+          </div>
         )}
 
         <p className={`action-helper action-helper-${suggestedFarmAction.action}`}>

@@ -1079,6 +1079,19 @@ summary:focus-visible {
   font-weight: 800;
 }
 
+.crop-detail-empty-message {
+  display: grid;
+  gap: 6px;
+}
+
+.crop-detail-empty-message p {
+  margin: 0;
+}
+
+.crop-detail-empty-message strong {
+  color: #31535c;
+}
+
 .crop-detail-icon {
   flex: 0 0 auto;
   width: 56px;
@@ -1127,6 +1140,12 @@ summary:focus-visible {
   grid-column: 1 / -1;
   border-color: rgba(83, 143, 111, 0.18);
   background: rgba(232, 246, 226, 0.88) !important;
+}
+
+.crop-detail-ready-time {
+  grid-column: 1 / -1;
+  border-color: rgba(52, 132, 158, 0.16);
+  background: rgba(232, 246, 255, 0.82) !important;
 }
 
 .crop-status-pill {

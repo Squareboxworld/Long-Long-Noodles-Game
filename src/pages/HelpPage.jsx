@@ -266,13 +266,21 @@ export default function HelpPage() {
             <p>
               Version 0.4 begins with a clearer read-only Crop Detail Panel on the Farm
               page. Selecting a crop slot shows the selected slot, friendly crop status,
-              crop type, growth progress, watered state, and suggested next action.
+              crop type, growth progress, watered state, estimated ready time, and suggested
+              next action.
             </p>
             <ul>
               <li>The panel helps explain what is happening in the selected soil slot.</li>
               <li>Empty soil points players toward planting or buying wheat seeds.</li>
               <li>Planted wheat shows when it needs water before growth can start.</li>
-              <li>Watered wheat shows growing progress until it is ready to harvest.</li>
+              <li>
+                Watered wheat shows growing progress and an estimated ready time until it is
+                ready to harvest.
+              </li>
+              <li>
+                Dev Fast Growth Mode makes the estimate short for local testing, but the
+                estimate does not change growth speed.
+              </li>
               <li>The panel is guidance only and does not change gameplay or save data.</li>
             </ul>
           </section>

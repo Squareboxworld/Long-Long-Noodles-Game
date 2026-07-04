@@ -1,8 +1,8 @@
 # Road to Long Long Noodles - Version 0.4 Farming Clarity Plan
 
-Status: Version 0.4 begins with a read-only Crop Detail Panel for the existing local farming prototype
+Status: Version 0.4 adds read-only Crop Detail Panel clarity and estimated ready time for the existing local farming prototype
 
-Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. It is UI guidance only and derives display text from existing crop slot and inventory state. It does not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
+Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Prompt 2 adds estimated ready time text for selected wheat crops. These features are UI guidance only and derive display text from existing crop slot, inventory, and growth timing state. They do not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
 
 ## Included In Version 0.4 Prompt 1
 
@@ -12,6 +12,16 @@ Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. It is UI guidan
 - Growth progress bar for the selected crop slot
 - Existing timestamp display for planted, growth-started, and last-watered times
 - Help / Manual explanation for the Crop Detail Panel
+- README and manual test checklist updates
+
+## Included In Version 0.4 Prompt 2
+
+- Estimated ready time display in the `Selected Crop Slot` panel
+- `Ready in` countdown for watered wheat based on the existing active wheat growth duration
+- Friendly ready-time instructions for no selection, empty slots, and unwatered wheat
+- Mature wheat ready-time text that says it is ready now
+- Shared UI time formatting helper in `src/utils/timeFormat.js`
+- Help / Manual explanation for estimated ready time
 - README and manual test checklist updates
 
 ## Friendly Status Wording
@@ -37,6 +47,19 @@ Next action text is derived from the selected slot and current inventory:
 - Mature wheat: `Harvest this wheat.`
 
 This guidance does not trigger actions by itself. The existing Plant Wheat, Water, and Harvest buttons remain the only Farm page action controls.
+
+## Estimated Ready Time
+
+Estimated ready time is derived from the selected crop slot's `growthStartedAt` timestamp and the existing `ACTIVE_WHEAT_GROWTH_DURATION_MS` constant used by the growth system.
+
+- No selected slot: `Ready time: Select a soil slot first.`
+- Empty slot: `Ready time: Plant wheat seed first.`
+- Planted unwatered wheat: `Ready time: Water this wheat to start growth.`
+- Watered growing wheat: `Ready in: ...`
+- Mature wheat: `Ready now. Harvest this wheat.`
+- Missing or invalid timing data: `Ready time: Unknown`
+
+The estimate updates through the existing Farm page growth recalculation interval. It does not change the growth duration or create a new timer system.
 
 ## Balance Unchanged
 

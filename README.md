@@ -89,12 +89,13 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 
 ## Version 0.4 Crop Detail Panel
 
-Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a compact read-only `Selected Crop Slot` panel with friendly status wording, crop type, progress, watered state, timestamps, and the next helpful action.
+Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a compact read-only `Selected Crop Slot` panel with friendly status wording, crop type, progress, watered state, timestamps, estimated ready time, and the next helpful action.
 
 - Empty soil shows `Empty Soil` and planting guidance when wheat seeds are available.
 - Planted unwatered wheat shows `Needs Water` and explains that watering starts growth.
 - Watered wheat below 100% shows `Growing`.
 - Mature wheat shows `Ready to Harvest`.
+- Watered growing wheat shows a `Ready in` estimate derived from the existing active wheat growth duration.
 - The panel is UI guidance only. It does not change gameplay balance, rewards, save keys, crop data, or economy values.
 
 ## Growth Mode
@@ -102,6 +103,7 @@ Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a com
 - Real design: wheat takes 7 real-life days.
 - Local testing: Dev Fast Growth Mode is active with a 60-second wheat growth duration.
 - Crop progress starts after the first successful watering and is recalculated from timestamps, so watered wheat continues progressing after refresh or reopen.
+- Estimated ready time uses the same active wheat growth duration and does not change growth speed.
 - Version 0.3 final QA fixed the growth-start timing bug where late-watered wheat could jump forward from planting time.
 
 ## Help / Manual
