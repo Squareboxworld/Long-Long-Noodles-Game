@@ -160,7 +160,7 @@ export default function HelpPage() {
               <li>Select an empty soil slot.</li>
               <li>Plant wheat.</li>
               <li>Water wheat.</li>
-              <li>Wait until mature.</li>
+              <li>Wait until the wheat is ready to harvest.</li>
               <li>Harvest wheat.</li>
               <li>Go to Pawn Shop.</li>
               <li>Sell wheat.</li>
@@ -219,8 +219,8 @@ export default function HelpPage() {
                 watering, harvesting, selling wheat, buying wheat seeds, and reset use.
               </li>
               <li>
-                Current Farm Status is derived from the crop slots and shows empty, planted,
-                unwatered, growing, and mature wheat slot counts.
+                Current Farm Status is derived from the crop slots and shows Empty Soil,
+                Needs Water, Growing, and Ready to Harvest counts.
               </li>
               <li>
                 Progress Summary derives total wheat cycle actions, net gold from trading, and
@@ -267,13 +267,13 @@ export default function HelpPage() {
             <p>
               Version 0.4 begins with a clearer read-only Crop Detail Panel on the Farm
               page. Selecting a crop slot shows the selected slot, friendly crop status,
-              crop type, growth progress, watered state, estimated ready time, and suggested
+              crop name, growth progress, watered state, estimated ready time, and suggested
               next action.
             </p>
             <ul>
               <li>The panel helps explain what is happening in the selected soil slot.</li>
               <li>Empty soil points players toward planting or buying wheat seeds.</li>
-              <li>Planted wheat shows when it needs water before growth can start.</li>
+              <li>Wheat that needs water clearly shows `Needs Water` before growth can start.</li>
               <li>
                 Watered wheat shows growing progress and an estimated ready time until it is
                 ready to harvest.
@@ -309,7 +309,7 @@ export default function HelpPage() {
               <li>Plant wheat if you have wheat seeds.</li>
               <li>Water the wheat.</li>
               <li>Wait for the crop to grow.</li>
-              <li>Harvest the wheat when it is mature.</li>
+              <li>Harvest the wheat when it is ready to harvest.</li>
             </ol>
           </section>
 
@@ -322,15 +322,15 @@ export default function HelpPage() {
             <p>
               Crops start growing after the first successful watering. Growth then uses
               timestamps, so progress continues after refresh or reopening the browser. In
-              Version 0.3, unwatered crops stay at 0%.
+              Version 0.3 and later, wheat that needs water stays at 0%.
             </p>
           </section>
 
           <section className="manual-section" id="harvesting">
             <h3>Harvesting</h3>
             <p>
-              Mature wheat can be harvested from the Farm page. Harvesting gives 1 wheat
-              and resets the crop slot to empty.
+              Wheat that is ready to harvest can be harvested from the Farm page. Harvesting
+              gives 1 wheat and resets the crop slot to Empty Soil.
             </p>
             <p>
               Harvesting does not return seeds. The harvest minigame and Wheat Fragment

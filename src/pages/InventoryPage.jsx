@@ -2,8 +2,8 @@ import { getAssetPath } from '../utils/assets.js';
 import {
   ACTIVE_GROWTH_MODE_LABEL,
   CROP_SLOT_STATUS,
-  CROP_TYPES,
 } from '../game/gameConstants.js';
+import { isDisplayReadyToHarvest, isDisplayWheatCrop } from '../utils/cropDisplay.js';
 import { getFarmMilestoneProgress } from '../utils/milestones.js';
 import { formatRelativeTime } from '../utils/timeFormat.js';
 
@@ -65,12 +65,11 @@ function getProgressValue(progress, key) {
 }
 
 function isActiveWheatSlot(slot) {
-  return slot.cropType === CROP_TYPES.WHEAT && slot.status !== CROP_SLOT_STATUS.EMPTY;
+  return isDisplayWheatCrop(slot);
 }
 
 function isMatureWheatSlot(slot) {
-  return isActiveWheatSlot(slot) &&
-    (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE || slot.growthProgress >= 100);
+  return isDisplayReadyToHarvest(slot);
 }
 
 function getCurrentFarmStatus(farm) {
@@ -80,25 +79,25 @@ function getCurrentFarmStatus(farm) {
     {
       label: 'Empty slots',
       value: cropSlots.filter((slot) => slot.status === CROP_SLOT_STATUS.EMPTY).length,
-      note: 'Ready for future planting.',
+      note: 'Empty Soil ready for wheat seeds.',
     },
     {
-      label: 'Planted wheat slots',
+      label: 'Wheat in soil',
       value: cropSlots.filter(isActiveWheatSlot).length,
       note: 'Any wheat currently in soil.',
     },
     {
-      label: 'Unwatered wheat slots',
-      value: cropSlots.filter((slot) => isActiveWheatSlot(slot) && !slot.isWatered && !slot.isMature).length,
-      note: 'Needs water before growth.',
+      label: 'Needs Water',
+      value: cropSlots.filter((slot) => isActiveWheatSlot(slot) && !slot.isWatered && !isMatureWheatSlot(slot)).length,
+      note: 'Water these to start growth.',
     },
     {
-      label: 'Growing wheat slots',
+      label: 'Growing',
       value: cropSlots.filter((slot) => isActiveWheatSlot(slot) && slot.isWatered && !isMatureWheatSlot(slot)).length,
-      note: 'Watered and not mature yet.',
+      note: 'Watered and not ready yet.',
     },
     {
-      label: 'Mature wheat slots',
+      label: 'Ready to Harvest',
       value: cropSlots.filter(isMatureWheatSlot).length,
       note: 'Ready to harvest.',
     },
@@ -122,7 +121,7 @@ function getProgressSummary(gameState) {
     {
       label: 'Total wheat cycle actions',
       value: totalCycleActions,
-      note: 'Planted + watered + harvested.',
+      note: 'Plant + water + harvest actions.',
     },
     {
       label: 'Net gold from trading',

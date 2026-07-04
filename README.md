@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.4 begins with Crop Detail Panel clarity on top of the stable Version 0.3 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, and a read-only selected crop detail panel on the Farm page.
+Version 0.4 adds Farm clarity on top of the stable Version 0.3 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, and a local Farm Activity Log.
 
 ## Run Locally
 
@@ -58,7 +58,7 @@ The first playable loop is:
 
 Plant wheat -> water wheat -> wait by real timestamp -> harvest wheat -> sell wheat -> buy wheat seeds -> repeat.
 
-The current prototype supports planting wheat, watering wheat, growing watered wheat from real timestamps, harvesting mature wheat, selling wheat for gold, buying wheat seeds, and saving/loading with localStorage.
+The current prototype supports planting wheat, watering wheat to start growth, growing watered wheat from real timestamps, harvesting wheat that is ready to harvest, selling wheat for gold, buying wheat seeds, and saving/loading with localStorage.
 
 ## Current Starting State
 
@@ -74,9 +74,9 @@ The visible `Reset Dev State` button returns the app to this starting state duri
 
 - Select a crop slot on the Farm page.
 - Use `Plant Wheat` on an empty slot if wheat seeds are available.
-- Use `Water` on planted wheat.
-- Watered wheat grows from timestamps and can reach mature status in Dev Fast Growth Mode.
-- Use `Harvest` on mature wheat to gain 1 wheat.
+- Use `Water` on wheat that shows `Needs Water`.
+- Watered wheat shows `Growing` and can become `Ready to Harvest` in Dev Fast Growth Mode.
+- Use `Harvest` on wheat that is `Ready to Harvest` to gain 1 wheat.
 - Harvesting does not return seeds.
 - Use the Pawn Shop to sell 1 wheat for 110 gold.
 - Use the Pawn Shop to buy 1 wheat seed for 100 gold.
@@ -112,16 +112,17 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 
 ## Version 0.4 Farm Clarity
 
-Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a compact read-only `Selected Crop Slot` panel with friendly status wording, crop type, progress, watered state, timestamps, estimated ready time, and the next helpful action.
+Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a compact read-only `Selected Crop Slot` panel with friendly status wording, crop name, progress, watered state, timestamps, estimated ready time, and the next helpful action.
 
 - Empty soil shows `Empty Soil` and planting guidance when wheat seeds are available.
-- Planted unwatered wheat shows `Needs Water` and explains that watering starts growth.
+- Wheat that has not been watered shows `Needs Water` and explains that watering starts growth.
 - Watered wheat below 100% shows `Growing`.
-- Mature wheat shows `Ready to Harvest`.
+- Wheat at 100% shows `Ready to Harvest`.
 - Watered growing wheat shows a `Ready in` estimate derived from the existing active wheat growth duration.
 - Inventory now includes a read-only Farm Activity Log for recent successful farming and Pawn Shop actions.
 - Activity entries are local-only, capped to recent entries, and saved through localStorage.
-- The panel is UI guidance only. It does not change gameplay balance, rewards, save keys, crop data, or economy values.
+- Crop tiles, the Crop Detail Panel, Current Goal, action hints, Help, and docs use the same friendly crop state wording.
+- The panel and wording polish are UI guidance only. They do not change gameplay balance, rewards, save keys, crop data, or economy values.
 
 ## Growth Mode
 

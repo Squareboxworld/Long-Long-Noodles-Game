@@ -10,18 +10,18 @@ const shopInventoryItems = [
 
 function getShopGuidance(buyIsValid, sellIsValid) {
   if (sellIsValid && buyIsValid) {
-    return 'You can sell wheat for gold or buy another wheat seed now.';
+    return 'You can sell 1 wheat for 110 gold or buy 1 wheat seed for 100 gold.';
   }
 
   if (sellIsValid) {
-    return 'Useful next action: sell wheat for gold.';
+    return 'Useful next action: sell 1 wheat for 110 gold.';
   }
 
   if (buyIsValid) {
-    return 'Useful next action: buy a wheat seed with gold.';
+    return 'Useful next action: buy 1 wheat seed for 100 gold.';
   }
 
-  return 'No Pawn Shop action is ready yet. Harvest wheat first, then sell it here.';
+  return 'No Pawn Shop action is ready yet. Harvest wheat first, then sell wheat here for gold.';
 }
 
 export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat }) {
@@ -47,7 +47,7 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
 
   function handleSellWheat() {
     if (!sellIsValid) {
-      setFeedbackMessage('You do not have wheat to sell yet. Harvest mature wheat first.');
+      setFeedbackMessage('You do not have wheat to sell yet. Harvest wheat that is ready first.');
       return;
     }
 
@@ -100,7 +100,7 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
           <article className={sellIsValid ? 'shop-offer shop-offer-suggested' : 'shop-offer'}>
             {sellIsValid ? <span className="shop-offer-cue">Useful now</span> : null}
             <h3>Sell Wheat</h3>
-            <p>Pawn Shop buys 1 wheat for {PAWN_SHOP_WHEAT_SELL_PRICE} gold.</p>
+            <p>Sell 1 wheat for {PAWN_SHOP_WHEAT_SELL_PRICE} gold.</p>
             <p className="shop-offer-status">
               {sellIsValid ? 'Ready to sell 1 wheat.' : 'Need at least 1 wheat to sell.'}
             </p>
@@ -116,7 +116,7 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
           <article className={buyIsValid ? 'shop-offer shop-offer-suggested' : 'shop-offer'}>
             {buyIsValid ? <span className="shop-offer-cue">Available</span> : null}
             <h3>Buy Wheat Seed</h3>
-            <p>1 wheat seed costs {WHEAT_SEED_COST} gold.</p>
+            <p>Buy 1 wheat seed for {WHEAT_SEED_COST} gold.</p>
             <p className="shop-offer-status">
               {buyIsValid ? 'Ready to buy 1 wheat seed.' : `Need ${WHEAT_SEED_COST} gold to buy.`}
             </p>

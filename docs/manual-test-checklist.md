@@ -18,7 +18,7 @@ Status: Version 0.4 local manual test checklist
 5. Plant wheat.
 6. Water wheat.
 7. Wait for Dev Fast Growth Mode.
-8. Confirm wheat becomes mature.
+8. Confirm wheat becomes `Ready to Harvest`.
 9. Harvest wheat.
 10. Confirm wheat inventory increases.
 11. Go to Pawn Shop.
@@ -41,9 +41,9 @@ Status: Version 0.4 local manual test checklist
 - Farm page shows a `Current Goal` panel.
 - Current Goal panel shows a simple visual action cue for the suggested next step.
 - At the starting state, Current Goal tells the player to plant wheat seeds in empty soil slots.
-- After planting unwatered wheat, Current Goal tells the player to water planted wheat.
-- After watering wheat before maturity, Current Goal tells the player to wait for wheat to grow.
-- After wheat reaches mature status, Current Goal tells the player to harvest mature wheat.
+- After planting wheat that needs water, Current Goal tells the player to water wheat.
+- After watering wheat before it is ready to harvest, Current Goal tells the player to wait for wheat to grow.
+- After wheat reaches `Ready to Harvest`, Current Goal tells the player to harvest wheat.
 - After harvesting wheat, Current Goal tells the player to go to the Pawn Shop and sell wheat for gold.
 - With enough gold and no wheat seeds, Current Goal tells the player to buy wheat seeds from the Pawn Shop.
 - If the local test state has no seeds, no wheat, and not enough gold, Current Goal explains that Reset Dev State can restart the test build.
@@ -57,13 +57,13 @@ Status: Version 0.4 local manual test checklist
 
 - At the starting state, empty crop slots show a gentle `Plant here` hint while wheat seeds are available.
 - Selected crop slot outline remains stronger than any plant, water, growing, or harvest hint.
-- After planting wheat, the planted unwatered slot shows a `Needs water` visual hint.
+- After planting wheat, the slot shows a `Needs Water` visual hint.
 - After watering wheat, the watered growing slot shows a calm `Growing` visual state without aggressive flashing.
-- After wheat reaches maturity, the mature slot shows a clear `Harvest` visual hint.
+- After wheat reaches `Ready to Harvest`, the slot shows a clear `Harvest` visual hint.
 - With no slot selected, the Farm action helper says to select a soil slot first.
 - Selecting an empty slot with seed available visually emphasizes the Plant Wheat button.
-- Selecting unwatered wheat visually emphasizes the Water button.
-- Selecting mature wheat visually emphasizes the Harvest button.
+- Selecting wheat that needs water visually emphasizes the Water button.
+- Selecting wheat that is ready to harvest visually emphasizes the Harvest button.
 - Non-useful action buttons stay clickable and readable so friendly error messages still work.
 - On the Pawn Shop page, Sell Wheat is visually highlighted when wheat is available.
 - On the Pawn Shop page, Buy Wheat Seed is visually highlighted when gold is at least `100`.
@@ -87,7 +87,7 @@ Status: Version 0.4 local manual test checklist
 - Trading shows wheat sold, seeds bought, gold earned, and gold spent.
 - Save / Debug shows reset count.
 - Inventory page shows `Current Farm Status`.
-- Current Farm Status shows empty slots, planted wheat slots, unwatered wheat slots, growing wheat slots, and mature wheat slots.
+- Current Farm Status shows Empty Soil, wheat in soil, Needs Water, Growing, and Ready to Harvest counts.
 - Current Farm Status values are derived from current crop slots and are not stored separately.
 - Inventory page shows `Progress Summary`.
 - Progress Summary shows total wheat cycle actions, net gold from trading, and current farming capacity.
@@ -113,10 +113,10 @@ Status: Version 0.4 local manual test checklist
 - With no slot selected, the panel shows `Ready time: Select a soil slot first.`
 - Selecting an empty slot shows Status `Empty Soil`, Crop `None`, Progress `0%`, Watered `No`, Next action `Plant wheat seed here.`, and `Ready time: Plant wheat seed first.` when wheat seeds are available.
 - Selecting an empty slot with no wheat seeds shows Next action `Buy wheat seeds at the Pawn Shop.`
-- Selecting planted unwatered wheat shows Status `Needs Water`, Stage `Seed Planted`, Progress `0%`, Watered `No`, Next action `Water this wheat to start growth.`, and `Ready time: Water this wheat to start growth.`
+- Selecting wheat that needs water shows Status `Needs Water`, Stage `Seed Planted`, Progress `0%`, Watered `No`, Next action `Water this wheat to start growth.`, and `Ready time: Water this wheat to start growth.`
 - Selecting watered wheat below `100%` shows Status `Growing`, Watered `Yes`, Next action `Wait until this wheat reaches 100%.`, and a `Ready in:` countdown.
 - Confirm the `Ready in:` countdown updates while the crop grows.
-- Selecting mature wheat shows Status `Ready to Harvest`, Progress `100%`, Next action `Harvest this wheat.`, and `Ready now. Harvest this wheat.`
+- Selecting wheat that is ready to harvest shows Status `Ready to Harvest`, Stage `Mature Wheat`, Progress `100%`, Next action `Harvest this wheat.`, and `Ready now. Harvest this wheat.`
 - The Crop Detail Panel is read-only guidance and does not grant rewards, create quests, or change gameplay state.
 - The Crop Detail Panel does not cover crop slots or block crop slot clicks.
 - The Crop Detail Panel stacks cleanly on phone-sized viewports without horizontal scrolling.
@@ -156,7 +156,7 @@ Status: Version 0.4 local manual test checklist
 - Farm page shows the farm background PNG when available, with CSS fallback if the image is missing.
 - Farm page shows land count.
 - Farm page shows 16 crop slots.
-- Farm page shows every crop slot as `empty` with soil tile art when available.
+- Farm page shows every empty crop slot as `Empty Soil` with soil tile art when available.
 - Farm page shows inventory summary for gold, wheat seeds, and wheat.
 - Farm page shows resource icons for gold, wheat seeds, wheat, and water where available.
 - Farm page shows Squarebox idle art as a decorative farm character when available.
@@ -194,28 +194,28 @@ Status: Version 0.4 local manual test checklist
 - Confirming Reset Dev State returns the displayed inventory to Gold `0`, Wheat Seeds `4`, and Wheat `0`.
 - Select an empty crop slot.
 - Click `Plant Wheat`.
-- Confirm the selected slot status changes to `planted`.
-- Confirm the planted slot shows the wheat seed stage image.
+- Confirm the selected slot status changes to `Needs Water`.
+- Confirm the slot shows the wheat seed stage image.
 - Confirm Wheat Seeds decreases from `4` to `3`.
 - Confirm Farm Milestones shows First Seed as completed after planting.
-- Confirm selected crop details show Crop `Wheat`, Status `Needs Water`, Stage `Seed Planted`, Growth Started At `Not set`, Last Watered At `Not set`, Progress `0%`, and Ready time `Water this wheat to start growth.`
+- Confirm selected crop details show Crop `Wheat`, Status `Needs Water`, Stage `Seed Planted`, Growth Started `Not set`, Last Watered `Not set`, Progress `0%`, and Ready time `Water this wheat to start growth.`
 - Click `Water`.
-- Confirm selected crop details show Watered `Yes`, Status `Growing`, Last Watered At is set, Growth Started At is set from the watering time, and Ready time starts counting down.
+- Confirm selected crop details show Watered `Yes`, Status `Growing`, Last Watered is set, Growth Started is set from the watering time, and Ready time starts counting down.
 - Confirm Farm Milestones shows First Watering as completed after watering.
 - Refresh the browser.
-- Confirm planted and watered state persists from localStorage.
+- Confirm watered `Growing` state persists from localStorage.
 - Click `Reset Dev State`.
 - Confirm localStorage-backed state returns to 16 empty slots and 4 wheat seeds.
 - With no seeds available after planting 4 slots, select another empty slot and click `Plant Wheat`.
 - Confirm the friendly message explains that wheat seeds are needed and the Pawn Shop is where seeds are bought.
 - Select an empty slot and click `Water`.
-- Confirm the friendly message says `Select planted wheat first.`
+- Confirm the friendly message says `Select wheat that needs water first.`
 - Without selecting a valid empty slot, click `Plant Wheat` and confirm the message says `Select an empty soil slot first.` or `Choose an empty soil slot before planting.`
 - After planting and watering wheat, confirm growth progress starts increasing from the first watering time.
 - Confirm wheat visuals progress from sprout to small to growing as progress increases.
 - Wait for the dev fast-growth duration to pass.
-- Confirm the watered crop reaches status `mature`, Mature `yes`, and Growth Progress `100%`.
-- Confirm mature wheat shows the mature wheat image.
+- Confirm the watered crop reaches Status `Ready to Harvest` and Growth Progress `100%`.
+- Confirm wheat that is ready to harvest shows the Mature Wheat stage image.
 - Confirm selected crop details show Status `Ready to Harvest`, Next action `Harvest this wheat.`, and `Ready now. Harvest this wheat.`
 - Click `Harvest`.
 - Confirm feedback says `You harvested 1 wheat.`
@@ -224,9 +224,9 @@ Status: Version 0.4 local manual test checklist
 - Confirm the crop slot returns to `empty`.
 - Refresh the browser.
 - Confirm the harvested wheat count, empty crop slot, and milestone progress remain saved after refresh.
-- Confirm unwatered planted wheat remains at `0%` growth.
+- Confirm wheat that needs water remains at `0%` growth.
 - Select an empty slot and click `Harvest`; confirm the message says `There is no wheat here to harvest.`
-- Select planted or growing wheat and click `Harvest`; confirm the message says `This wheat is still growing. Wait until it reaches 100%.`
+- Select wheat that needs water or Growing wheat and click `Harvest`; confirm the message says `This wheat is still growing. Wait until it reaches 100%.`
 
 ## Pawn Shop Checks
 
@@ -244,7 +244,7 @@ Status: Version 0.4 local manual test checklist
 - Confirm Farm Milestones shows Seed Buyer as completed after buying a wheat seed.
 - Refresh the browser.
 - Confirm the updated Gold, Wheat Seeds, and Wheat values remain saved.
-- With no wheat available, click `Sell 1 Wheat`; confirm the message says `You do not have wheat to sell yet. Harvest mature wheat first.`
+- With no wheat available, click `Sell 1 Wheat`; confirm the message says `You do not have wheat to sell yet. Harvest wheat that is ready first.`
 - With less than 100 gold, click `Buy 1 Wheat Seed`; confirm the message says `You need 100 gold to buy 1 wheat seed. Sell wheat to earn gold.`
 - No first tutorial sale bonus, bulk buy/sell, Wandering Merchant, harvest minigame, Wheat Fragment, seed return, thirst timer, dry crop timer, weed timer, land expansion, or tools are active yet.
 
@@ -259,7 +259,7 @@ Status: Version 0.4 local manual test checklist
 - Confirm Version 0.2 Guidance explains beginner loop clarity, Current Goal, Pawn Shop continuation, no seed return, stuck-state reset, and temporary art.
 - Confirm Version 0.3 Statistics explains lifetime stats, Current Farm Status, Progress Summary, localStorage, no rewards, no achievements, no quests, and no online account save.
 - Confirm Version 0.3 Milestones explains read-only progress markers, localStorage-derived progress, no rewards, no XP, no levels, no unlocks, no claim buttons, and no online account achievements.
-- Confirm Version 0.4 Crop Detail explains that selecting a crop slot shows status, progress, watered state, estimated ready time, and next action, and that the panel is read-only guidance.
+- Confirm Version 0.4 Crop Detail explains that selecting a crop slot shows friendly status, progress, watered state, estimated ready time, and next action, and that the panel is read-only guidance.
 - Confirm Version 0.4 Activity Log explains recent local action history, capped entries, no rewards, no notifications, no backend, and no online history.
 - Confirm Saving / localStorage explains Local Save Info, browser/device-only saves, browser data clearing risk, no online save, and Reset Dev State behavior.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress after first watering, and unwatered crops staying at 0%.
@@ -298,7 +298,7 @@ Status: Version 0.4 local manual test checklist
 - With localStorage empty, the app starts from 1 land, 16 empty slots, 4 wheat seeds, 0 gold, and 0 wheat.
 - If the saved data is broken, the app falls back to the starting state instead of crashing.
 - Reset Dev State returns React state and saved state to the starting state.
-- Mature crop state remains saved after refresh.
+- `Ready to Harvest` crop state remains saved after refresh.
 - Farm Milestones start at `0` progress for a clean save.
 - Farm Milestones remain after refresh because progress counters persist in localStorage.
 - Local Save Info Created and Last saved fields do not crash if missing or invalid.
@@ -308,7 +308,7 @@ Status: Version 0.4 local manual test checklist
 - Reset Dev State.
 - Plant wheat in slot A.
 - Wait 10-15 seconds without watering.
-- Confirm slot A remains at `0%`, Last Watered At `Not set`, and Growth Started At `Not set`.
+- Confirm slot A remains at `0%`, Last Watered `Not set`, and Growth Started `Not set`.
 - Water slot A.
 - Confirm slot A starts growing from the watering time and does not jump forward based on planting time.
 - Plant wheat in slot B.
@@ -316,7 +316,7 @@ Status: Version 0.4 local manual test checklist
 - Confirm slot B remains at `0%` until watered.
 - Water slot B.
 - Confirm slot B starts from its own watering time, not from slot A's growth time.
-- Refresh the browser and confirm watered crop progress persists from each crop's own Growth Started At timestamp.
+- Refresh the browser and confirm watered crop progress persists from each crop's own Growth Started time.
 
 ## Exclusion Checks
 

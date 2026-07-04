@@ -1,8 +1,8 @@
 # Road to Long Long Noodles - Version 0.4 Farming Clarity Plan
 
-Status: Version 0.4 adds read-only Crop Detail Panel clarity, estimated ready time, and a local Farm Activity Log for the existing local farming prototype
+Status: Version 0.4 adds read-only Crop Detail Panel clarity, estimated ready time, a local Farm Activity Log, and consistent crop state wording for the existing local farming prototype
 
-Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Prompt 2 adds estimated ready time text for selected wheat crops. Version 0.4 Prompt 3 adds a capped local Farm Activity Log for recent successful actions. These features are clarity/history only and derive from existing crop slot, inventory, action, and growth timing state. They do not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
+Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Prompt 2 adds estimated ready time text for selected wheat crops. Version 0.4 Prompt 3 adds a capped local Farm Activity Log for recent successful actions. Version 0.4 Prompt 4 standardizes player-facing crop wording across the Farm page, Inventory, Pawn Shop, Help, and documentation. These features are clarity/history only and derive from existing crop slot, inventory, action, and growth timing state. They do not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
 
 ## Included In Version 0.4 Prompt 1
 
@@ -10,16 +10,24 @@ Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Pro
 - Friendly crop status wording derived from existing slot state
 - Compact selected-slot details for slot, crop, stage, progress, watered state, and next action
 - Growth progress bar for the selected crop slot
-- Existing timestamp display for planted, growth-started, and last-watered times
+- Friendly timestamp display for planted, growth started, and last watered times
 - Help / Manual explanation for the Crop Detail Panel
 - README and manual test checklist updates
+
+## Included In Version 0.4 Prompt 4
+
+- Friendly crop state wording polish across Farm, Inventory, Pawn Shop, Help, and docs
+- Crop tile status labels now use player-facing wording instead of raw internal slot status
+- Shared display-only crop wording helper in `src/utils/cropDisplay.js`
+- Current Goal, action hints, ready-time text, and farm notes use the same terms
+- No gameplay logic, balance, save key, or economy values were changed
 
 ## Included In Version 0.4 Prompt 2
 
 - Estimated ready time display in the `Selected Crop Slot` panel
 - `Ready in` countdown for watered wheat based on the existing active wheat growth duration
-- Friendly ready-time instructions for no selection, empty slots, and unwatered wheat
-- Mature wheat ready-time text that says it is ready now
+- Friendly ready-time instructions for no selection, Empty Soil, and wheat that needs water
+- Ready to Harvest ready-time text that says it is ready now
 - Shared UI time formatting helper in `src/utils/timeFormat.js`
 - Help / Manual explanation for estimated ready time
 - README and manual test checklist updates
@@ -37,14 +45,14 @@ Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Pro
 
 ## Friendly Status Wording
 
-The Crop Detail Panel converts internal crop slot state into player-facing wording:
+The UI converts internal crop slot state into player-facing wording:
 
 - Empty slot: `Empty Soil`
-- Planted wheat that has not been watered: `Needs Water`
+- Wheat that has not been watered: `Needs Water`
 - Watered wheat below `100%`: `Growing`
-- Mature wheat: `Ready to Harvest`
+- Wheat at `100%`: `Ready to Harvest`
 
-The panel may also show `Seed Planted` as a stage label for planted wheat at `0%` growth.
+The Crop Detail Panel may also show supporting stage labels such as `Seed Planted`, `Sprout`, `Small Wheat`, `Growing Wheat`, and `Mature Wheat`.
 
 ## Next Action Guidance
 
@@ -53,9 +61,9 @@ Next action text is derived from the selected slot and current inventory:
 - No selected slot: `Select a soil slot first.`
 - Empty slot with wheat seeds: `Plant wheat seed here.`
 - Empty slot without wheat seeds: `Buy wheat seeds at the Pawn Shop.`
-- Planted unwatered wheat: `Water this wheat to start growth.`
+- Wheat that needs water: `Water this wheat to start growth.`
 - Watered growing wheat: `Wait until this wheat reaches 100%.`
-- Mature wheat: `Harvest this wheat.`
+- Wheat that is ready to harvest: `Harvest this wheat.`
 
 This guidance does not trigger actions by itself. The existing Plant Wheat, Water, and Harvest buttons remain the only Farm page action controls.
 
@@ -65,9 +73,9 @@ Estimated ready time is derived from the selected crop slot's `growthStartedAt` 
 
 - No selected slot: `Ready time: Select a soil slot first.`
 - Empty slot: `Ready time: Plant wheat seed first.`
-- Planted unwatered wheat: `Ready time: Water this wheat to start growth.`
+- Wheat that needs water: `Ready time: Water this wheat to start growth.`
 - Watered growing wheat: `Ready in: ...`
-- Mature wheat: `Ready now. Harvest this wheat.`
+- Wheat that is ready to harvest: `Ready now. Harvest this wheat.`
 - Missing or invalid timing data: `Ready time: Unknown`
 
 The estimate updates through the existing Farm page growth recalculation interval. It does not change the growth duration or create a new timer system.

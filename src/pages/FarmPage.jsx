@@ -10,6 +10,13 @@ import {
   WHEAT_SEED_COST,
 } from '../game/gameConstants.js';
 import { getAssetPath } from '../utils/assets.js';
+import {
+  getCropName,
+  getCropStageLabel,
+  getCropStatusLabel,
+  isDisplayReadyToHarvest,
+  isDisplayWheatCrop,
+} from '../utils/cropDisplay.js';
 import { formatDuration } from '../utils/timeFormat.js';
 
 const inventoryLabels = [
@@ -39,15 +46,15 @@ const objectiveCueAssetIds = {
 
 const beginnerLoopSteps = [
   'Plant wheat seeds.',
-  'Water planted wheat.',
-  'Wait until the wheat becomes mature.',
+  'Water wheat to start growth.',
+  'Wait until the wheat is ready to harvest.',
   'Harvest wheat.',
   'Sell wheat at the Pawn Shop.',
   'Use gold to buy more wheat seeds.',
 ];
 
 function isWheatCrop(slot) {
-  return slot.cropType === CROP_TYPES.WHEAT && slot.status !== CROP_SLOT_STATUS.EMPTY;
+  return isDisplayWheatCrop(slot);
 }
 
 function getCurrentObjective(gameState) {
@@ -59,30 +66,30 @@ function getCurrentObjective(gameState) {
       isWheatCrop(slot) &&
       (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE || slot.growthProgress >= 100),
   );
-  const hasUnwateredWheat = slots.some(
-    (slot) => isWheatCrop(slot) && !slot.isWatered && !slot.isMature,
+  const hasNeedsWaterWheat = slots.some(
+    (slot) => isWheatCrop(slot) && !slot.isWatered && !isDisplayReadyToHarvest(slot),
   );
   const hasWateredGrowingWheat = slots.some(
-    (slot) => isWheatCrop(slot) && slot.isWatered && !slot.isMature,
+    (slot) => isWheatCrop(slot) && slot.isWatered && !isDisplayReadyToHarvest(slot),
   );
 
   if (hasMatureWheat) {
     return {
       action: 'harvest',
       cue: 'Harvest wheat',
-      detail: 'Harvest mature wheat, then sell it at the Pawn Shop.',
-      label: 'Ready to harvest',
-      title: 'Harvest your mature wheat.',
+      detail: 'Harvest wheat that is ready, then sell it at the Pawn Shop.',
+      label: 'Ready to Harvest',
+      title: 'Harvest your ready wheat.',
     };
   }
 
-  if (hasUnwateredWheat) {
+  if (hasNeedsWaterWheat) {
     return {
       action: 'water',
-      cue: 'Water planted wheat',
-      detail: 'Water planted wheat so it can grow.',
-      label: 'Care for crops',
-      title: 'Water your planted wheat so it can grow.',
+      cue: 'Water wheat',
+      detail: 'Water wheat to start growth.',
+      label: 'Needs Water',
+      title: 'Water your wheat so growth can start.',
     };
   }
 
@@ -110,9 +117,9 @@ function getCurrentObjective(gameState) {
     return {
       action: 'wait',
       cue: 'Growing',
-      detail: 'Dev Fast Growth Mode makes this faster for testing.',
+      detail: 'Wait until your wheat reaches 100%. Dev Fast Growth Mode makes this faster for testing.',
       label: 'Growing',
-      title: 'Wait for your wheat to grow.',
+      title: 'Wait until your wheat is ready to harvest.',
     };
   }
 
@@ -146,21 +153,21 @@ function getCurrentObjective(gameState) {
 }
 
 function getCropSlotVisualHint(gameState, slot) {
-  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
+  if (isDisplayReadyToHarvest(slot)) {
     return {
       className: 'crop-slot-hint-harvest',
       label: 'Harvest',
     };
   }
 
-  if (isWheatCrop(slot) && !slot.isWatered && !slot.isMature) {
+  if (isWheatCrop(slot) && !slot.isWatered && !isDisplayReadyToHarvest(slot)) {
     return {
       className: 'crop-slot-hint-water',
-      label: 'Needs water',
+      label: 'Needs Water',
     };
   }
 
-  if (isWheatCrop(slot) && slot.isWatered && !slot.isMature) {
+  if (isWheatCrop(slot) && slot.isWatered && !isDisplayReadyToHarvest(slot)) {
     return {
       className: 'crop-slot-hint-growing',
       label: 'Growing',
@@ -188,25 +195,25 @@ function getSuggestedFarmAction(selectedSlot, plantIsValid, waterIsValid, harves
   if (harvestIsValid) {
     return {
       action: 'harvest',
-      message: 'Harvest is the useful action for this mature wheat.',
+      message: 'Harvest this wheat now. It is ready to harvest.',
     };
   }
 
   if (waterIsValid) {
     return {
       action: 'water',
-      message: 'Water is the useful action for this planted wheat.',
+      message: 'Water this wheat to start growth.',
     };
   }
 
   if (plantIsValid) {
     return {
       action: 'plant',
-      message: 'Plant Wheat is the useful action for this empty soil slot.',
+      message: 'Plant wheat seed in this empty soil slot.',
     };
   }
 
-  if (isWheatCrop(selectedSlot) && selectedSlot.isWatered && !selectedSlot.isMature) {
+  if (isWheatCrop(selectedSlot) && selectedSlot.isWatered && !isDisplayReadyToHarvest(selectedSlot)) {
     return {
       action: 'wait',
       message: 'This wheat is growing. Wait until it reaches 100%.',
@@ -215,44 +222,16 @@ function getSuggestedFarmAction(selectedSlot, plantIsValid, waterIsValid, harves
 
   return {
     action: 'none',
-    message: 'This slot has no useful farm action right now.',
+    message: 'This soil slot has no farm action ready right now.',
   };
 }
 
 function getSelectedCropStatus(slot) {
-  if (!slot || slot.status === CROP_SLOT_STATUS.EMPTY) {
-    return 'Empty Soil';
-  }
-
-  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
-    return 'Ready to Harvest';
-  }
-
-  if (isWheatCrop(slot) && !slot.isWatered) {
-    return 'Needs Water';
-  }
-
-  if (isWheatCrop(slot) && slot.isWatered) {
-    return 'Growing';
-  }
-
-  return 'Seed Planted';
+  return getCropStatusLabel(slot);
 }
 
 function getSelectedCropStage(slot) {
-  if (!slot || slot.status === CROP_SLOT_STATUS.EMPTY) {
-    return 'Empty Soil';
-  }
-
-  if (isWheatCrop(slot) && (slot.isMature || slot.growthProgress >= 100)) {
-    return 'Ready to Harvest';
-  }
-
-  if (isWheatCrop(slot) && slot.growthProgress <= 0) {
-    return 'Seed Planted';
-  }
-
-  return 'Growing';
+  return getCropStageLabel(slot);
 }
 
 function getSelectedCropNextAction(slot, inventory) {
@@ -266,7 +245,7 @@ function getSelectedCropNextAction(slot, inventory) {
       : 'Buy wheat seeds at the Pawn Shop.';
   }
 
-  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
+  if (isDisplayReadyToHarvest(slot)) {
     return 'Harvest this wheat.';
   }
 
@@ -290,7 +269,7 @@ function getSelectedCropReadyTime(slot, currentTimeMs = Date.now()) {
     return 'Ready time: Plant wheat seed first.';
   }
 
-  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
+  if (isDisplayReadyToHarvest(slot)) {
     return 'Ready now. Harvest this wheat.';
   }
 
@@ -329,19 +308,19 @@ function getSelectedCropSummary(slot, inventory) {
       : 'This soil is empty, but you need wheat seeds before planting.';
   }
 
-  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
-    return 'This wheat is mature and ready to harvest.';
+  if (isDisplayReadyToHarvest(slot)) {
+    return 'This wheat is ready to harvest.';
   }
 
   if (isWheatCrop(slot) && !slot.isWatered) {
-    return 'This wheat is planted, but growth has not started yet.';
+    return 'This wheat needs water before growth can start.';
   }
 
   if (isWheatCrop(slot)) {
-    return 'This wheat is watered and growing from its first watering time.';
+    return 'This wheat is growing from its first watering time.';
   }
 
-  return 'This crop slot has a planted crop.';
+  return 'This soil slot has a crop.';
 }
 
 function getSelectedCropIconAssetId(slot) {
@@ -349,7 +328,7 @@ function getSelectedCropIconAssetId(slot) {
     return 'icon_wheat_seed';
   }
 
-  if (isWheatCrop(slot) && !slot.isWatered && !slot.isMature) {
+  if (isWheatCrop(slot) && !slot.isWatered && !isDisplayReadyToHarvest(slot)) {
     return 'icon_water_drop';
   }
 
@@ -374,18 +353,18 @@ function getPlantBlockedMessage(gameState, selectedSlot) {
 
 function getWaterBlockedMessage(selectedSlot) {
   if (!selectedSlot || selectedSlot.status === CROP_SLOT_STATUS.EMPTY) {
-    return 'Select planted wheat first.';
+    return 'Select wheat that needs water first.';
   }
 
   if (selectedSlot.cropType !== CROP_TYPES.WHEAT) {
-    return 'Select planted wheat first.';
+    return 'Select wheat that needs water first.';
   }
 
   if (selectedSlot.isMature) {
-    return 'This wheat is already mature. Harvest it instead.';
+    return 'This wheat is ready to harvest. Harvest it instead.';
   }
 
-  return 'Select planted wheat first.';
+  return 'Select wheat that needs water first.';
 }
 
 function getHarvestBlockedMessage(selectedSlot) {
@@ -405,7 +384,7 @@ function getWheatStageAssetId(slot) {
     return null;
   }
 
-  if (slot.isMature || slot.growthProgress >= 100) {
+  if (isDisplayReadyToHarvest(slot)) {
     return 'crop_wheat_stage_04_mature';
   }
 
@@ -492,7 +471,7 @@ export default function FarmPage({
   const { farm, inventory } = gameState;
   const [selectedSlotId, setSelectedSlotId] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState(
-    'Select a crop slot, then plant or water wheat.',
+    'Select a soil slot, then plant or water wheat.',
   );
   const selectedSlot = farm.cropSlots.find((slot) => slot.slotId === selectedSlotId) ?? null;
   const selectedSlotIndex = selectedSlot
@@ -682,8 +661,8 @@ export default function FarmPage({
                   <DecorativeImage className="slot-overlay-image" path={slotArt.weedOverlayPath} />
                 </span>
                 <span className="slot-number">{index + 1}</span>
-                <span className="slot-status">{slot.status}</span>
-                {slot.isWatered ? <span className="slot-watered">watered</span> : null}
+                <span className="slot-status">{getCropStatusLabel(slot)}</span>
+                {slot.isWatered ? <span className="slot-watered">Watered</span> : null}
                 {slotVisualHint ? (
                   <span className="slot-action-hint">{slotVisualHint.label}</span>
                 ) : null}
@@ -704,8 +683,9 @@ export default function FarmPage({
           })}
         </div>
         <div className="farm-note">
-          Watered wheat grows in real time and keeps progressing after refresh. Mature wheat can be
-          harvested for 1 wheat. Pawn Shop buy/sell actions stay on the Pawn Shop page.
+          After watering, wheat grows in real time and keeps progressing after refresh. Wheat
+          that is ready to harvest gives 1 wheat. Pawn Shop buy/sell actions stay on the Pawn
+          Shop page.
         </div>
       </div>
 
@@ -734,7 +714,7 @@ export default function FarmPage({
               </div>
               <div>
                 <dt>Crop</dt>
-                <dd>{selectedSlot.cropType === CROP_TYPES.WHEAT ? 'Wheat' : 'None'}</dd>
+                <dd>{getCropName(selectedSlot)}</dd>
               </div>
               <div>
                 <dt>Stage</dt>
@@ -773,15 +753,15 @@ export default function FarmPage({
 
             <dl className="crop-detail-times">
               <div>
-                <dt>Planted At</dt>
+                <dt>Planted</dt>
                 <dd>{formatTimestamp(selectedSlot.plantedAt)}</dd>
               </div>
               <div>
-                <dt>Growth Started At</dt>
+                <dt>Growth Started</dt>
                 <dd>{formatTimestamp(selectedSlot.growthStartedAt)}</dd>
               </div>
               <div>
-                <dt>Last Watered At</dt>
+                <dt>Last Watered</dt>
                 <dd>{formatTimestamp(selectedSlot.lastWateredAt)}</dd>
               </div>
             </dl>
