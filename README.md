@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.3 adds progress data and read-only farm statistics UI on top of the stable Version 0.2 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, and farm statistics summaries.
+Version 0.3 adds progress data and read-only farm statistics UI on top of the stable Version 0.2 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, and read-only Farm Milestones.
 
 ## Run Locally
 
@@ -81,7 +81,8 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 - The Inventory page includes a grouped read-only `Progress Tracking` panel.
 - The Inventory page also shows `Current Farm Status` counts derived from crop slots.
 - `Progress Summary` shows derived totals such as total wheat cycle actions, net gold from trading, and current farming capacity.
-- No rewards, achievements, quests, account system, online save, or backend were added.
+- `Farm Milestones` show read-only progress markers derived from existing progress counters.
+- No rewards, XP, levels, unlocks, achievement logic, quests, account system, online save, or backend were added.
 
 ## Growth Mode
 
@@ -91,7 +92,7 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 
@@ -117,6 +118,12 @@ The following systems are intentionally not included:
 - Firebase
 - Online save
 - Real notifications
+- Achievements
+- XP
+- Player levels
+- Unlocks
+- Quest rewards
+- Reward-claim buttons
 - Harvest minigame
 - Wheat Fragment
 - Tools

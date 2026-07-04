@@ -2,7 +2,7 @@
 
 Status: progress data foundation and read-only farm statistics UI for the existing local farming prototype
 
-Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Version 0.3 Prompt 2 turns those fields into a clearer read-only Farm Statistics UI on the Inventory page. It does not add rewards, achievements, quests, account system, online save, backend, or new gameplay systems.
+Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Version 0.3 Prompt 2 turns those fields into a clearer read-only Farm Statistics UI on the Inventory page. Version 0.3 Prompt 3 adds read-only Farm Milestones derived from existing progress counters. It does not add rewards, achievements, quests, account system, online save, backend, or new gameplay systems.
 
 ## Included In Version 0.3 Prompt 1
 
@@ -20,6 +20,14 @@ Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Ver
 - `Current Farm Status` counts derived from current crop slots
 - `Progress Summary` values derived from progress and farm state
 - Help / Manual explanation for local-only statistics
+- Documentation and manual test checklist updates
+
+## Included In Version 0.3 Prompt 3
+
+- Static Farm Milestone definitions in `src/data/farmMilestones.js`
+- Safe milestone display derivation in `src/utils/milestones.js`
+- Read-only `Farm Milestones` section on Inventory
+- Help / Manual explanation for local-only milestone markers
 - Documentation and manual test checklist updates
 
 ## Progress Fields
@@ -82,7 +90,21 @@ The Inventory page also shows `Progress Summary`, derived from existing local st
 - Net gold from trading: lifetime gold earned - lifetime gold spent
 - Current farming capacity: current crop slot count
 
-These sections are only for Version 0.3 local testing and player clarity. They have no rewards, achievement completion, milestone logic, claim buttons, levels, or gameplay effects.
+These sections are only for Version 0.3 local testing and player clarity. They have no rewards, achievement completion, rewarded milestone logic, claim buttons, levels, or gameplay effects.
+
+## Farm Milestones
+
+Farm Milestones are read-only progress markers derived from existing `progress` counters. They are not stored separately in localStorage and they do not change gameplay.
+
+- First Seed: plant 1 wheat seed
+- First Watering: water wheat 1 time
+- First Harvest: harvest 1 wheat
+- First Sale: sell 1 wheat at the Pawn Shop
+- Seed Buyer: buy 1 wheat seed from the Pawn Shop
+- Small Farmer: harvest 5 wheat in total
+- Trading Practice: earn 500 gold from selling wheat
+
+Each milestone displays title, description, current value, target value, progress label, and `Completed` or `In progress` state. There are no rewards, XP, levels, unlocks, claim buttons, or achievement completion logic.
 
 ## Balance Unchanged
 
@@ -104,7 +126,10 @@ These sections are only for Version 0.3 local testing and player clarity. They h
 - Progress rewards
 - Achievements
 - Achievement completion logic
-- Milestones
+- Rewarded milestone logic
+- XP
+- Player levels
+- Unlocks
 - Quest rewards
 - Reward-claim buttons
 - Daily login rewards

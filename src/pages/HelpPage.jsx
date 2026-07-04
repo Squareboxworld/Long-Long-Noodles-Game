@@ -13,6 +13,7 @@ const sectionLinks = [
   ['first-time-path', 'First-Time Player Path'],
   ['version-0-2-guidance', 'Version 0.2 Guidance'],
   ['version-0-3-statistics', 'Version 0.3 Statistics'],
+  ['version-0-3-milestones', 'Version 0.3 Milestones'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -57,6 +58,9 @@ const knownExclusions = [
   'Achievements',
   'Quest rewards',
   'Reward-claim buttons',
+  'XP',
+  'Player levels',
+  'Unlocks',
   'Harvest minigame',
   'Wheat Fragment',
   'Tools',
@@ -98,6 +102,10 @@ const faqItems = [
     'No. Version 0.3 statistics are read-only local prototype data. They help testers understand the farming loop but do not unlock rewards, achievements, or quests.',
   ],
   [
+    'Do Farm Milestones give rewards?',
+    'No. Farm Milestones are read-only progress markers. There are no claim buttons, XP, levels, unlocks, or achievement rewards in this prototype.',
+  ],
+  [
     'Will this save transfer to the future official game?',
     'Version 0.1 uses browser localStorage for testing. Early test saves may be reset or changed later and are not server/account saves.',
   ],
@@ -115,9 +123,9 @@ export default function HelpPage() {
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
           <p>Read the guide if you are unsure what to do next.</p>
-          <p>Status: Version 0.3 statistics guide. Last updated: July 3, 2026.</p>
+          <p>Status: Version 0.3 statistics and milestones guide. Last updated: July 4, 2026.</p>
         </div>
-        <span className="manual-status-label">Version 0.3 statistics</span>
+        <span className="manual-status-label">Version 0.3 progress guide</span>
       </header>
 
       <div className="manual-layout">
@@ -213,11 +221,30 @@ export default function HelpPage() {
                 current farming capacity from existing local state.
               </li>
               <li>
+                Farm Milestones use the same progress counters to show simple read-only markers
+                for loop progress.
+              </li>
+              <li>
                 Statistics do not give rewards, achievements, quests, levels, or claim buttons.
               </li>
               <li>
                 This is not online account data, backend data, or an official transferable save.
               </li>
+            </ul>
+          </section>
+
+          <section className="manual-section" id="version-0-3-milestones">
+            <h3>Version 0.3 Farm Milestones</h3>
+            <p>
+              Farm Milestones show progress through the farming loop using existing local
+              progress counters. They are stored only through the browser localStorage save data.
+            </p>
+            <ul>
+              <li>Milestones are local-only prototype progress markers.</li>
+              <li>They do not give rewards, XP, levels, unlocks, or achievement completion.</li>
+              <li>There are no claim buttons.</li>
+              <li>They are not online account achievements.</li>
+              <li>Reset Dev State restarts the local test state and can change milestone progress.</li>
             </ul>
           </section>
 
@@ -265,7 +292,8 @@ export default function HelpPage() {
             </p>
             <p>
               The Inventory page also shows read-only Version 0.3 statistics: lifetime action
-              counts, current farm slot status, and simple derived progress summary values.
+              counts, current farm slot status, simple derived progress summary values, and Farm
+              Milestones.
             </p>
           </section>
 

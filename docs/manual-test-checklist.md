@@ -92,6 +92,11 @@ Status: Version 0.3 local manual test checklist
 - Inventory page shows `Progress Summary`.
 - Progress Summary shows total wheat cycle actions, net gold from trading, and current farming capacity.
 - Progress Tracking, Current Farm Status, and Progress Summary do not include rewards, achievements, quests, claim buttons, backend, account system, or online save.
+- Inventory page shows `Farm Milestones`.
+- Farm Milestones are derived from existing progress counters and are not stored separately.
+- Farm Milestones show `Completed` or `In progress`.
+- Farm Milestones show progress labels such as `0 / 1` or `1 / 5`.
+- Farm Milestones do not include rewards, XP, levels, unlocks, achievement logic, quests, claim buttons, backend, account system, or online save.
 
 ## Navigation
 
@@ -122,6 +127,7 @@ Status: Version 0.3 local manual test checklist
 - Inventory page explains that wheat is sold at the Pawn Shop for gold.
 - Inventory page shows the read-only Progress Tracking panel without crashing if older saved state has no progress data.
 - Inventory page shows Current Farm Status and Progress Summary in compact mobile-friendly cards.
+- Inventory page shows Farm Milestones below the statistics sections.
 - Pawn Shop page is separate from the Farm page.
 - Pawn Shop page shows current gold, wheat seeds, and wheat.
 - Pawn Shop page shows wheat seed price `100` gold.
@@ -131,7 +137,7 @@ Status: Version 0.3 local manual test checklist
 - Pawn Shop page explains that harvesting gives wheat, not seed.
 - Pawn Shop page visually highlights available buy/sell actions.
 - Help / Manual page uses a readable GitHub-style documentation layout.
-- Help / Manual page shows a Version 0.3 statistics status label and last updated text.
+- Help / Manual page shows a Version 0.3 progress guide status label and last updated text.
 - Help / Manual page includes a First-Time Player Path section.
 
 ## Gameplay Checks
@@ -143,9 +149,11 @@ Status: Version 0.3 local manual test checklist
 - Confirm the selected slot status changes to `planted`.
 - Confirm the planted slot shows the wheat seed stage image.
 - Confirm Wheat Seeds decreases from `4` to `3`.
+- Confirm Farm Milestones shows First Seed as completed after planting.
 - Confirm selected slot details show crop type `wheat`, planted timestamp, and growth started timestamp.
 - Click `Water`.
 - Confirm selected slot details show Watered `yes` and Last Watered At is set.
+- Confirm Farm Milestones shows First Watering as completed after watering.
 - Refresh the browser.
 - Confirm planted and watered state persists from localStorage.
 - Click `Reset Dev State`.
@@ -164,9 +172,10 @@ Status: Version 0.3 local manual test checklist
 - Click `Harvest`.
 - Confirm feedback says `You harvested 1 wheat.`
 - Confirm Wheat inventory increases by `1`.
+- Confirm Farm Milestones shows First Harvest as completed after harvesting.
 - Confirm the crop slot returns to `empty`.
 - Refresh the browser.
-- Confirm the harvested wheat count and empty crop slot remain saved after refresh.
+- Confirm the harvested wheat count, empty crop slot, and milestone progress remain saved after refresh.
 - Confirm unwatered planted wheat remains at `0%` growth.
 - Select an empty slot and click `Harvest`; confirm the message says `There is no wheat here to harvest.`
 - Select planted or growing wheat and click `Harvest`; confirm the message says `This wheat is still growing. Wait until it reaches 100%.`
@@ -179,10 +188,12 @@ Status: Version 0.3 local manual test checklist
 - Confirm feedback says `You sold 1 wheat for 110 gold.`
 - Confirm Wheat decreases by `1`.
 - Confirm Gold increases by `110`.
+- Confirm Farm Milestones shows First Sale as completed after selling wheat.
 - Click `Buy 1 Wheat Seed`.
 - Confirm feedback says `You bought 1 wheat seed.`
 - Confirm Gold decreases by `100`.
 - Confirm Wheat Seeds increases by `1`.
+- Confirm Farm Milestones shows Seed Buyer as completed after buying a wheat seed.
 - Refresh the browser.
 - Confirm the updated Gold, Wheat Seeds, and Wheat values remain saved.
 - With no wheat available, click `Sell 1 Wheat`; confirm the message says `You do not have wheat to sell yet. Harvest mature wheat first.`
@@ -193,16 +204,17 @@ Status: Version 0.3 local manual test checklist
 
 - Open Help from the main navigation.
 - Confirm the Help page has section navigation buttons.
-- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
+- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
 - Confirm Getting Started lists 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
 - Confirm First-Time Player Path lists: start on Farm, select empty soil, plant wheat, water wheat, wait, harvest, go to Pawn Shop, sell wheat, buy wheat seeds, return to Farm.
 - Confirm First-Time Player Path mentions Dev Fast Growth Mode, temporary art, and Reset Dev State.
 - Confirm Version 0.2 Guidance explains beginner loop clarity, Current Goal, Pawn Shop continuation, no seed return, stuck-state reset, and temporary art.
 - Confirm Version 0.3 Statistics explains lifetime stats, Current Farm Status, Progress Summary, localStorage, no rewards, no achievements, no quests, and no online account save.
+- Confirm Version 0.3 Milestones explains read-only progress markers, localStorage-derived progress, no rewards, no XP, no levels, no unlocks, no claim buttons, and no online account achievements.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
-- Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying wheat seeds, selling wheat, stuck test state, Current Goal, statistics rewards, future save transfer, and excluded future systems.
-- Confirm Known Exclusions lists Noodles, soup, customers, premium, payment, monetization, Long Long Coin, admin panel, account system, backend, Firebase, online save, notifications, achievements, quest rewards, reward-claim buttons, harvest minigame, Wheat Fragment, tools, land expansion, and Wandering Merchant.
+- Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying wheat seeds, selling wheat, stuck test state, Current Goal, statistics rewards, milestone rewards, future save transfer, and excluded future systems.
+- Confirm Known Exclusions lists Noodles, soup, customers, premium, payment, monetization, Long Long Coin, admin panel, account system, backend, Firebase, online save, notifications, achievements, XP, player levels, unlocks, quest rewards, reward-claim buttons, harvest minigame, Wheat Fragment, tools, land expansion, and Wandering Merchant.
 
 ## Responsive Checks
 
@@ -213,6 +225,7 @@ Status: Version 0.3 local manual test checklist
 - Crop progress bars fit inside crop slots on mobile.
 - Text does not overlap with farm or shop placeholder elements.
 - Pages do not require awkward horizontal scrolling at phone widths.
+- Inventory statistics and Farm Milestones stack cleanly on phone-sized viewports.
 
 ## Art Integration Checks
 
@@ -232,8 +245,10 @@ Status: Version 0.3 local manual test checklist
 - If the saved data is broken, the app falls back to the starting state instead of crashing.
 - Reset Dev State returns React state and saved state to the starting state.
 - Mature crop state remains saved after refresh.
+- Farm Milestones start at `0` progress for a clean save.
+- Farm Milestones remain after refresh because progress counters persist in localStorage.
 
 ## Exclusion Checks
 
 - No Noodles page is present.
-- No customer, soup, premium, payment, Long Long Coin, admin, login, account system, backend, Firebase, online save, or notification system is present.
+- No customer, soup, premium, payment, Long Long Coin, admin, login, account system, backend, Firebase, online save, notification system, rewards, XP, player levels, unlocks, achievement logic, or claim buttons are present.

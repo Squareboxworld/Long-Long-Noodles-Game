@@ -1,5 +1,6 @@
 import { getAssetPath } from '../utils/assets.js';
 import { CROP_SLOT_STATUS, CROP_TYPES } from '../game/gameConstants.js';
+import { getFarmMilestoneProgress } from '../utils/milestones.js';
 
 const inventoryCards = [
   {
@@ -162,6 +163,8 @@ export default function InventoryPage({ gameState }) {
   const progress = gameState.progress ?? {};
   const farmStatus = getCurrentFarmStatus(farm);
   const progressSummary = getProgressSummary(gameState);
+  const farmMilestones = getFarmMilestoneProgress(progress);
+  const completedMilestoneCount = farmMilestones.filter((milestone) => milestone.completed).length;
 
   return (
     <section className="inventory-page">
@@ -254,6 +257,47 @@ export default function InventoryPage({ gameState }) {
               <span>{item.label}</span>
               <strong>{item.value}</strong>
               <p>{item.note}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="farm-milestones-panel" aria-labelledby="farm-milestones-heading">
+        <div className="stats-panel-header">
+          <div>
+            <p className="eyebrow">Read-only progress markers</p>
+            <h3 id="farm-milestones-heading">Farm Milestones</h3>
+          </div>
+          <p>
+            Milestones are read-only progress markers in this prototype. They do not give
+            rewards yet.
+          </p>
+        </div>
+
+        <div className="milestone-summary-pill" aria-label="Completed farm milestones">
+          <span>Completed</span>
+          <strong>{completedMilestoneCount} / {farmMilestones.length}</strong>
+        </div>
+
+        <div className="farm-milestones-grid">
+          {farmMilestones.map((milestone) => (
+            <article
+              className={
+                milestone.completed
+                  ? 'farm-milestone-card farm-milestone-completed'
+                  : 'farm-milestone-card'
+              }
+              key={milestone.id}
+            >
+              <div className="farm-milestone-heading">
+                <h4>{milestone.title}</h4>
+                <span>{milestone.completed ? 'Completed' : 'In progress'}</span>
+              </div>
+              <p>{milestone.description}</p>
+              <div className="farm-milestone-progress">
+                <span>Progress</span>
+                <strong>{milestone.progressLabel}</strong>
+              </div>
             </article>
           ))}
         </div>

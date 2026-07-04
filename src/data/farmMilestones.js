@@ -1,0 +1,51 @@
+export const FARM_MILESTONES = Object.freeze([
+  {
+    id: 'first-seed',
+    title: 'First Seed',
+    description: 'Plant your first wheat seed.',
+    progressKey: 'lifetimeWheatPlanted',
+    targetValue: 1,
+  },
+  {
+    id: 'first-watering',
+    title: 'First Watering',
+    description: 'Water wheat for the first time.',
+    progressKey: 'lifetimeWheatWatered',
+    targetValue: 1,
+  },
+  {
+    id: 'first-harvest',
+    title: 'First Harvest',
+    description: 'Harvest your first wheat.',
+    progressKey: 'lifetimeWheatHarvested',
+    targetValue: 1,
+  },
+  {
+    id: 'first-sale',
+    title: 'First Sale',
+    description: 'Sell wheat at the Pawn Shop.',
+    progressKey: 'lifetimeWheatSold',
+    targetValue: 1,
+  },
+  {
+    id: 'seed-buyer',
+    title: 'Seed Buyer',
+    description: 'Buy a wheat seed from the Pawn Shop.',
+    progressKey: 'lifetimeSeedsBought',
+    targetValue: 1,
+  },
+  {
+    id: 'small-farmer',
+    title: 'Small Farmer',
+    description: 'Harvest 5 wheat in total.',
+    progressKey: 'lifetimeWheatHarvested',
+    targetValue: 5,
+  },
+  {
+    id: 'trading-practice',
+    title: 'Trading Practice',
+    description: 'Earn 500 gold from selling wheat.',
+    progressKey: 'lifetimeGoldEarned',
+    targetValue: 500,
+  },
+]);

@@ -1147,7 +1147,8 @@ summary:focus-visible {
 
 .progress-tracking-panel,
 .farm-status-panel,
-.progress-summary-panel {
+.progress-summary-panel,
+.farm-milestones-panel {
   display: grid;
   gap: 18px;
   margin-top: 22px;
@@ -1159,7 +1160,8 @@ summary:focus-visible {
 }
 
 .farm-status-panel,
-.progress-summary-panel {
+.progress-summary-panel,
+.farm-milestones-panel {
   background: rgba(237, 248, 229, 0.78);
 }
 
@@ -1183,7 +1185,8 @@ summary:focus-visible {
 
 .stats-group-grid,
 .farm-status-grid,
-.progress-summary-grid {
+.progress-summary-grid,
+.farm-milestones-grid {
   display: grid;
   gap: 12px;
 }
@@ -1200,9 +1203,14 @@ summary:focus-visible {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.farm-milestones-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .stats-group-card,
 .farm-status-card,
-.progress-summary-card {
+.progress-summary-card,
+.farm-milestone-card {
   min-width: 0;
   padding: 14px;
   border: 1px solid rgba(117, 91, 68, 0.13);
@@ -1280,6 +1288,89 @@ summary:focus-visible {
   margin: 8px 0 0;
   color: #5c625a;
   font-size: 0.9rem;
+}
+
+.milestone-summary-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(49, 83, 92, 0.14);
+  border-radius: 999px;
+  background: #e8f6ff;
+  color: #31535c;
+  font-weight: 900;
+}
+
+.milestone-summary-pill span {
+  color: #657066;
+  font-size: 0.88rem;
+}
+
+.farm-milestone-card {
+  display: grid;
+  gap: 12px;
+}
+
+.farm-milestone-completed {
+  border-color: rgba(87, 134, 93, 0.32);
+  background: #f5ffec;
+}
+
+.farm-milestone-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.farm-milestone-heading h4 {
+  margin: 0;
+  color: #31535c;
+  font-size: 1.06rem;
+}
+
+.farm-milestone-heading span {
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #e8f6ff;
+  color: #31535c;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.farm-milestone-completed .farm-milestone-heading span {
+  background: #d9edc2;
+  color: #324a27;
+}
+
+.farm-milestone-card p {
+  margin: 0;
+  color: #5c625a;
+}
+
+.farm-milestone-progress {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(91, 133, 135, 0.22);
+}
+
+.farm-milestone-progress span {
+  color: #657066;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.farm-milestone-progress strong {
+  color: #31535c;
+  font-size: 1.15rem;
 }
 
 .shop-board {
@@ -1592,6 +1683,7 @@ summary:focus-visible {
   .stats-group-grid,
   .farm-status-grid,
   .progress-summary-grid,
+  .farm-milestones-grid,
   .farm-state-bar,
   .farm-guidance-grid,
   .shop-counter,
