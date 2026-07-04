@@ -20,10 +20,16 @@ function parseTimeMs(timestampOrDate) {
   return Number.NaN;
 }
 
+function isValidTimestamp(timestampOrDate) {
+  return Number.isFinite(parseTimeMs(timestampOrDate));
+}
+
 function hasSlotChanged(previousSlot, nextSlot) {
   return (
     previousSlot.status !== nextSlot.status ||
+    previousSlot.growthStartedAt !== nextSlot.growthStartedAt ||
     previousSlot.growthProgress !== nextSlot.growthProgress ||
+    previousSlot.isWatered !== nextSlot.isWatered ||
     previousSlot.isMature !== nextSlot.isMature
   );
 }
@@ -57,6 +63,7 @@ export function recalculateCropGrowth(
 ) {
   const maturedSlotIds = [];
   let changed = false;
+  let shouldSave = false;
 
   const cropSlots = gameState.farm.cropSlots.map((slot) => {
     const canGrow =
@@ -67,18 +74,43 @@ export function recalculateCropGrowth(
       return slot;
     }
 
-    const hasBeenWatered = Boolean(slot.isWatered || slot.lastWateredAt);
+    const validLastWateredAt = isValidTimestamp(slot.lastWateredAt) ? slot.lastWateredAt : null;
+    const hasBeenWatered = Boolean(slot.isWatered || validLastWateredAt);
 
     if (!hasBeenWatered) {
       const nextSlot = {
         ...slot,
         status: CROP_SLOT_STATUS.PLANTED,
+        growthStartedAt: null,
+        growthProgress: 0,
+        isWatered: false,
+        isMature: false,
+      };
+
+      if (hasSlotChanged(slot, nextSlot)) {
+        changed = true;
+        shouldSave = true;
+      }
+
+      return nextSlot;
+    }
+
+    const activeGrowthStartedAt = isValidTimestamp(slot.growthStartedAt)
+      ? slot.growthStartedAt
+      : validLastWateredAt;
+
+    if (!activeGrowthStartedAt) {
+      const nextSlot = {
+        ...slot,
+        status: CROP_SLOT_STATUS.PLANTED,
+        growthStartedAt: null,
         growthProgress: 0,
         isMature: false,
       };
 
       if (hasSlotChanged(slot, nextSlot)) {
         changed = true;
+        shouldSave = true;
       }
 
       return nextSlot;
@@ -86,7 +118,7 @@ export function recalculateCropGrowth(
 
     const growthProgress = calculateCropGrowthProgress({
       currentTime,
-      growthStartedAt: slot.growthStartedAt ?? slot.plantedAt,
+      growthStartedAt: activeGrowthStartedAt,
       growthDurationMs,
     });
     const isMature = growthProgress >= 100;
@@ -98,6 +130,8 @@ export function recalculateCropGrowth(
     const nextSlot = {
       ...slot,
       status: nextStatus,
+      growthStartedAt: activeGrowthStartedAt,
+      isWatered: true,
       growthProgress: isMature ? 100 : growthProgress,
       isMature,
     };
@@ -107,6 +141,11 @@ export function recalculateCropGrowth(
 
       if (isMature && !slot.isMature && slot.status !== CROP_SLOT_STATUS.MATURE) {
         maturedSlotIds.push(slot.slotId);
+        shouldSave = true;
+      }
+
+      if (slot.growthStartedAt !== activeGrowthStartedAt || slot.isWatered !== true) {
+        shouldSave = true;
       }
     }
 
@@ -133,6 +172,6 @@ export function recalculateCropGrowth(
       },
     },
     maturedSlotIds,
-    shouldSave: maturedSlotIds.length > 0,
+    shouldSave,
   };
 }

@@ -1,8 +1,8 @@
 # Road to Long Long Noodles - Version 0.3 Progress Data and Statistics Plan
 
-Status: progress data foundation and read-only farm statistics UI for the existing local farming prototype
+Status: progress data, read-only statistics, local save polish, and final growth-start bug fix for the existing local farming prototype
 
-Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Version 0.3 Prompt 2 turns those fields into a clearer read-only Farm Statistics UI on the Inventory page. Version 0.3 Prompt 3 adds read-only Farm Milestones derived from existing progress counters. Version 0.3 Prompt 4 adds local save information, reset wording, and version status polish. It does not add rewards, achievements, quests, account system, online save, backend, or new gameplay systems.
+Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Version 0.3 Prompt 2 turns those fields into a clearer read-only Farm Statistics UI on the Inventory page. Version 0.3 Prompt 3 adds read-only Farm Milestones derived from existing progress counters. Version 0.3 Prompt 4 adds local save information, reset wording, and version status polish. Version 0.3 Prompt 5 fixes the wheat growth-start timing bug so growth begins after first watering. It does not add rewards, achievements, quests, account system, online save, backend, or new gameplay systems.
 
 ## Included In Version 0.3 Prompt 1
 
@@ -37,6 +37,16 @@ Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Ver
 - Small `Version 0.3 Prototype` label in the app header
 - Clearer Reset Dev State explanation and simple confirmation prompt
 - Documentation of localStorage limitations
+- Documentation and manual test checklist updates
+
+## Included In Version 0.3 Prompt 5
+
+- Wheat growth now starts after the first successful watering, not at planting time
+- Planting wheat keeps `growthStartedAt` inactive and progress at `0%`
+- First successful watering initializes `growthStartedAt`
+- Later watering updates `lastWateredAt` without resetting `growthStartedAt`
+- Growth calculation uses `growthStartedAt` and does not fall back to `plantedAt`
+- Backward-compatible old save handling for planted and watered wheat slots
 - Documentation and manual test checklist updates
 
 ## Progress Fields
@@ -132,10 +142,16 @@ The panel explains that progress is saved in this browser using localStorage. Cl
 
 Reset Dev State is documented as a development/testing action that restarts this browser's prototype test state and may erase local progress here. No online account exists, so reset does not affect any online account.
 
-## Known QA Item
+## Growth Start Bug Fix
 
-- Growth currently starts counting from planting time instead of first successful watering time.
-- This bug is intentionally not fixed in Prompt 4 and should be handled in the final QA/bug-fix pass.
+Wheat now starts growing only after the first successful watering.
+
+- Planting wheat leaves `growthStartedAt` inactive and keeps Growth Progress at `0%`.
+- First successful watering sets `growthStartedAt` from the watering time.
+- Later watering updates `lastWateredAt` but does not reset `growthStartedAt`.
+- Growth calculation uses `growthStartedAt`, not `plantedAt`.
+- Old unwatered planted crops with stale `growthStartedAt` are normalized back to `0%` and inactive growth.
+- Old watered crops missing `growthStartedAt` use `lastWateredAt` when available.
 
 ## Balance Unchanged
 

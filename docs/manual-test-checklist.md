@@ -104,6 +104,7 @@ Status: Version 0.3 local manual test checklist
 - App header shows a small `Version 0.3 Prototype` label.
 - Reset Dev State text explains that reset is mainly for development/testing and restarts this browser's prototype test state.
 - Reset Dev State confirmation explains that it may erase local progress in this browser and does not affect an online account because no online account exists.
+- Wheat growth starts after the first successful watering, not when the wheat is planted.
 
 ## Navigation
 
@@ -161,9 +162,9 @@ Status: Version 0.3 local manual test checklist
 - Confirm the planted slot shows the wheat seed stage image.
 - Confirm Wheat Seeds decreases from `4` to `3`.
 - Confirm Farm Milestones shows First Seed as completed after planting.
-- Confirm selected slot details show crop type `wheat`, planted timestamp, and growth started timestamp.
+- Confirm selected slot details show crop type `wheat`, planted timestamp, Growth Started At `Not set`, Last Watered At `Not set`, and Growth Progress `0%`.
 - Click `Water`.
-- Confirm selected slot details show Watered `yes` and Last Watered At is set.
+- Confirm selected slot details show Watered `yes`, Last Watered At is set, and Growth Started At is set from the watering time.
 - Confirm Farm Milestones shows First Watering as completed after watering.
 - Refresh the browser.
 - Confirm planted and watered state persists from localStorage.
@@ -174,7 +175,7 @@ Status: Version 0.3 local manual test checklist
 - Select an empty slot and click `Water`.
 - Confirm the friendly message says `Select planted wheat first.`
 - Without selecting a valid empty slot, click `Plant Wheat` and confirm the message says `Select an empty soil slot first.` or `Choose an empty soil slot before planting.`
-- After planting and watering wheat, confirm growth progress starts increasing.
+- After planting and watering wheat, confirm growth progress starts increasing from the first watering time.
 - Confirm wheat visuals progress from sprout to small to growing as progress increases.
 - Wait for the dev fast-growth duration to pass.
 - Confirm the watered crop reaches status `mature`, Mature `yes`, and Growth Progress `100%`.
@@ -223,7 +224,7 @@ Status: Version 0.3 local manual test checklist
 - Confirm Version 0.3 Statistics explains lifetime stats, Current Farm Status, Progress Summary, localStorage, no rewards, no achievements, no quests, and no online account save.
 - Confirm Version 0.3 Milestones explains read-only progress markers, localStorage-derived progress, no rewards, no XP, no levels, no unlocks, no claim buttons, and no online account achievements.
 - Confirm Saving / localStorage explains Local Save Info, browser/device-only saves, browser data clearing risk, no online save, and Reset Dev State behavior.
-- Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress, and unwatered crops staying at 0%.
+- Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress after first watering, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
 - Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying wheat seeds, selling wheat, stuck test state, Current Goal, statistics rewards, milestone rewards, future save transfer, and excluded future systems.
 - Confirm Known Exclusions lists Noodles, soup, customers, premium, payment, monetization, Long Long Coin, admin panel, account system, backend, Firebase, online save, notifications, achievements, XP, player levels, unlocks, quest rewards, reward-claim buttons, harvest minigame, Wheat Fragment, tools, land expansion, and Wandering Merchant.
@@ -262,11 +263,20 @@ Status: Version 0.3 local manual test checklist
 - Farm Milestones remain after refresh because progress counters persist in localStorage.
 - Local Save Info Created and Last saved fields do not crash if missing or invalid.
 
-## Known Deferred Bug
+## Version 0.3 Growth Start Regression Checks
 
-- Growth currently starts counting from planting time instead of first successful watering time.
-- This known bug is intentionally not fixed in Version 0.3 Prompt 4.
-- Verify in the final QA/bug-fix pass that this behavior is corrected there, not in this polish prompt.
+- Reset Dev State.
+- Plant wheat in slot A.
+- Wait 10-15 seconds without watering.
+- Confirm slot A remains at `0%`, Last Watered At `Not set`, and Growth Started At `Not set`.
+- Water slot A.
+- Confirm slot A starts growing from the watering time and does not jump forward based on planting time.
+- Plant wheat in slot B.
+- Wait while slot A is growing.
+- Confirm slot B remains at `0%` until watered.
+- Water slot B.
+- Confirm slot B starts from its own watering time, not from slot A's growth time.
+- Refresh the browser and confirm watered crop progress persists from each crop's own Growth Started At timestamp.
 
 ## Exclusion Checks
 

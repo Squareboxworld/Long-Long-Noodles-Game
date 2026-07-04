@@ -91,8 +91,8 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 
 - Real design: wheat takes 7 real-life days.
 - Local testing: Dev Fast Growth Mode is active with a 60-second wheat growth duration.
-- Crop progress is recalculated from timestamps, so watered wheat continues progressing after refresh or reopen.
-- Known QA item for the next pass: growth currently starts counting from planting time instead of first successful watering time.
+- Crop progress starts after the first successful watering and is recalculated from timestamps, so watered wheat continues progressing after refresh or reopen.
+- Version 0.3 final QA fixed the growth-start timing bug where late-watered wheat could jump forward from planting time.
 
 ## Help / Manual
 

@@ -59,6 +59,10 @@ function incrementProgress(gameState, increments) {
   };
 }
 
+function isValidTimestamp(value) {
+  return typeof value === 'string' && Number.isFinite(Date.parse(value));
+}
+
 export function canPlantWheat(gameState, slotId) {
   const slot = gameState.farm.cropSlots.find((cropSlot) => cropSlot.slotId === slotId);
 
@@ -128,7 +132,7 @@ export function plantWheat(gameState, slotId, now = new Date().toISOString()) {
       status: CROP_SLOT_STATUS.PLANTED,
       plantedAt: now,
       lastWateredAt: null,
-      growthStartedAt: now,
+      growthStartedAt: null,
       growthProgress: 0,
       isWatered: false,
       isThirsty: false,
@@ -165,6 +169,9 @@ export function waterCrop(gameState, slotId, now = new Date().toISOString()) {
     (cropSlot) => ({
       ...cropSlot,
       lastWateredAt: now,
+      growthStartedAt: isValidTimestamp(cropSlot.growthStartedAt)
+        ? cropSlot.growthStartedAt
+        : now,
       isWatered: true,
       isThirsty: false,
     }),

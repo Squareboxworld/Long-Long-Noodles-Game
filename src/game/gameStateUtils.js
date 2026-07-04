@@ -76,6 +76,10 @@ function safeTimestamp(value, fallback = null) {
   return typeof value === 'string' ? value : fallback;
 }
 
+function isValidTimestamp(value) {
+  return typeof value === 'string' && Number.isFinite(Date.parse(value));
+}
+
 function safeBoolean(value, fallback) {
   return typeof value === 'boolean' ? value : fallback;
 }
@@ -91,22 +95,58 @@ function normalizeProgress(savedProgress) {
 
 function normalizeCropSlot(savedSlot, baseSlot) {
   const cropType = VALID_CROP_TYPES.has(savedSlot?.cropType) ? savedSlot.cropType : null;
-  const status = VALID_CROP_STATUSES.has(savedSlot?.status)
+  let status = VALID_CROP_STATUSES.has(savedSlot?.status)
     ? savedSlot.status
     : CROP_SLOT_STATUS.EMPTY;
+  const plantedAt = safeTimestamp(savedSlot?.plantedAt);
+  const lastWateredAt = safeTimestamp(savedSlot?.lastWateredAt);
+  let growthStartedAt = safeTimestamp(savedSlot?.growthStartedAt);
+  let growthProgress = Math.max(0, safeNumber(savedSlot?.growthProgress, 0));
+  let isWatered = safeBoolean(savedSlot?.isWatered, false);
+  let isMature = safeBoolean(savedSlot?.isMature, false);
+  const isSavedMatureWheat =
+    cropType === CROP_TYPES.WHEAT &&
+    (status === CROP_SLOT_STATUS.MATURE || isMature || growthProgress >= 100);
+  const hasActiveWheat = cropType === CROP_TYPES.WHEAT && status !== CROP_SLOT_STATUS.EMPTY;
+
+  if (isSavedMatureWheat) {
+    status = CROP_SLOT_STATUS.MATURE;
+    growthProgress = 100;
+    isWatered = true;
+    isMature = true;
+  } else if (hasActiveWheat) {
+    const validLastWateredAt = isValidTimestamp(lastWateredAt) ? lastWateredAt : null;
+    const hasBeenWatered = Boolean(isWatered || validLastWateredAt);
+
+    if (!hasBeenWatered) {
+      status = CROP_SLOT_STATUS.PLANTED;
+      growthStartedAt = null;
+      growthProgress = 0;
+      isWatered = false;
+      isMature = false;
+    } else if (!isValidTimestamp(growthStartedAt)) {
+      growthStartedAt = validLastWateredAt;
+
+      if (!growthStartedAt) {
+        status = CROP_SLOT_STATUS.PLANTED;
+        growthProgress = 0;
+        isMature = false;
+      }
+    }
+  }
 
   return {
     ...baseSlot,
     cropType,
     status,
-    plantedAt: safeTimestamp(savedSlot?.plantedAt),
-    lastWateredAt: safeTimestamp(savedSlot?.lastWateredAt),
-    growthStartedAt: safeTimestamp(savedSlot?.growthStartedAt),
-    growthProgress: Math.max(0, safeNumber(savedSlot?.growthProgress, 0)),
-    isWatered: safeBoolean(savedSlot?.isWatered, false),
+    plantedAt,
+    lastWateredAt,
+    growthStartedAt,
+    growthProgress,
+    isWatered,
     isThirsty: safeBoolean(savedSlot?.isThirsty, false),
     hasWeed: safeBoolean(savedSlot?.hasWeed, false),
-    isMature: safeBoolean(savedSlot?.isMature, false),
+    isMature,
   };
 }
 

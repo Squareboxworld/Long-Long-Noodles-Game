@@ -278,8 +278,9 @@ export default function HelpPage() {
               0.1 uses Dev Fast Growth Mode so testers do not need to wait 7 days.
             </p>
             <p>
-              Crops grow from timestamps, so progress continues after refresh or reopening
-              the browser. In Version 0.1, unwatered crops do not grow.
+              Crops start growing after the first successful watering. Growth then uses
+              timestamps, so progress continues after refresh or reopening the browser. In
+              Version 0.3, unwatered crops stay at 0%.
             </p>
           </section>
 
