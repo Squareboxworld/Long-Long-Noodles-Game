@@ -65,17 +65,17 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
         </p>
       </div>
 
-      <div className="shop-board">
+      <div className="shop-board game-panel">
         <div className="shop-roof">Pawn Shop</div>
         <div className="shop-inventory-summary" aria-label="Current inventory">
           {shopInventoryItems.map(([key, label]) => (
-            <article key={key}>
+            <article className="game-card" key={key}>
               <span>{label}</span>
               <strong>{inventory[key]}</strong>
             </article>
           ))}
         </div>
-        <section className="shop-helper-panel" aria-label="How the Pawn Shop works">
+        <section className="shop-helper-panel game-panel" aria-label="How the Pawn Shop works">
           <div>
             <p className="eyebrow">How Pawn Shop works</p>
             <h3>Harvest wheat, sell wheat, buy wheat seeds.</h3>
@@ -95,9 +95,11 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
             </li>
           </ul>
         </section>
-        <p className="shop-next-note">{shopGuidance}</p>
+        <p className={!buyIsValid && !sellIsValid ? 'shop-next-note empty-state-card' : 'shop-next-note'}>
+          {shopGuidance}
+        </p>
         <div className="shop-counter">
-          <article className={sellIsValid ? 'shop-offer shop-offer-suggested' : 'shop-offer'}>
+          <article className={sellIsValid ? 'shop-offer game-card shop-offer-suggested' : 'shop-offer game-card'}>
             {sellIsValid ? <span className="shop-offer-cue">Useful now</span> : null}
             <h3>Sell Wheat</h3>
             <p>Sell 1 wheat for {PAWN_SHOP_WHEAT_SELL_PRICE} gold.</p>
@@ -113,7 +115,7 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
               Sell 1 Wheat
             </button>
           </article>
-          <article className={buyIsValid ? 'shop-offer shop-offer-suggested' : 'shop-offer'}>
+          <article className={buyIsValid ? 'shop-offer game-card shop-offer-suggested' : 'shop-offer game-card'}>
             {buyIsValid ? <span className="shop-offer-cue">Available</span> : null}
             <h3>Buy Wheat Seed</h3>
             <p>Buy 1 wheat seed for {WHEAT_SEED_COST} gold.</p>

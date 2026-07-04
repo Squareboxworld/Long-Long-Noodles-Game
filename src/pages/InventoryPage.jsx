@@ -227,7 +227,7 @@ export default function InventoryPage({ gameState }) {
 
       <div className="inventory-grid">
         {inventoryCards.map((item) => (
-          <article className="inventory-card" key={item.label}>
+          <article className="inventory-card game-card" key={item.label}>
             <InventoryIcon assetId={item.assetId} fallback={item.icon} />
             <h3>{item.label}</h3>
             <strong>{inventory[item.key]}</strong>
@@ -236,7 +236,7 @@ export default function InventoryPage({ gameState }) {
         ))}
       </div>
 
-      <section className="local-save-info-panel" aria-labelledby="local-save-info-heading">
+      <section className="local-save-info-panel game-panel" aria-labelledby="local-save-info-heading">
         <div className="stats-panel-header">
           <div>
             <p className="eyebrow">Local prototype save</p>
@@ -250,7 +250,7 @@ export default function InventoryPage({ gameState }) {
 
         <dl className="local-save-info-grid">
           {localSaveInfo.map(([label, value]) => (
-            <div className="local-save-info-card" key={label}>
+            <div className="local-save-info-card game-card" key={label}>
               <dt>{label}</dt>
               <dd>{value}</dd>
             </div>
@@ -258,7 +258,7 @@ export default function InventoryPage({ gameState }) {
         </dl>
       </section>
 
-      <section className="progress-tracking-panel" aria-labelledby="progress-tracking-heading">
+      <section className="progress-tracking-panel game-panel" aria-labelledby="progress-tracking-heading">
         <div className="stats-panel-header">
           <div>
             <p className="eyebrow">Version 0.3 statistics</p>
@@ -271,7 +271,7 @@ export default function InventoryPage({ gameState }) {
 
         <div className="stats-group-grid">
           {progressGroups.map((group) => (
-            <article className="stats-group-card" key={group.title}>
+            <article className="stats-group-card game-card" key={group.title}>
               <div className="stats-group-heading">
                 <InventoryIcon assetId={group.assetId} fallback="" />
                 <h4>{group.title}</h4>
@@ -289,7 +289,7 @@ export default function InventoryPage({ gameState }) {
         </div>
       </section>
 
-      <section className="farm-status-panel" aria-labelledby="farm-status-heading">
+      <section className="farm-status-panel game-panel" aria-labelledby="farm-status-heading">
         <div className="stats-panel-header">
           <div>
             <p className="eyebrow">Farm at a glance</p>
@@ -302,7 +302,7 @@ export default function InventoryPage({ gameState }) {
 
         <div className="farm-status-grid">
           {farmStatus.map((item) => (
-            <article className="farm-status-card" key={item.label}>
+            <article className="farm-status-card game-card" key={item.label}>
               <span>{item.label}</span>
               <strong>{item.value}</strong>
               <p>{item.note}</p>
@@ -311,7 +311,7 @@ export default function InventoryPage({ gameState }) {
         </div>
       </section>
 
-      <section className="progress-summary-panel" aria-labelledby="progress-summary-heading">
+      <section className="progress-summary-panel game-panel" aria-labelledby="progress-summary-heading">
         <div className="stats-panel-header">
           <div>
             <p className="eyebrow">Simple summary</p>
@@ -325,7 +325,7 @@ export default function InventoryPage({ gameState }) {
 
         <div className="progress-summary-grid">
           {progressSummary.map((item) => (
-            <article className="progress-summary-card" key={item.label}>
+            <article className="progress-summary-card game-card" key={item.label}>
               <span>{item.label}</span>
               <strong>{item.value}</strong>
               <p>{item.note}</p>
@@ -334,7 +334,7 @@ export default function InventoryPage({ gameState }) {
         </div>
       </section>
 
-      <section className="farm-milestones-panel" aria-labelledby="farm-milestones-heading">
+      <section className="farm-milestones-panel game-panel" aria-labelledby="farm-milestones-heading">
         <div className="stats-panel-header">
           <div>
             <p className="eyebrow">Read-only progress markers</p>
@@ -351,13 +351,19 @@ export default function InventoryPage({ gameState }) {
           <strong>{completedMilestoneCount} / {farmMilestones.length}</strong>
         </div>
 
+        {completedMilestoneCount === 0 ? (
+          <p className="milestone-empty-note empty-state-card">
+            No Farm Milestones are complete yet. Plant and water wheat to start filling them in.
+          </p>
+        ) : null}
+
         <div className="farm-milestones-grid">
           {farmMilestones.map((milestone) => (
             <article
               className={
                 milestone.completed
-                  ? 'farm-milestone-card farm-milestone-completed'
-                  : 'farm-milestone-card'
+                  ? 'farm-milestone-card game-card farm-milestone-completed'
+                  : 'farm-milestone-card game-card'
               }
               key={milestone.id}
             >
@@ -375,7 +381,7 @@ export default function InventoryPage({ gameState }) {
         </div>
       </section>
 
-      <section className="farm-activity-log-panel" aria-labelledby="farm-activity-log-heading">
+      <section className="farm-activity-log-panel game-panel" aria-labelledby="farm-activity-log-heading">
         <div className="stats-panel-header">
           <div>
             <p className="eyebrow">Recent local actions</p>
@@ -401,7 +407,9 @@ export default function InventoryPage({ gameState }) {
             ))}
           </ol>
         ) : (
-          <p className="farm-activity-empty">Your recent farm actions will appear here.</p>
+          <p className="farm-activity-empty empty-state-card">
+            Your recent successful Farm and Pawn Shop actions will appear here.
+          </p>
         )}
       </section>
     </section>

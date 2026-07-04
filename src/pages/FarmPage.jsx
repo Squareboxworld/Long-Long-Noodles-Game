@@ -562,11 +562,11 @@ export default function FarmPage({
       </div>
 
       <div className="farm-state-bar" aria-label="Farm state summary">
-        <article>
+        <article className="game-card">
           <span>Land Count</span>
           <strong>{farm.landCount}</strong>
         </article>
-        <article>
+        <article className="game-card">
           <span>Crop Slots</span>
           <strong>{farm.cropSlots.length}</strong>
         </article>
@@ -574,7 +574,7 @@ export default function FarmPage({
           const iconPath = getAssetPath(assetId);
 
           return (
-            <article key={key}>
+            <article className="game-card" key={key}>
               <span className="farm-resource-label">
                 <DecorativeImage className="farm-resource-icon" path={iconPath} />
                 {label}
@@ -586,7 +586,7 @@ export default function FarmPage({
       </div>
 
       <div className="farm-guidance-grid">
-        <section className="current-objective-panel" aria-live="polite">
+        <section className="current-objective-panel game-panel" aria-live="polite">
           <div>
             <p className="eyebrow">Current Goal</p>
             <span className="objective-label">{currentObjective.label}</span>
@@ -599,7 +599,7 @@ export default function FarmPage({
           <p>{currentObjective.detail}</p>
         </section>
 
-        <section className="beginner-guide-panel">
+        <section className="beginner-guide-panel game-panel">
           <div className="beginner-guide-header">
             <div>
               <p className="eyebrow">Beginner loop</p>
@@ -677,7 +677,7 @@ export default function FarmPage({
           </div>
         </div>
 
-        <aside className="selected-slot-panel crop-detail-panel" aria-live="polite">
+        <aside className="selected-slot-panel crop-detail-panel game-panel" aria-live="polite">
           <div className="crop-detail-header">
             <div>
               <p className="eyebrow">Selected Crop Slot</p>
@@ -754,7 +754,8 @@ export default function FarmPage({
               </details>
             </>
           ) : (
-            <div className="crop-detail-empty-message">
+            <div className="crop-detail-empty-message empty-state-card">
+              <p>Select a crop slot to see status, ready time, and the next useful action.</p>
               <strong>{selectedCropReadyTime}</strong>
             </div>
           )}

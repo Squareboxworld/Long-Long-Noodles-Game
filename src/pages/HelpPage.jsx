@@ -18,6 +18,7 @@ const sectionLinks = [
   ['version-0-4-activity-log', 'Version 0.4 Activity Log'],
   ['version-0-4-farm-ux', 'Version 0.4 Farm UX'],
   ['version-0-5-hud', 'Version 0.5 HUD'],
+  ['version-0-5-page-cards', 'Version 0.5 Page Cards'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -125,7 +126,7 @@ const faqItems = [
 
 export default function HelpPage() {
   return (
-    <article className="manual-page">
+    <article className="manual-page game-panel">
       <header className="manual-header">
         <div>
           <p className="eyebrow">GitHub-style documentation</p>
@@ -332,6 +333,20 @@ export default function HelpPage() {
               <li>Navigation still includes only Welcome, Farm, Inventory, Pawn Shop, and Help.</li>
               <li>The HUD is local-only and does not add accounts, backend, online save, or new resources.</li>
               <li>No gameplay balance, prices, growth timing, or rewards changed.</li>
+            </ul>
+          </section>
+
+          <section className="manual-section" id="version-0-5-page-cards">
+            <h3>Version 0.5 Page Cards and Panels</h3>
+            <p>
+              Version 0.5 also improves shared page cards and panel styling so the current
+              real pages feel like one soft, cozy prototype instead of separate website sections.
+            </p>
+            <ul>
+              <li>Welcome, Farm, Inventory, Pawn Shop, and Help now share more consistent panels.</li>
+              <li>Inventory statistics, Farm Milestones, Farm Activity Log, and Local Save Info use related card styling.</li>
+              <li>Empty states explain what will appear later without adding rewards or new systems.</li>
+              <li>This is visual polish only. It does not change farming balance, save behavior, or available pages.</li>
             </ul>
           </section>
 

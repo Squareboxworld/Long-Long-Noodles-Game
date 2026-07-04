@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.5 begins a Game HUD / UI Shell foundation on top of the stable Version 0.4 farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, Farm UX polish, a local Farm Activity Log, and a compact top resource HUD.
+Version 0.5 continues UI shell polish on top of the stable Version 0.4 farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, Farm UX polish, a local Farm Activity Log, a compact top resource HUD, and shared card/panel styling across the real current pages.
 
 ## Run Locally
 
@@ -138,6 +138,9 @@ Version 0.5 starts by making the existing real pages feel more like one coherent
 - The resource HUD updates from existing local game state when planting, harvesting, selling wheat, and buying wheat seeds.
 - Navigation still includes only Welcome, Farm, Inventory, Pawn Shop, and Help.
 - Page headings and navigation spacing were lightly polished for a more consistent game shell.
+- Shared `game-panel`, `game-card`, and empty-state styling now make Welcome, Farm, Inventory, Pawn Shop, and Help feel more visually connected.
+- Inventory statistics, milestones, activity log, Local Save Info, Pawn Shop offers, and Help sections use a softer common panel language.
+- Empty-state wording was improved for selected crop details, Farm Milestones, Farm Activity Log, and Pawn Shop guidance.
 - The HUD is local-only and does not add accounts, backend, online save, premium currency, XP, levels, rewards, or unavailable pages.
 - No gameplay balance, economy values, growth duration, save key, or crop behavior changed.
 
@@ -151,7 +154,7 @@ Version 0.5 starts by making the existing real pages feel more like one coherent
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Version 0.5 Page Cards, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 

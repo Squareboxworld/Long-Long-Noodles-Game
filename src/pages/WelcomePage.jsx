@@ -10,7 +10,7 @@ const welcomeLoopSteps = [
 export default function WelcomePage({ onNavigate }) {
   return (
     <section className="welcome-page page-grid">
-      <div className="intro-panel">
+      <div className="intro-panel game-panel welcome-intro-panel">
         <p className="eyebrow">Cozy farming prototype</p>
         <h2>Grow wheat first.</h2>
         <p>
@@ -32,11 +32,11 @@ export default function WelcomePage({ onNavigate }) {
         </div>
       </div>
 
-      <div className="cloud-card farm-preview" aria-label="First farming loop preview">
+      <div className="cloud-card farm-preview game-panel" aria-label="First farming loop preview">
         <div className="sun-dot" />
         <div className="preview-cloud preview-cloud-one" />
         <div className="preview-cloud preview-cloud-two" />
-        <div className="welcome-loop-card">
+        <div className="welcome-loop-card game-card">
           <p className="eyebrow">First-time path</p>
           <h3>Basic wheat loop</h3>
           <ol>

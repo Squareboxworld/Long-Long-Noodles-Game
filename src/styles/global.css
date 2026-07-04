@@ -294,6 +294,37 @@ summary:focus-visible {
   background: rgba(255, 252, 243, 0.88);
 }
 
+.game-panel,
+.game-card {
+  min-width: 0;
+  border-color: rgba(117, 91, 68, 0.14);
+}
+
+.game-panel {
+  border: 2px solid rgba(117, 91, 68, 0.14);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 246, 0.9), rgba(246, 236, 211, 0.62)),
+    rgba(255, 249, 234, 0.9);
+  box-shadow: 0 14px 32px rgba(77, 57, 43, 0.09);
+}
+
+.game-card {
+  border: 1px solid rgba(117, 91, 68, 0.13);
+  border-radius: 18px;
+  background: rgba(255, 253, 246, 0.9);
+  box-shadow: 0 8px 18px rgba(77, 57, 43, 0.06);
+}
+
+.empty-state-card {
+  border: 1px dashed rgba(49, 83, 92, 0.18);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(232, 246, 255, 0.72), rgba(255, 253, 246, 0.7)),
+    rgba(255, 253, 246, 0.84);
+  color: #31535c;
+}
+
 .page-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
@@ -314,6 +345,12 @@ summary:focus-visible {
 
 .section-heading {
   margin-bottom: 20px;
+}
+
+.welcome-intro-panel {
+  align-self: stretch;
+  align-content: center;
+  padding: 24px;
 }
 
 .intro-panel h2,
@@ -776,10 +813,8 @@ summary:focus-visible {
 
 .current-objective-panel,
 .beginner-guide-panel {
-  border: 2px solid rgba(117, 91, 68, 0.14);
   border-radius: 22px;
   background: rgba(255, 249, 234, 0.92);
-  box-shadow: 0 14px 30px rgba(77, 57, 43, 0.08);
 }
 
 .current-objective-panel {
@@ -1161,6 +1196,7 @@ summary:focus-visible {
 .crop-detail-empty-message {
   display: grid;
   gap: 6px;
+  padding: 12px;
 }
 
 .crop-detail-empty-message p {
@@ -1382,7 +1418,7 @@ summary:focus-visible {
 
 .inventory-card,
 .shop-counter article {
-  border: 2px solid rgba(117, 91, 68, 0.14);
+  border: 1px solid rgba(117, 91, 68, 0.13);
   border-radius: 24px;
   background: #fff9ea;
 }
@@ -1429,10 +1465,8 @@ summary:focus-visible {
   gap: 18px;
   margin-top: 22px;
   padding: 22px;
-  border: 2px solid rgba(91, 133, 135, 0.16);
   border-radius: 24px;
   background: rgba(255, 252, 240, 0.82);
-  box-shadow: 0 14px 30px rgba(72, 99, 97, 0.08);
 }
 
 .farm-status-panel,
@@ -1452,6 +1486,8 @@ summary:focus-visible {
 .stats-panel-header h3 {
   margin: 0 0 8px;
   color: #31535c;
+  font-size: 1.35rem;
+  line-height: 1.15;
 }
 
 .stats-panel-header p {
@@ -1497,7 +1533,6 @@ summary:focus-visible {
 .farm-milestone-card {
   min-width: 0;
   padding: 14px;
-  border: 1px solid rgba(117, 91, 68, 0.13);
   border-radius: 18px;
   background: #fff9ea;
 }
@@ -1601,6 +1636,13 @@ summary:focus-visible {
 .milestone-summary-pill span {
   color: #657066;
   font-size: 0.88rem;
+}
+
+.milestone-empty-note {
+  margin: 0;
+  padding: 12px 14px;
+  color: #31535c;
+  font-weight: 900;
 }
 
 .farm-milestone-card {
@@ -1712,9 +1754,7 @@ summary:focus-visible {
 
 .farm-activity-empty {
   padding: 14px;
-  border: 1px solid rgba(117, 91, 68, 0.13);
   border-radius: 18px;
-  background: rgba(255, 253, 246, 0.82);
 }
 
 .shop-board {
@@ -1782,10 +1822,8 @@ summary:focus-visible {
   gap: 16px;
   margin: 20px 20px 0;
   padding: 18px;
-  border: 2px solid rgba(117, 91, 68, 0.14);
   border-radius: 22px;
   background: rgba(255, 249, 234, 0.92);
-  box-shadow: 0 14px 30px rgba(77, 57, 43, 0.08);
 }
 
 .shop-helper-panel h3 {
@@ -1832,6 +1870,13 @@ summary:focus-visible {
   background: rgba(232, 246, 255, 0.72);
   color: #31535c;
   font-weight: 900;
+}
+
+.shop-next-note.empty-state-card {
+  border-style: dashed;
+  background:
+    linear-gradient(180deg, rgba(232, 246, 255, 0.72), rgba(255, 253, 246, 0.7)),
+    rgba(255, 253, 246, 0.84);
 }
 
 .shop-offer {
@@ -1935,16 +1980,20 @@ summary:focus-visible {
 }
 
 .manual-content {
+  display: grid;
+  gap: 14px;
   min-width: 0;
 }
 
 .manual-section {
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(68, 83, 83, 0.12);
+  padding: 18px;
+  border: 1px solid rgba(117, 91, 68, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 253, 246, 0.72);
 }
 
 .manual-section:first-child {
-  padding-top: 0;
+  padding-top: 18px;
 }
 
 .manual-page ul {

@@ -163,6 +163,21 @@ Status: Version 0.5 local manual test checklist
 - No fake Noodles, Quest, Event, Map, Leaderboard, premium, account, backend, or online-save buttons appear.
 - HUD and navigation wrap cleanly on phone-sized viewports without horizontal scrolling.
 
+## Version 0.5 Shared Card / Panel Styling Checks
+
+- Welcome page intro and first-time path use cohesive soft game-panel styling.
+- Farm page Current Goal, beginner loop, farm state cards, and Selected Crop Slot panel feel visually related.
+- Inventory page resource cards, Local Save Info, Progress Tracking, Current Farm Status, Progress Summary, Farm Milestones, and Farm Activity Log use consistent spacing and card styling.
+- Pawn Shop inventory, helper panel, action guidance, and buy/sell cards use consistent game-like panels.
+- Help / Manual sections remain readable and use consistent documentation panel styling.
+- Empty selected crop detail state tells the player to select a crop slot.
+- Empty Farm Activity Log explains that successful Farm and Pawn Shop actions will appear there.
+- With zero completed milestones, Farm Milestones explains that planting and watering will start filling milestones in.
+- Pawn Shop unavailable-action guidance still explains to harvest wheat first.
+- Shared panel polish does not add pages, rewards, quests, XP, levels, backend, account, online save, or future systems.
+- Shared panel polish does not change inventory values, prices, growth timing, harvest output, save key, or crop behavior.
+- Shared panels and cards stack cleanly on phone-sized viewports without horizontal scrolling.
+
 ## Navigation
 
 - `Start Farming` on Welcome opens the Farm page.
@@ -290,6 +305,7 @@ Status: Version 0.5 local manual test checklist
 - Confirm Version 0.4 Activity Log explains recent local action history, capped entries, no rewards, no notifications, no backend, and no online history.
 - Confirm Version 0.4 Farm UX explains that Farm layout polish keeps crop details and action controls near the crop grid without changing gameplay.
 - Confirm Version 0.5 HUD explains the top resource HUD, real local inventory values, current real pages only, no new resources, no backend, and no balance changes.
+- Confirm Version 0.5 Page Cards explains shared card/panel styling, clearer empty states, no new systems, and no balance changes.
 - Confirm Saving / localStorage explains Local Save Info, browser/device-only saves, browser data clearing risk, no online save, and Reset Dev State behavior.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress after first watering, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
