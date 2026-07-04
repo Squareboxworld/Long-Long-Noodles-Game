@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.3 adds progress data, read-only farm statistics UI, and local save clarity on top of the stable Version 0.2 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, and Local Save Info.
+Version 0.4 begins with Crop Detail Panel clarity on top of the stable Version 0.3 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, and a read-only selected crop detail panel on the Farm page.
 
 ## Run Locally
 
@@ -87,6 +87,16 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 - Reset Dev State now clearly warns that it restarts this browser's prototype test state and may erase local progress here.
 - No rewards, XP, levels, unlocks, achievement logic, quests, account system, online save, or backend were added.
 
+## Version 0.4 Crop Detail Panel
+
+Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a compact read-only `Selected Crop Slot` panel with friendly status wording, crop type, progress, watered state, timestamps, and the next helpful action.
+
+- Empty soil shows `Empty Soil` and planting guidance when wheat seeds are available.
+- Planted unwatered wheat shows `Needs Water` and explains that watering starts growth.
+- Watered wheat below 100% shows `Growing`.
+- Mature wheat shows `Ready to Harvest`.
+- The panel is UI guidance only. It does not change gameplay balance, rewards, save keys, crop data, or economy values.
+
 ## Growth Mode
 
 - Real design: wheat takes 7 real-life days.
@@ -96,7 +106,7 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 
@@ -135,4 +145,4 @@ The following systems are intentionally not included:
 - Wandering Merchant
 - Generated final art beyond the provided PNGs
 
-See [docs/version-0.1-scope.md](docs/version-0.1-scope.md) for the farming prototype scope, [docs/version-0.2-plan.md](docs/version-0.2-plan.md) for the beginner guidance pass, and [docs/version-0.3-plan.md](docs/version-0.3-plan.md) for progress data foundation notes.
+See [docs/version-0.1-scope.md](docs/version-0.1-scope.md) for the farming prototype scope, [docs/version-0.2-plan.md](docs/version-0.2-plan.md) for the beginner guidance pass, [docs/version-0.3-plan.md](docs/version-0.3-plan.md) for progress data foundation notes, and [docs/version-0.4-plan.md](docs/version-0.4-plan.md) for Crop Detail Panel notes.

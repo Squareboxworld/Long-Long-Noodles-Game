@@ -1059,6 +1059,37 @@ summary:focus-visible {
   background: #fff9ea;
 }
 
+.crop-detail-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(249, 236, 204, 0.42)),
+    #fff9ea;
+}
+
+.crop-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.crop-detail-summary,
+.crop-detail-empty-message {
+  margin: 6px 0 0;
+  color: #5c6a5c;
+  font-weight: 800;
+}
+
+.crop-detail-icon {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  padding: 8px;
+  border: 2px solid rgba(49, 83, 92, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 253, 246, 0.86);
+  object-fit: contain;
+}
+
 .selected-slot-panel h3 {
   margin: 0;
   color: #31535c;
@@ -1086,6 +1117,83 @@ summary:focus-visible {
 }
 
 .slot-detail-grid dd {
+  margin: 3px 0 0;
+  color: #31535c;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.crop-detail-next-action {
+  grid-column: 1 / -1;
+  border-color: rgba(83, 143, 111, 0.18);
+  background: rgba(232, 246, 226, 0.88) !important;
+}
+
+.crop-status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border: 2px solid rgba(49, 83, 92, 0.12);
+  border-radius: 999px;
+  background: #fff5cf;
+  color: #31535c;
+}
+
+.crop-detail-progress {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 2px solid rgba(49, 83, 92, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 253, 246, 0.82);
+}
+
+.crop-detail-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #31535c;
+  font-weight: 900;
+}
+
+.crop-detail-progress-track {
+  overflow: hidden;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(49, 83, 92, 0.12);
+}
+
+.crop-detail-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #9fc86e, #f0c65c);
+}
+
+.crop-detail-times {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.crop-detail-times div {
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 253, 246, 0.64);
+}
+
+.crop-detail-times dt {
+  color: #776850;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.crop-detail-times dd {
   margin: 3px 0 0;
   color: #31535c;
   font-weight: 800;
@@ -1732,6 +1840,7 @@ summary:focus-visible {
   .farm-milestones-grid,
   .farm-state-bar,
   .farm-guidance-grid,
+  .crop-detail-times,
   .shop-counter,
   .shop-helper-panel,
   .shop-inventory-summary,
@@ -1848,9 +1957,20 @@ summary:focus-visible {
 
   .current-objective-panel,
   .beginner-guide-panel,
+  .crop-detail-panel,
   .shop-helper-panel {
     padding: 14px;
     border-radius: 18px;
+  }
+
+  .crop-detail-header {
+    align-items: flex-start;
+  }
+
+  .crop-detail-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
   }
 
   .beginner-guide-header {

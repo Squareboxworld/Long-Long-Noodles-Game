@@ -217,6 +217,106 @@ function getSuggestedFarmAction(selectedSlot, plantIsValid, waterIsValid, harves
   };
 }
 
+function getSelectedCropStatus(slot) {
+  if (!slot || slot.status === CROP_SLOT_STATUS.EMPTY) {
+    return 'Empty Soil';
+  }
+
+  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
+    return 'Ready to Harvest';
+  }
+
+  if (isWheatCrop(slot) && !slot.isWatered) {
+    return 'Needs Water';
+  }
+
+  if (isWheatCrop(slot) && slot.isWatered) {
+    return 'Growing';
+  }
+
+  return 'Seed Planted';
+}
+
+function getSelectedCropStage(slot) {
+  if (!slot || slot.status === CROP_SLOT_STATUS.EMPTY) {
+    return 'Empty Soil';
+  }
+
+  if (isWheatCrop(slot) && (slot.isMature || slot.growthProgress >= 100)) {
+    return 'Ready to Harvest';
+  }
+
+  if (isWheatCrop(slot) && slot.growthProgress <= 0) {
+    return 'Seed Planted';
+  }
+
+  return 'Growing';
+}
+
+function getSelectedCropNextAction(slot, inventory) {
+  if (!slot) {
+    return 'Select a soil slot first.';
+  }
+
+  if (slot.status === CROP_SLOT_STATUS.EMPTY) {
+    return inventory.wheatSeeds > 0
+      ? 'Plant wheat seed here.'
+      : 'Buy wheat seeds at the Pawn Shop.';
+  }
+
+  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
+    return 'Harvest this wheat.';
+  }
+
+  if (isWheatCrop(slot) && !slot.isWatered) {
+    return 'Water this wheat to start growth.';
+  }
+
+  if (isWheatCrop(slot)) {
+    return 'Wait until this wheat reaches 100%.';
+  }
+
+  return 'No crop action is ready for this slot.';
+}
+
+function getSelectedCropSummary(slot, inventory) {
+  if (!slot) {
+    return 'Select a soil slot to see details.';
+  }
+
+  if (slot.status === CROP_SLOT_STATUS.EMPTY) {
+    return inventory.wheatSeeds > 0
+      ? 'This soil is empty and ready for a wheat seed.'
+      : 'This soil is empty, but you need wheat seeds before planting.';
+  }
+
+  if (isWheatCrop(slot) && (slot.isMature || slot.status === CROP_SLOT_STATUS.MATURE)) {
+    return 'This wheat is mature and ready to harvest.';
+  }
+
+  if (isWheatCrop(slot) && !slot.isWatered) {
+    return 'This wheat is planted, but growth has not started yet.';
+  }
+
+  if (isWheatCrop(slot)) {
+    return 'This wheat is watered and growing from its first watering time.';
+  }
+
+  return 'This crop slot has a planted crop.';
+}
+
+function getSelectedCropIconAssetId(slot) {
+  if (!slot || slot.status === CROP_SLOT_STATUS.EMPTY) {
+    return 'icon_wheat_seed';
+  }
+
+  if (isWheatCrop(slot) && !slot.isWatered && !slot.isMature) {
+    return 'icon_water_drop';
+  }
+
+  return 'icon_wheat';
+}
+
 function getPlantBlockedMessage(gameState, selectedSlot) {
   if (!selectedSlot) {
     return 'Select an empty soil slot first.';
@@ -356,6 +456,13 @@ export default function FarmPage({
     'Select a crop slot, then plant or water wheat.',
   );
   const selectedSlot = farm.cropSlots.find((slot) => slot.slotId === selectedSlotId) ?? null;
+  const selectedSlotIndex = selectedSlot
+    ? farm.cropSlots.findIndex((slot) => slot.slotId === selectedSlot.slotId)
+    : -1;
+  const selectedCropStatus = getSelectedCropStatus(selectedSlot);
+  const selectedCropStage = getSelectedCropStage(selectedSlot);
+  const selectedCropNextAction = getSelectedCropNextAction(selectedSlot, inventory);
+  const selectedCropSummary = getSelectedCropSummary(selectedSlot, inventory);
   const currentObjective = getCurrentObjective(gameState);
   const plantIsValid = canPlantWheat(gameState, selectedSlot?.slotId);
   const waterIsValid = canWaterCrop(gameState, selectedSlot?.slotId);
@@ -375,6 +482,7 @@ export default function FarmPage({
   const waterIconPath = getAssetPath(actionAssetIds.waterIcon);
   const wheatIconPath = getAssetPath(actionAssetIds.wheatIcon);
   const currentObjectiveIconPath = getAssetPath(objectiveCueAssetIds[currentObjective.action]);
+  const selectedCropIconPath = getAssetPath(getSelectedCropIconAssetId(selectedSlot));
   const farmSceneStyle = farmBackgroundPath
     ? {
         backgroundImage:
@@ -561,60 +669,82 @@ export default function FarmPage({
         </div>
       </div>
 
-      <aside className="selected-slot-panel" aria-live="polite">
-        <div>
-          <p className="eyebrow">Selected crop slot</p>
-          <h3>{selectedSlot ? selectedSlot.slotId : 'No slot selected'}</h3>
+      <aside className="selected-slot-panel crop-detail-panel" aria-live="polite">
+        <div className="crop-detail-header">
+          <div>
+            <p className="eyebrow">Selected Crop Slot</p>
+            <h3>{selectedSlot ? `Slot ${selectedSlotIndex + 1}` : 'No slot selected'}</h3>
+            <p className="crop-detail-summary">{selectedCropSummary}</p>
+          </div>
+          <DecorativeImage className="crop-detail-icon" path={selectedCropIconPath} />
         </div>
 
         {selectedSlot ? (
-          <dl className="slot-detail-grid">
-            <div>
-              <dt>Status</dt>
-              <dd>{selectedSlot.status}</dd>
+          <>
+            <dl className="slot-detail-grid crop-detail-grid">
+              <div>
+                <dt>Slot</dt>
+                <dd>{selectedSlot.slotId}</dd>
+              </div>
+              <div>
+                <dt>Status</dt>
+                <dd>
+                  <span className="crop-status-pill">{selectedCropStatus}</span>
+                </dd>
+              </div>
+              <div>
+                <dt>Crop</dt>
+                <dd>{selectedSlot.cropType === CROP_TYPES.WHEAT ? 'Wheat' : 'None'}</dd>
+              </div>
+              <div>
+                <dt>Stage</dt>
+                <dd>{selectedCropStage}</dd>
+              </div>
+              <div>
+                <dt>Progress</dt>
+                <dd>{formatProgress(selectedSlot.growthProgress)}</dd>
+              </div>
+              <div>
+                <dt>Watered</dt>
+                <dd>{selectedSlot.isWatered ? 'Yes' : 'No'}</dd>
+              </div>
+              <div className="crop-detail-next-action">
+                <dt>Next action</dt>
+                <dd>{selectedCropNextAction}</dd>
+              </div>
+            </dl>
+
+            <div
+              className="crop-detail-progress"
+              aria-label={`Selected crop growth progress ${formatProgress(selectedSlot.growthProgress)}`}
+            >
+              <div className="crop-detail-progress-header">
+                <span>Growth Progress</span>
+                <strong>{formatProgress(selectedSlot.growthProgress)}</strong>
+              </div>
+              <div className="crop-detail-progress-track">
+                <span style={{ width: `${selectedSlot.growthProgress}%` }} />
+              </div>
             </div>
-            <div>
-              <dt>Crop Type</dt>
-              <dd>{selectedSlot.cropType ?? 'none'}</dd>
-            </div>
-            <div>
-              <dt>Watered</dt>
-              <dd>{selectedSlot.isWatered ? 'yes' : 'no'}</dd>
-            </div>
-            <div>
-              <dt>Thirsty</dt>
-              <dd>{selectedSlot.isThirsty ? 'yes' : 'no'}</dd>
-            </div>
-            <div>
-              <dt>Has Weed</dt>
-              <dd>{selectedSlot.hasWeed ? 'yes' : 'no'}</dd>
-            </div>
-            <div>
-              <dt>Mature</dt>
-              <dd>{selectedSlot.isMature ? 'yes' : 'no'}</dd>
-            </div>
-            <div>
-              <dt>Can Harvest</dt>
-              <dd>{harvestIsValid ? 'yes' : 'no'}</dd>
-            </div>
-            <div>
-              <dt>Growth Progress</dt>
-              <dd>{formatProgress(selectedSlot.growthProgress)}</dd>
-            </div>
-            <div>
-              <dt>Planted At</dt>
-              <dd>{formatTimestamp(selectedSlot.plantedAt)}</dd>
-            </div>
-            <div>
-              <dt>Growth Started At</dt>
-              <dd>{formatTimestamp(selectedSlot.growthStartedAt)}</dd>
-            </div>
-            <div>
-              <dt>Last Watered At</dt>
-              <dd>{formatTimestamp(selectedSlot.lastWateredAt)}</dd>
-            </div>
-          </dl>
-        ) : null}
+
+            <dl className="crop-detail-times">
+              <div>
+                <dt>Planted At</dt>
+                <dd>{formatTimestamp(selectedSlot.plantedAt)}</dd>
+              </div>
+              <div>
+                <dt>Growth Started At</dt>
+                <dd>{formatTimestamp(selectedSlot.growthStartedAt)}</dd>
+              </div>
+              <div>
+                <dt>Last Watered At</dt>
+                <dd>{formatTimestamp(selectedSlot.lastWateredAt)}</dd>
+              </div>
+            </dl>
+          </>
+        ) : (
+          <p className="crop-detail-empty-message">Select a soil slot to see details.</p>
+        )}
 
         <p className={`action-helper action-helper-${suggestedFarmAction.action}`}>
           {suggestedFarmAction.message}

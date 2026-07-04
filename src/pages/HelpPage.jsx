@@ -14,6 +14,7 @@ const sectionLinks = [
   ['version-0-2-guidance', 'Version 0.2 Guidance'],
   ['version-0-3-statistics', 'Version 0.3 Statistics'],
   ['version-0-3-milestones', 'Version 0.3 Milestones'],
+  ['version-0-4-crop-detail', 'Version 0.4 Crop Detail'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -127,9 +128,9 @@ export default function HelpPage() {
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
           <p>Read the guide if you are unsure what to do next.</p>
-          <p>Status: Version 0.3 save and progress guide. Last updated: July 4, 2026.</p>
+          <p>Status: Version 0.4 crop detail guide. Last updated: July 4, 2026.</p>
         </div>
-        <span className="manual-status-label">Version 0.3 prototype guide</span>
+        <span className="manual-status-label">Version 0.4 prototype guide</span>
       </header>
 
       <div className="manual-layout">
@@ -257,6 +258,22 @@ export default function HelpPage() {
               <li>There are no claim buttons.</li>
               <li>They are not online account achievements.</li>
               <li>Reset Dev State restarts the local test state and can change milestone progress.</li>
+            </ul>
+          </section>
+
+          <section className="manual-section" id="version-0-4-crop-detail">
+            <h3>Version 0.4 Crop Detail Panel</h3>
+            <p>
+              Version 0.4 begins with a clearer read-only Crop Detail Panel on the Farm
+              page. Selecting a crop slot shows the selected slot, friendly crop status,
+              crop type, growth progress, watered state, and suggested next action.
+            </p>
+            <ul>
+              <li>The panel helps explain what is happening in the selected soil slot.</li>
+              <li>Empty soil points players toward planting or buying wheat seeds.</li>
+              <li>Planted wheat shows when it needs water before growth can start.</li>
+              <li>Watered wheat shows growing progress until it is ready to harvest.</li>
+              <li>The panel is guidance only and does not change gameplay or save data.</li>
             </ul>
           </section>
 
