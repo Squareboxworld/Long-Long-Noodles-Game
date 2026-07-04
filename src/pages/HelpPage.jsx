@@ -15,6 +15,7 @@ const sectionLinks = [
   ['version-0-3-statistics', 'Version 0.3 Statistics'],
   ['version-0-3-milestones', 'Version 0.3 Milestones'],
   ['version-0-4-crop-detail', 'Version 0.4 Crop Detail'],
+  ['version-0-4-activity-log', 'Version 0.4 Activity Log'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -282,6 +283,22 @@ export default function HelpPage() {
                 estimate does not change growth speed.
               </li>
               <li>The panel is guidance only and does not change gameplay or save data.</li>
+            </ul>
+          </section>
+
+          <section className="manual-section" id="version-0-4-activity-log">
+            <h3>Version 0.4 Farm Activity Log</h3>
+            <p>
+              The Farm Activity Log on Inventory records recent successful farming and Pawn
+              Shop actions from this local browser save. It helps testers understand what just
+              happened without adding rewards, quests, or notifications.
+            </p>
+            <ul>
+              <li>Activity entries are local-only and saved through localStorage.</li>
+              <li>Only recent entries are kept so the log does not grow forever.</li>
+              <li>Failed action clicks do not create activity entries.</li>
+              <li>Reset Dev State starts a fresh log with a reset entry.</li>
+              <li>The log is not online history, account history, backend data, or a reward system.</li>
             </ul>
           </section>
 

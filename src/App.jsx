@@ -7,6 +7,7 @@ import {
   sellWheat,
   waterCrop,
 } from './game/gameActions.js';
+import { addActivityLogEntry } from './game/activityLog.js';
 import { recalculateCropGrowth } from './game/gameGrowth.js';
 import { createInitialGameState } from './game/gameStateUtils.js';
 import { clearGameState, loadGameState, saveGameState } from './game/storage.js';
@@ -109,17 +110,22 @@ export default function App() {
       return;
     }
 
-    const resetState = createInitialGameState();
+    const resetAt = new Date().toISOString();
+    const resetState = createInitialGameState(resetAt);
     const totalResets = (gameState.progress?.totalResets ?? 0) + 1;
-
-    clearGameState();
-    commitGameState({
+    const resetStateWithProgress = {
       ...resetState,
       progress: {
         ...resetState.progress,
         totalResets,
       },
-    });
+    };
+
+    clearGameState();
+    commitGameState(addActivityLogEntry(resetStateWithProgress, {
+      type: 'reset',
+      message: 'Reset Dev State.',
+    }, resetAt));
   }
 
   return (

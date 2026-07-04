@@ -5,6 +5,7 @@ import {
   CROP_TYPES,
 } from '../game/gameConstants.js';
 import { getFarmMilestoneProgress } from '../utils/milestones.js';
+import { formatRelativeTime } from '../utils/timeFormat.js';
 
 const inventoryCards = [
   {
@@ -153,6 +154,19 @@ function formatSaveDate(timestamp) {
   });
 }
 
+function formatActivityTimestamp(timestamp) {
+  const date = new Date(timestamp);
+
+  if (Number.isNaN(date.getTime())) {
+    return 'Unknown time';
+  }
+
+  return date.toLocaleString(undefined, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  });
+}
+
 function getLocalSaveInfo(gameState) {
   return [
     ['Save type', 'Local browser save'],
@@ -200,6 +214,7 @@ export default function InventoryPage({ gameState }) {
   const farmMilestones = getFarmMilestoneProgress(progress);
   const completedMilestoneCount = farmMilestones.filter((milestone) => milestone.completed).length;
   const localSaveInfo = getLocalSaveInfo(gameState);
+  const activityLog = gameState.activityLog ?? [];
 
   return (
     <section className="inventory-page">
@@ -359,6 +374,36 @@ export default function InventoryPage({ gameState }) {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="farm-activity-log-panel" aria-labelledby="farm-activity-log-heading">
+        <div className="stats-panel-header">
+          <div>
+            <p className="eyebrow">Recent local actions</p>
+            <h3 id="farm-activity-log-heading">Farm Activity Log</h3>
+          </div>
+          <p>
+            Recent successful farming and Pawn Shop actions from this browser. Local-only,
+            capped, and reward-free.
+          </p>
+        </div>
+
+        {activityLog.length > 0 ? (
+          <ol className="farm-activity-list">
+            {activityLog.map((activity) => (
+              <li className={`farm-activity-item farm-activity-${activity.type}`} key={activity.id}>
+                <div>
+                  <p>{activity.message}</p>
+                  <time dateTime={activity.createdAt} title={formatActivityTimestamp(activity.createdAt)}>
+                    {formatRelativeTime(activity.createdAt)}
+                  </time>
+                </div>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p className="farm-activity-empty">Your recent farm actions will appear here.</p>
+        )}
       </section>
     </section>
   );

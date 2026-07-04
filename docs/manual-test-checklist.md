@@ -122,6 +122,24 @@ Status: Version 0.4 local manual test checklist
 - The Crop Detail Panel stacks cleanly on phone-sized viewports without horizontal scrolling.
 - Estimated Ready Time is derived from existing growth timing and does not change growth speed.
 
+## Version 0.4 Farm Activity Log Checks
+
+- Clean saves start with an empty `activityLog` array.
+- Older localStorage saves without `activityLog` load safely and show an empty Farm Activity Log.
+- Inventory page shows a read-only `Farm Activity Log` panel.
+- With no activity, the panel says `Your recent farm actions will appear here.`
+- Successful `Plant Wheat` records `Planted wheat seed in Slot X.`
+- Successful `Water` records `Watered wheat in Slot X.`
+- Successful `Harvest` records `Harvested 1 wheat from Slot X.`
+- Successful `Sell 1 Wheat` records `Sold 1 wheat for 110 gold.`
+- Successful `Buy 1 Wheat Seed` records `Bought 1 wheat seed for 100 gold.`
+- Failed action clicks do not create activity entries.
+- Activity Log shows newest activity first.
+- Activity Log persists after refresh because it is saved in localStorage.
+- Activity Log is capped at 20 entries.
+- Reset Dev State clears the previous log and starts the fresh test state with `Reset Dev State.`
+- Activity Log is local-only and does not add rewards, quests, notifications, backend, account history, or online save.
+
 ## Navigation
 
 - `Start Farming` on Welcome opens the Farm page.
@@ -155,6 +173,7 @@ Status: Version 0.4 local manual test checklist
 - Inventory page shows Current Farm Status and Progress Summary in compact mobile-friendly cards.
 - Inventory page shows Farm Milestones below the statistics sections.
 - Inventory page shows Local Save Info above the statistics sections.
+- Inventory page shows Farm Activity Log below the progress and milestone sections.
 - Pawn Shop page is separate from the Farm page.
 - Pawn Shop page shows current gold, wheat seeds, and wheat.
 - Pawn Shop page shows wheat seed price `100` gold.
@@ -233,7 +252,7 @@ Status: Version 0.4 local manual test checklist
 
 - Open Help from the main navigation.
 - Confirm the Help page has section navigation buttons.
-- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
+- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
 - Confirm Getting Started lists 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
 - Confirm First-Time Player Path lists: start on Farm, select empty soil, plant wheat, water wheat, wait, harvest, go to Pawn Shop, sell wheat, buy wheat seeds, return to Farm.
 - Confirm First-Time Player Path mentions Dev Fast Growth Mode, temporary art, and Reset Dev State.
@@ -241,6 +260,7 @@ Status: Version 0.4 local manual test checklist
 - Confirm Version 0.3 Statistics explains lifetime stats, Current Farm Status, Progress Summary, localStorage, no rewards, no achievements, no quests, and no online account save.
 - Confirm Version 0.3 Milestones explains read-only progress markers, localStorage-derived progress, no rewards, no XP, no levels, no unlocks, no claim buttons, and no online account achievements.
 - Confirm Version 0.4 Crop Detail explains that selecting a crop slot shows status, progress, watered state, estimated ready time, and next action, and that the panel is read-only guidance.
+- Confirm Version 0.4 Activity Log explains recent local action history, capped entries, no rewards, no notifications, no backend, and no online history.
 - Confirm Saving / localStorage explains Local Save Info, browser/device-only saves, browser data clearing risk, no online save, and Reset Dev State behavior.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress after first watering, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
@@ -258,6 +278,7 @@ Status: Version 0.4 local manual test checklist
 - Text does not overlap with farm or shop placeholder elements.
 - Pages do not require awkward horizontal scrolling at phone widths.
 - Inventory statistics and Farm Milestones stack cleanly on phone-sized viewports.
+- Farm Activity Log stacks cleanly on phone-sized viewports.
 - Local Save Info cards stack cleanly on phone-sized viewports.
 
 ## Art Integration Checks

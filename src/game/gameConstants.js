@@ -32,6 +32,8 @@ export const INITIAL_PROGRESS = Object.freeze({
   totalResets: 0,
 });
 
+export const MAX_ACTIVITY_LOG_ENTRIES = 20;
+
 export const WHEAT_SEED_COST = 100;
 export const PAWN_SHOP_WHEAT_SELL_PRICE = 110;
 

@@ -110,7 +110,7 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 - Reset Dev State now clearly warns that it restarts this browser's prototype test state and may erase local progress here.
 - No rewards, XP, levels, unlocks, achievement logic, quests, account system, online save, or backend were added.
 
-## Version 0.4 Crop Detail Panel
+## Version 0.4 Farm Clarity
 
 Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a compact read-only `Selected Crop Slot` panel with friendly status wording, crop type, progress, watered state, timestamps, estimated ready time, and the next helpful action.
 
@@ -119,6 +119,8 @@ Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a com
 - Watered wheat below 100% shows `Growing`.
 - Mature wheat shows `Ready to Harvest`.
 - Watered growing wheat shows a `Ready in` estimate derived from the existing active wheat growth duration.
+- Inventory now includes a read-only Farm Activity Log for recent successful farming and Pawn Shop actions.
+- Activity entries are local-only, capped to recent entries, and saved through localStorage.
 - The panel is UI guidance only. It does not change gameplay balance, rewards, save keys, crop data, or economy values.
 
 ## Growth Mode
@@ -131,7 +133,7 @@ Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a com
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 

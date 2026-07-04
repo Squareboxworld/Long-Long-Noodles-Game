@@ -1304,7 +1304,8 @@ summary:focus-visible {
 .local-save-info-panel,
 .farm-status-panel,
 .progress-summary-panel,
-.farm-milestones-panel {
+.farm-milestones-panel,
+.farm-activity-log-panel {
   display: grid;
   gap: 18px;
   margin-top: 22px;
@@ -1317,7 +1318,8 @@ summary:focus-visible {
 
 .farm-status-panel,
 .progress-summary-panel,
-.farm-milestones-panel {
+.farm-milestones-panel,
+.farm-activity-log-panel {
   background: rgba(237, 248, 229, 0.78);
 }
 
@@ -1543,6 +1545,57 @@ summary:focus-visible {
 .farm-milestone-progress strong {
   color: #31535c;
   font-size: 1.15rem;
+}
+
+.farm-activity-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.farm-activity-item {
+  position: relative;
+  min-width: 0;
+  padding: 14px 14px 14px 42px;
+  border: 1px solid rgba(117, 91, 68, 0.13);
+  border-radius: 18px;
+  background: rgba(255, 253, 246, 0.82);
+}
+
+.farm-activity-item::before {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 12px;
+  height: 12px;
+  border: 3px solid rgba(83, 143, 111, 0.24);
+  border-radius: 999px;
+  background: #9fc86e;
+  content: '';
+}
+
+.farm-activity-item p,
+.farm-activity-empty {
+  margin: 0;
+  color: #31535c;
+  font-weight: 900;
+}
+
+.farm-activity-item time {
+  display: block;
+  margin-top: 5px;
+  color: #657066;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.farm-activity-empty {
+  padding: 14px;
+  border: 1px solid rgba(117, 91, 68, 0.13);
+  border-radius: 18px;
+  background: rgba(255, 253, 246, 0.82);
 }
 
 .shop-board {

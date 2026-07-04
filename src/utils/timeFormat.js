@@ -44,3 +44,20 @@ export function formatDuration(milliseconds) {
     ? `${pluralize(days, 'day')} ${pluralize(hours, 'hour')}`
     : pluralize(days, 'day');
 }
+
+export function formatRelativeTime(timestamp, currentTime = Date.now()) {
+  const timestampMs = Date.parse(timestamp);
+  const currentTimeMs = currentTime instanceof Date ? currentTime.getTime() : currentTime;
+
+  if (!Number.isFinite(timestampMs) || !Number.isFinite(currentTimeMs)) {
+    return 'Unknown time';
+  }
+
+  const elapsedMs = Math.max(0, currentTimeMs - timestampMs);
+
+  if (elapsedMs < 5000) {
+    return 'just now';
+  }
+
+  return `${formatDuration(elapsedMs)} ago`;
+}

@@ -1,8 +1,8 @@
 # Road to Long Long Noodles - Version 0.4 Farming Clarity Plan
 
-Status: Version 0.4 adds read-only Crop Detail Panel clarity and estimated ready time for the existing local farming prototype
+Status: Version 0.4 adds read-only Crop Detail Panel clarity, estimated ready time, and a local Farm Activity Log for the existing local farming prototype
 
-Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Prompt 2 adds estimated ready time text for selected wheat crops. These features are UI guidance only and derive display text from existing crop slot, inventory, and growth timing state. They do not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
+Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Prompt 2 adds estimated ready time text for selected wheat crops. Version 0.4 Prompt 3 adds a capped local Farm Activity Log for recent successful actions. These features are clarity/history only and derive from existing crop slot, inventory, action, and growth timing state. They do not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
 
 ## Included In Version 0.4 Prompt 1
 
@@ -22,6 +22,17 @@ Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Pro
 - Mature wheat ready-time text that says it is ready now
 - Shared UI time formatting helper in `src/utils/timeFormat.js`
 - Help / Manual explanation for estimated ready time
+- README and manual test checklist updates
+
+## Included In Version 0.4 Prompt 3
+
+- Top-level `activityLog` array in local game state
+- Backward-compatible activity log normalization for older localStorage saves
+- Capped recent local activity entries with `id`, `type`, `message`, and `createdAt`
+- Successful action logging for planting, watering, harvesting, selling wheat, buying wheat seeds, and reset
+- Compact read-only `Farm Activity Log` panel on Inventory
+- Friendly relative activity time display such as `just now` or `2 minutes ago`
+- Help / Manual explanation for local-only activity history
 - README and manual test checklist updates
 
 ## Friendly Status Wording
@@ -60,6 +71,38 @@ Estimated ready time is derived from the selected crop slot's `growthStartedAt` 
 - Missing or invalid timing data: `Ready time: Unknown`
 
 The estimate updates through the existing Farm page growth recalculation interval. It does not change the growth duration or create a new timer system.
+
+## Farm Activity Log
+
+The Farm Activity Log is a local-only recent history list stored inside the existing localStorage save.
+
+Each entry has:
+
+```js
+{
+  id: 'activity-id',
+  type: 'plant',
+  message: 'Planted wheat seed in Slot 1.',
+  createdAt: '2026-07-04T00:00:00.000Z',
+  slotId: 'land-1-slot-01',
+  amount: 1,
+}
+```
+
+Only `id`, `type`, `message`, and `createdAt` are required. `slotId` and `amount` are optional.
+
+The log is capped at 20 entries. New entries are kept newest first, and older entries are dropped after the cap. Old saves without `activityLog` normalize to an empty array. Malformed activity data is ignored.
+
+Successful actions record activity:
+
+- Plant wheat: `Planted wheat seed in Slot X.`
+- Water wheat: `Watered wheat in Slot X.`
+- Harvest wheat: `Harvested 1 wheat from Slot X.`
+- Sell wheat: `Sold 1 wheat for 110 gold.`
+- Buy wheat seed: `Bought 1 wheat seed for 100 gold.`
+- Reset Dev State: `Reset Dev State.`
+
+Failed actions do not record activity. Reset Dev State clears the previous log as part of resetting the prototype test state, then starts the fresh state with one reset entry.
 
 ## Balance Unchanged
 

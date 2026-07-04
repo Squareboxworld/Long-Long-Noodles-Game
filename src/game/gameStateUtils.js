@@ -7,6 +7,7 @@ import {
   INITIAL_PROGRESS,
   STARTING_LAND_COUNT,
 } from './gameConstants.js';
+import { normalizeActivityLog } from './activityLog.js';
 
 const VALID_CROP_STATUSES = new Set(Object.values(CROP_SLOT_STATUS));
 const VALID_CROP_TYPES = new Set(Object.values(CROP_TYPES));
@@ -65,6 +66,7 @@ export function createInitialGameState(now = new Date().toISOString()) {
     progress: {
       ...INITIAL_PROGRESS,
     },
+    activityLog: [],
   };
 }
 
@@ -186,5 +188,6 @@ export function normalizeGameState(savedState) {
       wheat: Math.max(0, safeNumber(savedState.inventory?.wheat, INITIAL_INVENTORY.wheat)),
     },
     progress: normalizeProgress(savedState.progress),
+    activityLog: normalizeActivityLog(savedState.activityLog),
   };
 }

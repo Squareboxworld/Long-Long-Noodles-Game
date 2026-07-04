@@ -5,6 +5,7 @@ import {
   PAWN_SHOP_WHEAT_SELL_PRICE,
   WHEAT_SEED_COST,
 } from './gameConstants.js';
+import { addActivityLogEntry } from './activityLog.js';
 import { recalculateCropGrowth } from './gameGrowth.js';
 
 const messages = {
@@ -61,6 +62,12 @@ function incrementProgress(gameState, increments) {
 
 function isValidTimestamp(value) {
   return typeof value === 'string' && Number.isFinite(Date.parse(value));
+}
+
+function getSlotLabel(gameState, slotId) {
+  const slotIndex = gameState.farm.cropSlots.findIndex((cropSlot) => cropSlot.slotId === slotId);
+
+  return slotIndex >= 0 ? `Slot ${slotIndex + 1}` : slotId;
 }
 
 export function canPlantWheat(gameState, slotId) {
@@ -142,11 +149,18 @@ export function plantWheat(gameState, slotId, now = new Date().toISOString()) {
     now,
   );
 
+  const progressedState = incrementProgress(
+    { ...nextState, updatedAt: now },
+    { lifetimeWheatPlanted: 1 },
+  );
+
   return {
-    gameState: incrementProgress(
-      { ...nextState, updatedAt: now },
-      { lifetimeWheatPlanted: 1 },
-    ),
+    gameState: addActivityLogEntry(progressedState, {
+      type: 'plant',
+      message: `Planted wheat seed in ${getSlotLabel(gameState, slotId)}.`,
+      slotId,
+      amount: 1,
+    }, now),
     message: messages.plantSuccess,
     success: true,
   };
@@ -180,8 +194,15 @@ export function waterCrop(gameState, slotId, now = new Date().toISOString()) {
 
   const growthResult = recalculateCropGrowth({ ...nextState, updatedAt: now }, now);
 
+  const progressedState = incrementProgress(growthResult.gameState, { lifetimeWheatWatered: 1 });
+
   return {
-    gameState: incrementProgress(growthResult.gameState, { lifetimeWheatWatered: 1 }),
+    gameState: addActivityLogEntry(progressedState, {
+      type: 'water',
+      message: `Watered wheat in ${getSlotLabel(gameState, slotId)}.`,
+      slotId,
+      amount: 1,
+    }, now),
     message: messages.waterSuccess,
     success: true,
   };
@@ -237,8 +258,15 @@ export function harvestWheat(gameState, slotId, now = new Date().toISOString()) 
     now,
   );
 
+  const progressedState = incrementProgress(nextState, { lifetimeWheatHarvested: 1 });
+
   return {
-    gameState: incrementProgress(nextState, { lifetimeWheatHarvested: 1 }),
+    gameState: addActivityLogEntry(progressedState, {
+      type: 'harvest',
+      message: `Harvested 1 wheat from ${getSlotLabel(recalculatedState, slotId)}.`,
+      slotId,
+      amount: 1,
+    }, now),
     message: messages.harvestSuccess,
     success: true,
   };
@@ -259,11 +287,17 @@ export function buyWheatSeed(gameState, now = new Date().toISOString()) {
     },
   };
 
+  const progressedState = incrementProgress(nextState, {
+    lifetimeGoldSpent: WHEAT_SEED_COST,
+    lifetimeSeedsBought: 1,
+  });
+
   return {
-    gameState: incrementProgress(nextState, {
-      lifetimeGoldSpent: WHEAT_SEED_COST,
-      lifetimeSeedsBought: 1,
-    }),
+    gameState: addActivityLogEntry(progressedState, {
+      type: 'buy-seed',
+      message: `Bought 1 wheat seed for ${WHEAT_SEED_COST} gold.`,
+      amount: 1,
+    }, now),
     message: messages.buySeedSuccess,
     success: true,
   };
@@ -284,11 +318,17 @@ export function sellWheat(gameState, now = new Date().toISOString()) {
     },
   };
 
+  const progressedState = incrementProgress(nextState, {
+    lifetimeGoldEarned: PAWN_SHOP_WHEAT_SELL_PRICE,
+    lifetimeWheatSold: 1,
+  });
+
   return {
-    gameState: incrementProgress(nextState, {
-      lifetimeGoldEarned: PAWN_SHOP_WHEAT_SELL_PRICE,
-      lifetimeWheatSold: 1,
-    }),
+    gameState: addActivityLogEntry(progressedState, {
+      type: 'sell-wheat',
+      message: `Sold 1 wheat for ${PAWN_SHOP_WHEAT_SELL_PRICE} gold.`,
+      amount: 1,
+    }, now),
     message: messages.sellWheatSuccess,
     success: true,
   };
