@@ -21,6 +21,29 @@ To verify the production build:
 npm.cmd run build
 ```
 
+## Local Development Shortcut
+
+Normal local dev server:
+
+```bash
+npm.cmd run dev
+```
+
+Start the local dev server and automatically open the browser:
+
+```bash
+npm.cmd run dev:open
+```
+
+Windows double-click launcher:
+
+```bash
+start-dev-open.bat
+```
+
+These shortcuts are for local development only. They do not affect the game, deploy the
+website, create a backend, or add online save.
+
 ## Pages
 
 - Welcome
