@@ -29,7 +29,7 @@ function ResourceChip({ assetId, label, value }) {
   const iconPath = getAssetPath(assetId);
 
   return (
-    <article className="hud-resource-chip">
+    <article className="hud-resource-chip" aria-label={`${label}: ${value}`}>
       {iconPath ? (
         <img
           alt=""
@@ -77,15 +77,12 @@ export default function AppShell({
               />
             ))}
           </div>
-          <div className="weather-pill" aria-label="Soft cloudy farm mood">
-            ☁️ gentle farm day
-          </div>
           <div className="dev-reset-control">
             <button className="dev-reset-button" type="button" onClick={onResetDevState}>
               Reset Dev State
             </button>
             <p>
-              Restarts this browser's prototype test state. Mainly for development/testing.
+              Restarts this browser's test state. Mainly for development/testing.
             </p>
           </div>
         </div>

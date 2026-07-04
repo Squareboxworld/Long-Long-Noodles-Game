@@ -19,6 +19,8 @@ const sectionLinks = [
   ['version-0-4-farm-ux', 'Version 0.4 Farm UX'],
   ['version-0-5-hud', 'Version 0.5 HUD'],
   ['version-0-5-page-cards', 'Version 0.5 Page Cards'],
+  ['version-0-5-mobile-hud', 'Version 0.5 Mobile HUD'],
+  ['version-0-5-feedback', 'Version 0.5 Feedback'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -132,9 +134,9 @@ export default function HelpPage() {
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
           <p>Read the guide if you are unsure what to do next.</p>
-          <p>Status: Version 0.5 HUD / UI shell guide. Last updated: July 4, 2026.</p>
+          <p>Status: Version 0.5 local prototype guide. Last updated: July 5, 2026.</p>
         </div>
-        <span className="manual-status-label">Version 0.5 prototype guide</span>
+        <span className="manual-status-label">Version 0.5 guide</span>
       </header>
 
       <div className="manual-layout">
@@ -347,6 +349,37 @@ export default function HelpPage() {
               <li>Inventory statistics, Farm Milestones, Farm Activity Log, and Local Save Info use related card styling.</li>
               <li>Empty states explain what will appear later without adding rewards or new systems.</li>
               <li>This is visual polish only. It does not change farming balance, save behavior, or available pages.</li>
+            </ul>
+          </section>
+
+          <section className="manual-section" id="version-0-5-mobile-hud">
+            <h3>Version 0.5 Mobile HUD and Navigation</h3>
+            <p>
+              The top HUD and navigation are tuned so the prototype stays comfortable on
+              phone-sized screens without adding unavailable game systems.
+            </p>
+            <ul>
+              <li>The resource HUD still shows only real local values: Gold, Wheat Seeds, and Wheat.</li>
+              <li>Status labels and resource chips stack into compact rows on smaller screens.</li>
+              <li>Navigation still includes only Welcome, Farm, Inventory, Pawn Shop, and Help.</li>
+              <li>The current page is marked with `Current` and `aria-current` for clearer navigation.</li>
+              <li>This polish does not change growth timing, prices, save data, rewards, or gameplay balance.</li>
+            </ul>
+          </section>
+
+          <section className="manual-section" id="version-0-5-feedback">
+            <h3>Version 0.5 Button and Feedback Polish</h3>
+            <p>
+              Buttons and action feedback now use more consistent visual states across the
+              current real pages. This helps players understand useful actions, unavailable
+              actions, and recent action results.
+            </p>
+            <ul>
+              <li>Farm action buttons still allow friendly failed-action messages instead of silently blocking clicks.</li>
+              <li>Success and warning feedback messages are visually distinct but still compact.</li>
+              <li>Pawn Shop buy/sell cards show useful and unavailable states without changing prices.</li>
+              <li>Reset Dev State is styled as a development/testing reset action.</li>
+              <li>No new gameplay actions, rewards, backend, account, or online save were added.</li>
             </ul>
           </section>
 

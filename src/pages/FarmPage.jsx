@@ -473,6 +473,7 @@ export default function FarmPage({
   const [feedbackMessage, setFeedbackMessage] = useState(
     'Select a soil slot, then plant or water wheat.',
   );
+  const [feedbackTone, setFeedbackTone] = useState('info');
   const selectedSlot = farm.cropSlots.find((slot) => slot.slotId === selectedSlotId) ?? null;
   const selectedSlotIndex = selectedSlot
     ? farm.cropSlots.findIndex((slot) => slot.slotId === selectedSlot.slotId)
@@ -523,31 +524,37 @@ export default function FarmPage({
   function handlePlantWheat() {
     if (!plantIsValid) {
       setFeedbackMessage(getPlantBlockedMessage(gameState, selectedSlot));
+      setFeedbackTone('warning');
       return;
     }
 
     const result = onPlantWheat(selectedSlot?.slotId);
     setFeedbackMessage(result.message);
+    setFeedbackTone(result.success ? 'success' : 'warning');
   }
 
   function handleWaterCrop() {
     if (!waterIsValid) {
       setFeedbackMessage(getWaterBlockedMessage(selectedSlot));
+      setFeedbackTone('warning');
       return;
     }
 
     const result = onWaterCrop(selectedSlot?.slotId);
     setFeedbackMessage(result.message);
+    setFeedbackTone(result.success ? 'success' : 'warning');
   }
 
   function handleHarvestWheat() {
     if (!harvestIsValid) {
       setFeedbackMessage(getHarvestBlockedMessage(selectedSlot));
+      setFeedbackTone('warning');
       return;
     }
 
     const result = onHarvestWheat(selectedSlot?.slotId);
     setFeedbackMessage(result.message);
+    setFeedbackTone(result.success ? 'success' : 'warning');
   }
 
   return (
@@ -774,7 +781,7 @@ export default function FarmPage({
               )}
               style={getActionStyle(plantButtonPath)}
               type="button"
-              aria-disabled={!plantIsValid}
+              data-action-unavailable={!plantIsValid ? 'true' : undefined}
               onClick={handlePlantWheat}
             >
               <DecorativeImage className="action-icon" path={wheatSeedIconPath} />
@@ -789,7 +796,7 @@ export default function FarmPage({
               )}
               style={getActionStyle(waterButtonPath)}
               type="button"
-              aria-disabled={!waterIsValid}
+              data-action-unavailable={!waterIsValid ? 'true' : undefined}
               onClick={handleWaterCrop}
             >
               <DecorativeImage className="action-icon" path={waterIconPath} />
@@ -804,7 +811,7 @@ export default function FarmPage({
               )}
               style={getActionStyle(harvestButtonPath)}
               type="button"
-              aria-disabled={!harvestIsValid}
+              data-action-unavailable={!harvestIsValid ? 'true' : undefined}
               onClick={handleHarvestWheat}
             >
               <DecorativeImage className="action-icon" path={wheatIconPath} />
@@ -812,7 +819,9 @@ export default function FarmPage({
             </button>
           </div>
 
-          <p className="feedback-message">{feedbackMessage}</p>
+          <p className={`feedback-message feedback-${feedbackTone}`} aria-live="polite">
+            {feedbackMessage}
+          </p>
         </aside>
       </div>
     </section>

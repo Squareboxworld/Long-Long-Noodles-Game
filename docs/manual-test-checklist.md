@@ -178,6 +178,57 @@ Status: Version 0.5 local manual test checklist
 - Shared panel polish does not change inventory values, prices, growth timing, harvest output, save key, or crop behavior.
 - Shared panels and cards stack cleanly on phone-sized viewports without horizontal scrolling.
 
+## Version 0.5 Mobile HUD / Navigation Checks
+
+- Phone-width HUD shows the title without crowding the resource bar.
+- `Version 0.5 Prototype`, `Local Prototype`, and Dev Fast Growth Mode labels fit without horizontal scrolling.
+- Resource HUD shows only Gold, Wheat Seeds, and Wheat.
+- Resource chips remain readable and aligned on phone-sized screens.
+- Reset Dev State helper text is short and does not dominate the header.
+- Navigation still includes only Welcome, Farm, Inventory, Pawn Shop, and Help.
+- Navigation buttons remain tappable on phone-sized screens.
+- Active navigation is visible through more than color, including the `Current` marker.
+- Farm can still show the `Main` badge without confusing the current page state.
+- Focus state remains visible on navigation and action buttons.
+- Mobile HUD and navigation refinements do not add pages, resources, accounts, backend, rewards, or future systems.
+- Mobile HUD and navigation refinements do not change inventory values, prices, growth timing, harvest output, save key, or crop behavior.
+
+## Version 0.5 Button / Interaction Feedback Checks
+
+- Welcome `Start Farming` and `Read Help` buttons remain easy to tap and readable.
+- Farm Plant, Water, and Harvest buttons share consistent button styling.
+- The suggested Farm action remains visually clear without aggressive flashing.
+- Unavailable Farm actions are visually softened but still clickable for friendly guidance messages.
+- Successful Farm actions show compact success feedback.
+- Failed Farm actions show compact warning feedback.
+- Pawn Shop Sell and Buy buttons share consistent button styling.
+- Available Pawn Shop offers remain highlighted without being noisy.
+- Unavailable Pawn Shop offers look inactive but not broken.
+- Successful Pawn Shop actions show compact success feedback.
+- Failed Pawn Shop actions show compact warning feedback.
+- Reset Dev State visually reads as a development/testing reset action.
+- Reset Dev State still uses browser confirmation behavior.
+- Button focus states remain visible.
+- Button and feedback polish does not add actions, rewards, quests, backend, account, online save, or future systems.
+- Button and feedback polish does not change inventory values, prices, growth timing, harvest output, save key, or crop behavior.
+
+## Version 0.5 Final UI Shell QA Checks
+
+- HUD title, `Version 0.5 Prototype`, `Local Prototype`, and Dev Fast Growth Mode labels remain readable.
+- Resource HUD shows only Gold, Wheat Seeds, and Wheat.
+- Mobile HUD stacks without desktop flex-basis spacing at 360px and 390px widths.
+- Navigation still shows only Welcome, Farm, Inventory, Pawn Shop, and Help.
+- Active navigation remains visible through color, shape, `Current` text, and `aria-current`.
+- Shared panels and cards remain consistent across Welcome, Farm, Inventory, Pawn Shop, and Help.
+- Farm Plant, Water, and Harvest buttons remain tappable and show friendly failed-action feedback.
+- Pawn Shop Sell and Buy buttons remain tappable and show friendly failed-action feedback.
+- Reset Dev State remains visually distinct as a development/testing reset action.
+- Phone-width layouts have no horizontal scrolling.
+- Full loop regression still passes: plant, water, grow, harvest, sell wheat, buy wheat seed, refresh, and load.
+- Inventory statistics, Farm Milestones, and Farm Activity Log still update from successful actions only.
+- Final UI shell QA does not add actions, pages, rewards, quests, backend, account, online save, or future systems.
+- Final UI shell QA does not change inventory values, prices, growth timing, harvest output, save key, or crop behavior.
+
 ## Navigation
 
 - `Start Farming` on Welcome opens the Farm page.
@@ -294,7 +345,7 @@ Status: Version 0.5 local manual test checklist
 
 - Open Help from the main navigation.
 - Confirm the Help page has section navigation buttons.
-- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
+- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Version 0.5 Page Cards, Version 0.5 Mobile HUD, Version 0.5 Feedback, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
 - Confirm Getting Started lists 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
 - Confirm First-Time Player Path lists: start on Farm, select empty soil, plant wheat, water wheat, wait, harvest, go to Pawn Shop, sell wheat, buy wheat seeds, return to Farm.
 - Confirm First-Time Player Path mentions Dev Fast Growth Mode, temporary art, and Reset Dev State.
@@ -306,6 +357,8 @@ Status: Version 0.5 local manual test checklist
 - Confirm Version 0.4 Farm UX explains that Farm layout polish keeps crop details and action controls near the crop grid without changing gameplay.
 - Confirm Version 0.5 HUD explains the top resource HUD, real local inventory values, current real pages only, no new resources, no backend, and no balance changes.
 - Confirm Version 0.5 Page Cards explains shared card/panel styling, clearer empty states, no new systems, and no balance changes.
+- Confirm Version 0.5 Mobile HUD explains mobile HUD/navigation refinements, real resource values only, no new pages, and no balance changes.
+- Confirm Version 0.5 Feedback explains button/feedback polish, unavailable action clarity, no new systems, and no balance changes.
 - Confirm Saving / localStorage explains Local Save Info, browser/device-only saves, browser data clearing risk, no online save, and Reset Dev State behavior.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress after first watering, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.

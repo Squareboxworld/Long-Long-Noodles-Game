@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.5 continues UI shell polish on top of the stable Version 0.4 farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, Farm UX polish, a local Farm Activity Log, a compact top resource HUD, and shared card/panel styling across the real current pages.
+Version 0.5 continues UI shell polish on top of the stable Version 0.4 farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, Farm UX polish, a local Farm Activity Log, a compact top resource HUD, shared card/panel styling, mobile HUD/navigation refinements, button/feedback polish, and final UI shell QA cleanup across the real current pages.
 
 ## Run Locally
 
@@ -141,6 +141,13 @@ Version 0.5 starts by making the existing real pages feel more like one coherent
 - Shared `game-panel`, `game-card`, and empty-state styling now make Welcome, Farm, Inventory, Pawn Shop, and Help feel more visually connected.
 - Inventory statistics, milestones, activity log, Local Save Info, Pawn Shop offers, and Help sections use a softer common panel language.
 - Empty-state wording was improved for selected crop details, Farm Milestones, Farm Activity Log, and Pawn Shop guidance.
+- Mobile HUD spacing, status labels, resource chips, and navigation buttons were refined for phone-sized screens.
+- Active navigation now has a visible `Current` marker in addition to color and `aria-current`.
+- The resource bar still shows only real current inventory values: gold, wheat seeds, and wheat.
+- Farm, Pawn Shop, navigation, and reset buttons now share clearer interaction styling.
+- Farm and Pawn Shop feedback messages now use compact info, success, and warning presentation.
+- Unavailable-but-clickable actions are visually softened while still showing friendly error messages when clicked.
+- Final UI shell QA tightened mobile HUD sizing, reviewed navigation, shared panels, buttons, feedback, and phone-width layouts.
 - The HUD is local-only and does not add accounts, backend, online save, premium currency, XP, levels, rewards, or unavailable pages.
 - No gameplay balance, economy values, growth duration, save key, or crop behavior changed.
 
@@ -154,7 +161,7 @@ Version 0.5 starts by making the existing real pages feel more like one coherent
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Version 0.5 Page Cards, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Version 0.5 Page Cards, Version 0.5 Mobile HUD, Version 0.5 Feedback, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 

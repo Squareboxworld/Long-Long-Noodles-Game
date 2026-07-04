@@ -29,6 +29,7 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
   const [feedbackMessage, setFeedbackMessage] = useState(
     'Sell harvested wheat, then buy wheat seeds to keep farming.',
   );
+  const [feedbackTone, setFeedbackTone] = useState('info');
   const buyIsValid = canBuyWheatSeed(gameState);
   const sellIsValid = canSellWheat(gameState);
   const shopGuidance = getShopGuidance(buyIsValid, sellIsValid);
@@ -38,21 +39,25 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
       setFeedbackMessage(
         `You need ${WHEAT_SEED_COST} gold to buy 1 wheat seed. Sell wheat to earn gold.`,
       );
+      setFeedbackTone('warning');
       return;
     }
 
     const result = onBuyWheatSeed();
     setFeedbackMessage(result.message);
+    setFeedbackTone(result.success ? 'success' : 'warning');
   }
 
   function handleSellWheat() {
     if (!sellIsValid) {
       setFeedbackMessage('You do not have wheat to sell yet. Harvest wheat that is ready first.');
+      setFeedbackTone('warning');
       return;
     }
 
     const result = onSellWheat();
     setFeedbackMessage(result.message);
+    setFeedbackTone(result.success ? 'success' : 'warning');
   }
 
   return (
@@ -109,7 +114,7 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
             <button
               className={sellIsValid ? 'shop-action' : 'shop-action action-softened'}
               type="button"
-              aria-disabled={!sellIsValid}
+              data-action-unavailable={!sellIsValid ? 'true' : undefined}
               onClick={handleSellWheat}
             >
               Sell 1 Wheat
@@ -125,14 +130,16 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
             <button
               className={buyIsValid ? 'shop-action' : 'shop-action action-softened'}
               type="button"
-              aria-disabled={!buyIsValid}
+              data-action-unavailable={!buyIsValid ? 'true' : undefined}
               onClick={handleBuyWheatSeed}
             >
               Buy 1 Wheat Seed
             </button>
           </article>
         </div>
-        <p className="feedback-message shop-feedback">{feedbackMessage}</p>
+        <p className={`feedback-message feedback-${feedbackTone} shop-feedback`} aria-live="polite">
+          {feedbackMessage}
+        </p>
       </div>
     </section>
   );
