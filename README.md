@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.3 adds progress data and read-only farm statistics UI on top of the stable Version 0.2 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, and read-only Farm Milestones.
+Version 0.3 adds progress data, read-only farm statistics UI, and local save clarity on top of the stable Version 0.2 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, and Local Save Info.
 
 ## Run Locally
 
@@ -82,6 +82,9 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 - The Inventory page also shows `Current Farm Status` counts derived from crop slots.
 - `Progress Summary` shows derived totals such as total wheat cycle actions, net gold from trading, and current farming capacity.
 - `Farm Milestones` show read-only progress markers derived from existing progress counters.
+- `Local Save Info` explains that saves are local browser/device data, not online account data.
+- The app header includes a small `Version 0.3 Prototype` label.
+- Reset Dev State now clearly warns that it restarts this browser's prototype test state and may erase local progress here.
 - No rewards, XP, levels, unlocks, achievement logic, quests, account system, online save, or backend were added.
 
 ## Growth Mode
@@ -89,6 +92,7 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 - Real design: wheat takes 7 real-life days.
 - Local testing: Dev Fast Growth Mode is active with a 60-second wheat growth duration.
 - Crop progress is recalculated from timestamps, so watered wheat continues progressing after refresh or reopen.
+- Known QA item for the next pass: growth currently starts counting from planting time instead of first successful watering time.
 
 ## Help / Manual
 

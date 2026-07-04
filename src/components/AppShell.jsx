@@ -6,16 +6,22 @@ export default function AppShell({ activePage, children, onNavigate, onResetDevS
     <div className="app-shell">
       <header className="site-header">
         <div>
-          <p className="eyebrow">Version 0.2 farming prototype</p>
+          <p className="eyebrow">Version 0.3 local prototype</p>
           <h1>Road to Long Long Noodles</h1>
+          <span className="version-status-label">Version 0.3 Prototype</span>
         </div>
         <div className="header-actions">
           <div className="weather-pill" aria-label="Soft cloudy farm mood">
             ☁️ gentle farm day
           </div>
-          <button className="dev-reset-button" type="button" onClick={onResetDevState}>
-            Reset Dev State
-          </button>
+          <div className="dev-reset-control">
+            <button className="dev-reset-button" type="button" onClick={onResetDevState}>
+              Reset Dev State
+            </button>
+            <p>
+              Restarts this browser's prototype test state. Mainly for development/testing.
+            </p>
+          </div>
         </div>
       </header>
 

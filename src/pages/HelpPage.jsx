@@ -94,6 +94,10 @@ const faqItems = [
     'If you have no seeds, no wheat, and not enough gold, use Reset Dev State to restart the local test state.',
   ],
   [
+    'What does Reset Dev State do?',
+    'Reset Dev State restarts the prototype test state in this browser. It may erase local progress here and does not affect an online account because no online account exists.',
+  ],
+  [
     'Why is there a Current Goal panel?',
     'It reads the current farm and inventory state and suggests the next helpful action. It is guidance only and does not give rewards.',
   ],
@@ -123,9 +127,9 @@ export default function HelpPage() {
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
           <p>Read the guide if you are unsure what to do next.</p>
-          <p>Status: Version 0.3 statistics and milestones guide. Last updated: July 4, 2026.</p>
+          <p>Status: Version 0.3 save and progress guide. Last updated: July 4, 2026.</p>
         </div>
-        <span className="manual-status-label">Version 0.3 progress guide</span>
+        <span className="manual-status-label">Version 0.3 prototype guide</span>
       </header>
 
       <div className="manual-layout">
@@ -225,6 +229,14 @@ export default function HelpPage() {
                 for loop progress.
               </li>
               <li>
+                Local Save Info shows save type, save location, online account status, backend
+                status, version, dev mode, created time, and last saved time.
+              </li>
+              <li>
+                A small Version 0.3 Prototype label appears in the app header so testers know
+                which local prototype they are checking.
+              </li>
+              <li>
                 Statistics do not give rewards, achievements, quests, levels, or claim buttons.
               </li>
               <li>
@@ -293,7 +305,7 @@ export default function HelpPage() {
             <p>
               The Inventory page also shows read-only Version 0.3 statistics: lifetime action
               counts, current farm slot status, simple derived progress summary values, and Farm
-              Milestones.
+              Milestones. It also shows Local Save Info for this browser save.
             </p>
           </section>
 
@@ -319,6 +331,16 @@ export default function HelpPage() {
             <p>
               Early test saves may be reset or changed later. This is not a server/account save,
               online save, or official transferable profile.
+            </p>
+            <p>
+              The Local Save Info panel on Inventory explains that the save is local to this
+              browser/device. Clearing browser data or using another device may remove or hide
+              this save.
+            </p>
+            <p>
+              Reset Dev State is mainly for development and testing. It restarts the prototype
+              test state in this browser and may erase current local progress here. It does not
+              affect any online account because no online account exists in this prototype.
             </p>
           </section>
 

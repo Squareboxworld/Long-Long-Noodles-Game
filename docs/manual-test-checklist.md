@@ -97,6 +97,13 @@ Status: Version 0.3 local manual test checklist
 - Farm Milestones show `Completed` or `In progress`.
 - Farm Milestones show progress labels such as `0 / 1` or `1 / 5`.
 - Farm Milestones do not include rewards, XP, levels, unlocks, achievement logic, quests, claim buttons, backend, account system, or online save.
+- Inventory page shows `Local Save Info`.
+- Local Save Info shows save type, save location, online account status, backend status, Version 0.3 local prototype, Dev Fast Growth Mode, Created, and Last saved.
+- Local Save Info date values show `Unknown` if a timestamp is missing or invalid.
+- Local Save Info explains that clearing browser data or using another device may remove or hide this local save.
+- App header shows a small `Version 0.3 Prototype` label.
+- Reset Dev State text explains that reset is mainly for development/testing and restarts this browser's prototype test state.
+- Reset Dev State confirmation explains that it may erase local progress in this browser and does not affect an online account because no online account exists.
 
 ## Navigation
 
@@ -109,6 +116,7 @@ Status: Version 0.3 local manual test checklist
 ## Screens
 
 - Welcome page shows the game name and enter-game action.
+- App header shows `Version 0.3 Prototype`.
 - Welcome page explains the first-time farming loop before the player enters Farm.
 - Farm page shows the farm background PNG when available, with CSS fallback if the image is missing.
 - Farm page shows land count.
@@ -128,6 +136,7 @@ Status: Version 0.3 local manual test checklist
 - Inventory page shows the read-only Progress Tracking panel without crashing if older saved state has no progress data.
 - Inventory page shows Current Farm Status and Progress Summary in compact mobile-friendly cards.
 - Inventory page shows Farm Milestones below the statistics sections.
+- Inventory page shows Local Save Info above the statistics sections.
 - Pawn Shop page is separate from the Farm page.
 - Pawn Shop page shows current gold, wheat seeds, and wheat.
 - Pawn Shop page shows wheat seed price `100` gold.
@@ -137,13 +146,15 @@ Status: Version 0.3 local manual test checklist
 - Pawn Shop page explains that harvesting gives wheat, not seed.
 - Pawn Shop page visually highlights available buy/sell actions.
 - Help / Manual page uses a readable GitHub-style documentation layout.
-- Help / Manual page shows a Version 0.3 progress guide status label and last updated text.
+- Help / Manual page shows a Version 0.3 prototype guide status label and last updated text.
 - Help / Manual page includes a First-Time Player Path section.
 
 ## Gameplay Checks
 
 - The visible `Reset Dev State` button is present.
-- Clicking `Reset Dev State` returns the displayed inventory to Gold `0`, Wheat Seeds `4`, and Wheat `0`.
+- Clicking `Reset Dev State` shows a simple browser confirmation.
+- Canceling Reset Dev State keeps the current local state unchanged.
+- Confirming Reset Dev State returns the displayed inventory to Gold `0`, Wheat Seeds `4`, and Wheat `0`.
 - Select an empty crop slot.
 - Click `Plant Wheat`.
 - Confirm the selected slot status changes to `planted`.
@@ -211,6 +222,7 @@ Status: Version 0.3 local manual test checklist
 - Confirm Version 0.2 Guidance explains beginner loop clarity, Current Goal, Pawn Shop continuation, no seed return, stuck-state reset, and temporary art.
 - Confirm Version 0.3 Statistics explains lifetime stats, Current Farm Status, Progress Summary, localStorage, no rewards, no achievements, no quests, and no online account save.
 - Confirm Version 0.3 Milestones explains read-only progress markers, localStorage-derived progress, no rewards, no XP, no levels, no unlocks, no claim buttons, and no online account achievements.
+- Confirm Saving / localStorage explains Local Save Info, browser/device-only saves, browser data clearing risk, no online save, and Reset Dev State behavior.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
 - Confirm FAQ includes questions about website-like visuals, Dev Fast Growth Mode, no seed return, buying wheat seeds, selling wheat, stuck test state, Current Goal, statistics rewards, milestone rewards, future save transfer, and excluded future systems.
@@ -226,6 +238,7 @@ Status: Version 0.3 local manual test checklist
 - Text does not overlap with farm or shop placeholder elements.
 - Pages do not require awkward horizontal scrolling at phone widths.
 - Inventory statistics and Farm Milestones stack cleanly on phone-sized viewports.
+- Local Save Info cards stack cleanly on phone-sized viewports.
 
 ## Art Integration Checks
 
@@ -247,6 +260,13 @@ Status: Version 0.3 local manual test checklist
 - Mature crop state remains saved after refresh.
 - Farm Milestones start at `0` progress for a clean save.
 - Farm Milestones remain after refresh because progress counters persist in localStorage.
+- Local Save Info Created and Last saved fields do not crash if missing or invalid.
+
+## Known Deferred Bug
+
+- Growth currently starts counting from planting time instead of first successful watering time.
+- This known bug is intentionally not fixed in Version 0.3 Prompt 4.
+- Verify in the final QA/bug-fix pass that this behavior is corrected there, not in this polish prompt.
 
 ## Exclusion Checks
 

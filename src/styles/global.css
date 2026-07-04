@@ -106,6 +106,27 @@ summary:focus-visible {
   font-weight: 700;
 }
 
+.version-status-label {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 10px;
+  padding: 7px 11px;
+  border: 1px solid rgba(49, 83, 92, 0.16);
+  border-radius: 999px;
+  background: #e8f6ff;
+  color: #31535c;
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.dev-reset-control {
+  display: grid;
+  flex: 1 1 220px;
+  gap: 6px;
+  max-width: 250px;
+}
+
 .dev-reset-button {
   min-height: 44px;
   border: 2px solid rgba(111, 75, 49, 0.18);
@@ -115,6 +136,13 @@ summary:focus-visible {
   cursor: pointer;
   font-weight: 900;
   padding: 10px 14px;
+}
+
+.dev-reset-control p {
+  margin: 0;
+  color: #6f6552;
+  font-size: 0.82rem;
+  font-weight: 800;
 }
 
 .primary-nav {
@@ -1146,6 +1174,7 @@ summary:focus-visible {
 }
 
 .progress-tracking-panel,
+.local-save-info-panel,
 .farm-status-panel,
 .progress-summary-panel,
 .farm-milestones-panel {
@@ -1184,6 +1213,7 @@ summary:focus-visible {
 }
 
 .stats-group-grid,
+.local-save-info-grid,
 .farm-status-grid,
 .progress-summary-grid,
 .farm-milestones-grid {
@@ -1193,6 +1223,11 @@ summary:focus-visible {
 
 .stats-group-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.local-save-info-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
 }
 
 .farm-status-grid {
@@ -1208,6 +1243,7 @@ summary:focus-visible {
 }
 
 .stats-group-card,
+.local-save-info-card,
 .farm-status-card,
 .progress-summary-card,
 .farm-milestone-card {
@@ -1259,6 +1295,7 @@ summary:focus-visible {
 }
 
 .stat-row dt,
+.local-save-info-card dt,
 .farm-status-card span,
 .progress-summary-card span {
   display: block;
@@ -1272,6 +1309,14 @@ summary:focus-visible {
   color: #31535c;
   font-size: 1.15rem;
   font-weight: 900;
+}
+
+.local-save-info-card dd {
+  margin: 6px 0 0;
+  color: #31535c;
+  font-size: 1rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
 }
 
 .farm-status-card strong,
@@ -1681,6 +1726,7 @@ summary:focus-visible {
   .page-grid,
   .inventory-grid,
   .stats-group-grid,
+  .local-save-info-grid,
   .farm-status-grid,
   .progress-summary-grid,
   .farm-milestones-grid,
@@ -1767,6 +1813,10 @@ summary:focus-visible {
 
   .dev-reset-button {
     flex: 1 1 180px;
+  }
+
+  .dev-reset-control {
+    max-width: none;
   }
 
   .button-row {

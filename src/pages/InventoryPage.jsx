@@ -1,5 +1,9 @@
 import { getAssetPath } from '../utils/assets.js';
-import { CROP_SLOT_STATUS, CROP_TYPES } from '../game/gameConstants.js';
+import {
+  ACTIVE_GROWTH_MODE_LABEL,
+  CROP_SLOT_STATUS,
+  CROP_TYPES,
+} from '../game/gameConstants.js';
 import { getFarmMilestoneProgress } from '../utils/milestones.js';
 
 const inventoryCards = [
@@ -132,6 +136,36 @@ function getProgressSummary(gameState) {
   ];
 }
 
+function formatSaveDate(timestamp) {
+  if (!timestamp) {
+    return 'Unknown';
+  }
+
+  const date = new Date(timestamp);
+
+  if (Number.isNaN(date.getTime())) {
+    return 'Unknown';
+  }
+
+  return date.toLocaleString(undefined, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  });
+}
+
+function getLocalSaveInfo(gameState) {
+  return [
+    ['Save type', 'Local browser save'],
+    ['Save location', 'This browser/device only'],
+    ['Online account', 'Not available in this prototype'],
+    ['Backend', 'Not connected'],
+    ['Version', 'Version 0.3 local prototype'],
+    ['Dev mode', `${ACTIVE_GROWTH_MODE_LABEL} active`],
+    ['Created', formatSaveDate(gameState.createdAt)],
+    ['Last saved', formatSaveDate(gameState.updatedAt)],
+  ];
+}
+
 function hideBrokenImage(event) {
   event.currentTarget.hidden = true;
 }
@@ -165,6 +199,7 @@ export default function InventoryPage({ gameState }) {
   const progressSummary = getProgressSummary(gameState);
   const farmMilestones = getFarmMilestoneProgress(progress);
   const completedMilestoneCount = farmMilestones.filter((milestone) => milestone.completed).length;
+  const localSaveInfo = getLocalSaveInfo(gameState);
 
   return (
     <section className="inventory-page">
@@ -186,6 +221,28 @@ export default function InventoryPage({ gameState }) {
           </article>
         ))}
       </div>
+
+      <section className="local-save-info-panel" aria-labelledby="local-save-info-heading">
+        <div className="stats-panel-header">
+          <div>
+            <p className="eyebrow">Local prototype save</p>
+            <h3 id="local-save-info-heading">Local Save Info</h3>
+          </div>
+          <p>
+            Your progress is saved in this browser using localStorage. Clearing browser data or
+            using another device may remove or hide this save.
+          </p>
+        </div>
+
+        <dl className="local-save-info-grid">
+          {localSaveInfo.map(([label, value]) => (
+            <div className="local-save-info-card" key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
 
       <section className="progress-tracking-panel" aria-labelledby="progress-tracking-heading">
         <div className="stats-panel-header">
@@ -247,7 +304,8 @@ export default function InventoryPage({ gameState }) {
             <h3 id="progress-summary-heading">Progress Summary</h3>
           </div>
           <p>
-            Short derived totals for checking the local farming loop. No levels or rewards.
+            Short derived local totals for checking the farming loop. No rewards, levels, or
+            online account progress.
           </p>
         </div>
 
@@ -269,8 +327,8 @@ export default function InventoryPage({ gameState }) {
             <h3 id="farm-milestones-heading">Farm Milestones</h3>
           </div>
           <p>
-            Milestones are read-only progress markers in this prototype. They do not give
-            rewards yet.
+            Milestones are read-only local progress markers in this prototype. They do not give
+            rewards, XP, levels, unlocks, or online account achievements.
           </p>
         </div>
 

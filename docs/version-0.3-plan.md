@@ -2,7 +2,7 @@
 
 Status: progress data foundation and read-only farm statistics UI for the existing local farming prototype
 
-Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Version 0.3 Prompt 2 turns those fields into a clearer read-only Farm Statistics UI on the Inventory page. Version 0.3 Prompt 3 adds read-only Farm Milestones derived from existing progress counters. It does not add rewards, achievements, quests, account system, online save, backend, or new gameplay systems.
+Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Version 0.3 Prompt 2 turns those fields into a clearer read-only Farm Statistics UI on the Inventory page. Version 0.3 Prompt 3 adds read-only Farm Milestones derived from existing progress counters. Version 0.3 Prompt 4 adds local save information, reset wording, and version status polish. It does not add rewards, achievements, quests, account system, online save, backend, or new gameplay systems.
 
 ## Included In Version 0.3 Prompt 1
 
@@ -28,6 +28,15 @@ Version 0.3 Prompt 1 adds safe lifetime progress fields to local game state. Ver
 - Safe milestone display derivation in `src/utils/milestones.js`
 - Read-only `Farm Milestones` section on Inventory
 - Help / Manual explanation for local-only milestone markers
+- Documentation and manual test checklist updates
+
+## Included In Version 0.3 Prompt 4
+
+- Read-only `Local Save Info` section on Inventory
+- Safe created and last saved date display with `Unknown` fallback
+- Small `Version 0.3 Prototype` label in the app header
+- Clearer Reset Dev State explanation and simple confirmation prompt
+- Documentation of localStorage limitations
 - Documentation and manual test checklist updates
 
 ## Progress Fields
@@ -105,6 +114,28 @@ Farm Milestones are read-only progress markers derived from existing `progress` 
 - Trading Practice: earn 500 gold from selling wheat
 
 Each milestone displays title, description, current value, target value, progress label, and `Completed` or `In progress` state. There are no rewards, XP, levels, unlocks, claim buttons, or achievement completion logic.
+
+## Local Save Info
+
+The Inventory page shows read-only local save information:
+
+- Save type: local browser save
+- Save location: this browser/device only
+- Online account: not available in this prototype
+- Backend: not connected
+- Version: Version 0.3 local prototype
+- Dev mode: Dev Fast Growth Mode active
+- Created: formatted from `gameState.createdAt`, or `Unknown`
+- Last saved: formatted from `gameState.updatedAt`, or `Unknown`
+
+The panel explains that progress is saved in this browser using localStorage. Clearing browser data or using another device may remove or hide this save.
+
+Reset Dev State is documented as a development/testing action that restarts this browser's prototype test state and may erase local progress here. No online account exists, so reset does not affect any online account.
+
+## Known QA Item
+
+- Growth currently starts counting from planting time instead of first successful watering time.
+- This bug is intentionally not fixed in Prompt 4 and should be handled in the final QA/bug-fix pass.
 
 ## Balance Unchanged
 

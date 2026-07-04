@@ -101,6 +101,14 @@ export default function App() {
   }
 
   function handleResetDevState() {
+    const shouldReset = window.confirm(
+      'Reset Dev State restarts the prototype test state in this browser. It may erase current local progress here, and it does not affect any online account because no online account exists.',
+    );
+
+    if (!shouldReset) {
+      return;
+    }
+
     const resetState = createInitialGameState();
     const totalResets = (gameState.progress?.totalResets ?? 0) + 1;
 
