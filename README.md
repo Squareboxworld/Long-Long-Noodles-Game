@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.4 adds Farm clarity on top of the stable Version 0.3 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, and a local Farm Activity Log.
+Version 0.4 adds Farm clarity on top of the stable Version 0.3 local farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, Farm UX polish, and a local Farm Activity Log.
 
 ## Run Locally
 
@@ -122,6 +122,9 @@ Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a com
 - Inventory now includes a read-only Farm Activity Log for recent successful farming and Pawn Shop actions.
 - Activity entries are local-only, capped to recent entries, and saved through localStorage.
 - Crop tiles, the Crop Detail Panel, Current Goal, action hints, Help, and docs use the same friendly crop state wording.
+- Farm UX polish keeps the crop grid and farm background as the main visual focus while placing crop details and action buttons nearby on wider screens.
+- Mobile Farm layout stacks naturally so crop slots, ready-time text, and action buttons remain readable.
+- Selected Crop Slot timing details are tucked into a small expandable section so the next action and ready time stay easy to scan.
 - The panel and wording polish are UI guidance only. They do not change gameplay balance, rewards, save keys, crop data, or economy values.
 
 ## Growth Mode
@@ -134,7 +137,7 @@ Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a com
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 

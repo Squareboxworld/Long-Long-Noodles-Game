@@ -1,8 +1,8 @@
 # Road to Long Long Noodles - Version 0.4 Farming Clarity Plan
 
-Status: Version 0.4 adds read-only Crop Detail Panel clarity, estimated ready time, a local Farm Activity Log, and consistent crop state wording for the existing local farming prototype
+Status: Version 0.4 adds read-only Crop Detail Panel clarity, estimated ready time, a local Farm Activity Log, consistent crop state wording, and Farm UX polish for the existing local farming prototype
 
-Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Prompt 2 adds estimated ready time text for selected wheat crops. Version 0.4 Prompt 3 adds a capped local Farm Activity Log for recent successful actions. Version 0.4 Prompt 4 standardizes player-facing crop wording across the Farm page, Inventory, Pawn Shop, Help, and documentation. These features are clarity/history only and derive from existing crop slot, inventory, action, and growth timing state. They do not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
+Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Prompt 2 adds estimated ready time text for selected wheat crops. Version 0.4 Prompt 3 adds a capped local Farm Activity Log for recent successful actions. Version 0.4 Prompt 4 standardizes player-facing crop wording across the Farm page, Inventory, Pawn Shop, Help, and documentation. Version 0.4 Prompt 5 polishes Farm page layout, mobile readability, selected crop details, action controls, and crop grid clarity. These features are clarity/history only and derive from existing crop slot, inventory, action, and growth timing state. They do not add new gameplay systems, rewards, online save, backend, economy changes, or balance changes.
 
 ## Included In Version 0.4 Prompt 1
 
@@ -20,6 +20,16 @@ Version 0.4 Prompt 1 adds a clearer Farm page Crop Detail Panel. Version 0.4 Pro
 - Crop tile status labels now use player-facing wording instead of raw internal slot status
 - Shared display-only crop wording helper in `src/utils/cropDisplay.js`
 - Current Goal, action hints, ready-time text, and farm notes use the same terms
+- No gameplay logic, balance, save key, or economy values were changed
+
+## Included In Version 0.4 Prompt 5
+
+- Farm scene and Selected Crop Slot panel grouped into one Farm play area on wider screens
+- Mobile stacking rules for the Farm play area
+- Expandable Selected Crop Slot timing details so ready time and next action are easier to scan
+- Crop tile label spacing polished for long labels like `Ready to Harvest`
+- Action buttons kept large and readable near selected crop guidance
+- Help / Manual, README, and manual test checklist updates
 - No gameplay logic, balance, save key, or economy values were changed
 
 ## Included In Version 0.4 Prompt 2

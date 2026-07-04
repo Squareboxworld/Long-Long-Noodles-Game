@@ -16,6 +16,7 @@ const sectionLinks = [
   ['version-0-3-milestones', 'Version 0.3 Milestones'],
   ['version-0-4-crop-detail', 'Version 0.4 Crop Detail'],
   ['version-0-4-activity-log', 'Version 0.4 Activity Log'],
+  ['version-0-4-farm-ux', 'Version 0.4 Farm UX'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -129,7 +130,7 @@ export default function HelpPage() {
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
           <p>Read the guide if you are unsure what to do next.</p>
-          <p>Status: Version 0.4 crop detail guide. Last updated: July 4, 2026.</p>
+          <p>Status: Version 0.4 Farm clarity guide. Last updated: July 4, 2026.</p>
         </div>
         <span className="manual-status-label">Version 0.4 prototype guide</span>
       </header>
@@ -299,6 +300,21 @@ export default function HelpPage() {
               <li>Failed action clicks do not create activity entries.</li>
               <li>Reset Dev State starts a fresh log with a reset entry.</li>
               <li>The log is not online history, account history, backend data, or a reward system.</li>
+            </ul>
+          </section>
+
+          <section className="manual-section" id="version-0-4-farm-ux">
+            <h3>Version 0.4 Farm UX Polish</h3>
+            <p>
+              The Farm page layout is tuned so the crop grid remains the main visual focus while
+              the selected crop details, ready-time guidance, and action buttons stay close by.
+            </p>
+            <ul>
+              <li>Current Goal remains visible above the Farm play area.</li>
+              <li>The crop grid and Selected Crop Slot panel sit together on wider screens.</li>
+              <li>On smaller screens, Farm panels stack naturally without changing gameplay.</li>
+              <li>Timing details are tucked into a small expandable section so next action and ready time are easier to scan.</li>
+              <li>This polish does not change growth speed, prices, inventory, rewards, or save behavior.</li>
             </ul>
           </section>
 

@@ -198,9 +198,11 @@ Status: Version 0.4 local manual test checklist
 - Confirm the slot shows the wheat seed stage image.
 - Confirm Wheat Seeds decreases from `4` to `3`.
 - Confirm Farm Milestones shows First Seed as completed after planting.
-- Confirm selected crop details show Crop `Wheat`, Status `Needs Water`, Stage `Seed Planted`, Growth Started `Not set`, Last Watered `Not set`, Progress `0%`, and Ready time `Water this wheat to start growth.`
+- Confirm selected crop details show Crop `Wheat`, Status `Needs Water`, Stage `Seed Planted`, Progress `0%`, and Ready time `Water this wheat to start growth.`
+- Expand Timing details and confirm Growth Started `Not set` and Last Watered `Not set`.
 - Click `Water`.
-- Confirm selected crop details show Watered `Yes`, Status `Growing`, Last Watered is set, Growth Started is set from the watering time, and Ready time starts counting down.
+- Confirm selected crop details show Watered `Yes`, Status `Growing`, and Ready time starts counting down.
+- Expand Timing details and confirm Last Watered is set and Growth Started is set from the watering time.
 - Confirm Farm Milestones shows First Watering as completed after watering.
 - Refresh the browser.
 - Confirm watered `Growing` state persists from localStorage.
@@ -252,7 +254,7 @@ Status: Version 0.4 local manual test checklist
 
 - Open Help from the main navigation.
 - Confirm the Help page has section navigation buttons.
-- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
+- Confirm these sections exist: Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, Known Exclusions.
 - Confirm Getting Started lists 1 land, 16 crop slots, 4 wheat seeds, 0 gold, and 0 wheat.
 - Confirm First-Time Player Path lists: start on Farm, select empty soil, plant wheat, water wheat, wait, harvest, go to Pawn Shop, sell wheat, buy wheat seeds, return to Farm.
 - Confirm First-Time Player Path mentions Dev Fast Growth Mode, temporary art, and Reset Dev State.
@@ -261,6 +263,7 @@ Status: Version 0.4 local manual test checklist
 - Confirm Version 0.3 Milestones explains read-only progress markers, localStorage-derived progress, no rewards, no XP, no levels, no unlocks, no claim buttons, and no online account achievements.
 - Confirm Version 0.4 Crop Detail explains that selecting a crop slot shows friendly status, progress, watered state, estimated ready time, and next action, and that the panel is read-only guidance.
 - Confirm Version 0.4 Activity Log explains recent local action history, capped entries, no rewards, no notifications, no backend, and no online history.
+- Confirm Version 0.4 Farm UX explains that Farm layout polish keeps crop details and action controls near the crop grid without changing gameplay.
 - Confirm Saving / localStorage explains Local Save Info, browser/device-only saves, browser data clearing risk, no online save, and Reset Dev State behavior.
 - Confirm Crop Growth explains 7 real-life days, Dev Fast Growth Mode, timestamp progress after first watering, and unwatered crops staying at 0%.
 - Confirm Pawn Shop explains 100 gold seed cost and 110 gold wheat sell price.
@@ -272,6 +275,8 @@ Status: Version 0.4 local manual test checklist
 - Buttons are easy to tap on a phone-sized viewport.
 - Navigation does not overflow on mobile.
 - Farm crop slots and crop art remain readable on mobile.
+- Farm play area stacks cleanly on mobile and keeps the crop grid above the selected crop details.
+- Ready-time text and `Ready to Harvest` crop labels fit without overflowing their panels.
 - Farm visual hints do not cover slot content or block taps on mobile.
 - Crop Detail Panel does not cover crop slots or block taps on mobile.
 - Crop progress bars fit inside crop slots on mobile.

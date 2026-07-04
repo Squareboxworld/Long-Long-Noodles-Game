@@ -618,214 +618,214 @@ export default function FarmPage({
         </section>
       </div>
 
-      <div
-        className={farmBackgroundPath ? 'farm-scene farm-scene-art' : 'farm-scene'}
-        style={farmSceneStyle}
-      >
-        <div className="farm-sky" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
-        {squareboxIdlePath ? (
-          <div className="farm-character-perch" aria-hidden="true">
-            <DecorativeImage className="farm-character-image" path={squareboxIdlePath} />
+      <div className="farm-play-area">
+        <div
+          className={farmBackgroundPath ? 'farm-scene farm-scene-art' : 'farm-scene'}
+          style={farmSceneStyle}
+        >
+          <div className="farm-sky" aria-hidden="true">
+            <span />
+            <span />
+            <span />
           </div>
-        ) : null}
-        <div className="crop-grid" aria-label="Crop slots">
-          {farm.cropSlots.map((slot, index) => {
-            const slotArt = getCropSlotArt(slot);
-            const slotVisualHint = getCropSlotVisualHint(gameState, slot);
-
-            return (
-              <button
-                className={[
-                  'crop-slot',
-                  `crop-slot-${slot.status}`,
-                  slotArt.soilPath ? 'crop-slot-with-art' : '',
-                  slot.isWatered ? 'crop-slot-watered' : '',
-                  slotVisualHint?.className ?? '',
-                  slot.slotId === selectedSlot?.slotId ? 'crop-slot-selected' : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-                key={slot.slotId}
-                type="button"
-                aria-pressed={slot.slotId === selectedSlot?.slotId}
-                onClick={() => setSelectedSlotId(slot.slotId)}
-              >
-                <span className="crop-slot-art" aria-hidden="true">
-                  <DecorativeImage className="slot-soil-image" path={slotArt.soilPath} />
-                  <DecorativeImage className="slot-wheat-image" path={slotArt.wheatPath} />
-                  <DecorativeImage className="slot-overlay-image" path={slotArt.thirstyOverlayPath} />
-                  <DecorativeImage className="slot-overlay-image" path={slotArt.weedOverlayPath} />
-                </span>
-                <span className="slot-number">{index + 1}</span>
-                <span className="slot-status">{getCropStatusLabel(slot)}</span>
-                {slot.isWatered ? <span className="slot-watered">Watered</span> : null}
-                {slotVisualHint ? (
-                  <span className="slot-action-hint">{slotVisualHint.label}</span>
-                ) : null}
-                {slot.cropType ? (
-                  <div
-                    className="slot-progress"
-                    aria-label={`Growth progress ${formatProgress(slot.growthProgress)}`}
-                  >
-                    <span style={{ width: `${slot.growthProgress}%` }} />
-                  </div>
-                ) : null}
-                {slot.cropType ? (
-                  <span className="slot-progress-label">{formatProgress(slot.growthProgress)}</span>
-                ) : null}
-                <span className="slot-id">{slot.slotId}</span>
-              </button>
-            );
-          })}
-        </div>
-        <div className="farm-note">
-          After watering, wheat grows in real time and keeps progressing after refresh. Wheat
-          that is ready to harvest gives 1 wheat. Pawn Shop buy/sell actions stay on the Pawn
-          Shop page.
-        </div>
-      </div>
-
-      <aside className="selected-slot-panel crop-detail-panel" aria-live="polite">
-        <div className="crop-detail-header">
-          <div>
-            <p className="eyebrow">Selected Crop Slot</p>
-            <h3>{selectedSlot ? `Slot ${selectedSlotIndex + 1}` : 'No slot selected'}</h3>
-            <p className="crop-detail-summary">{selectedCropSummary}</p>
-          </div>
-          <DecorativeImage className="crop-detail-icon" path={selectedCropIconPath} />
-        </div>
-
-        {selectedSlot ? (
-          <>
-            <dl className="slot-detail-grid crop-detail-grid">
-              <div>
-                <dt>Slot</dt>
-                <dd>{selectedSlot.slotId}</dd>
-              </div>
-              <div>
-                <dt>Status</dt>
-                <dd>
-                  <span className="crop-status-pill">{selectedCropStatus}</span>
-                </dd>
-              </div>
-              <div>
-                <dt>Crop</dt>
-                <dd>{getCropName(selectedSlot)}</dd>
-              </div>
-              <div>
-                <dt>Stage</dt>
-                <dd>{selectedCropStage}</dd>
-              </div>
-              <div>
-                <dt>Progress</dt>
-                <dd>{formatProgress(selectedSlot.growthProgress)}</dd>
-              </div>
-              <div>
-                <dt>Watered</dt>
-                <dd>{selectedSlot.isWatered ? 'Yes' : 'No'}</dd>
-              </div>
-              <div className="crop-detail-next-action">
-                <dt>Next action</dt>
-                <dd>{selectedCropNextAction}</dd>
-              </div>
-              <div className="crop-detail-ready-time">
-                <dt>Ready time</dt>
-                <dd>{selectedCropReadyTime}</dd>
-              </div>
-            </dl>
-
-            <div
-              className="crop-detail-progress"
-              aria-label={`Selected crop growth progress ${formatProgress(selectedSlot.growthProgress)}`}
-            >
-              <div className="crop-detail-progress-header">
-                <span>Growth Progress</span>
-                <strong>{formatProgress(selectedSlot.growthProgress)}</strong>
-              </div>
-              <div className="crop-detail-progress-track">
-                <span style={{ width: `${selectedSlot.growthProgress}%` }} />
-              </div>
+          {squareboxIdlePath ? (
+            <div className="farm-character-perch" aria-hidden="true">
+              <DecorativeImage className="farm-character-image" path={squareboxIdlePath} />
             </div>
+          ) : null}
+          <div className="crop-grid" aria-label="Crop slots">
+            {farm.cropSlots.map((slot, index) => {
+              const slotArt = getCropSlotArt(slot);
+              const slotVisualHint = getCropSlotVisualHint(gameState, slot);
 
-            <dl className="crop-detail-times">
-              <div>
-                <dt>Planted</dt>
-                <dd>{formatTimestamp(selectedSlot.plantedAt)}</dd>
-              </div>
-              <div>
-                <dt>Growth Started</dt>
-                <dd>{formatTimestamp(selectedSlot.growthStartedAt)}</dd>
-              </div>
-              <div>
-                <dt>Last Watered</dt>
-                <dd>{formatTimestamp(selectedSlot.lastWateredAt)}</dd>
-              </div>
-            </dl>
-          </>
-        ) : (
-          <div className="crop-detail-empty-message">
-            <strong>{selectedCropReadyTime}</strong>
+              return (
+                <button
+                  className={[
+                    'crop-slot',
+                    `crop-slot-${slot.status}`,
+                    slotArt.soilPath ? 'crop-slot-with-art' : '',
+                    slot.isWatered ? 'crop-slot-watered' : '',
+                    slotVisualHint?.className ?? '',
+                    slot.slotId === selectedSlot?.slotId ? 'crop-slot-selected' : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  key={slot.slotId}
+                  type="button"
+                  aria-pressed={slot.slotId === selectedSlot?.slotId}
+                  onClick={() => setSelectedSlotId(slot.slotId)}
+                >
+                  <span className="crop-slot-art" aria-hidden="true">
+                    <DecorativeImage className="slot-soil-image" path={slotArt.soilPath} />
+                    <DecorativeImage className="slot-wheat-image" path={slotArt.wheatPath} />
+                    <DecorativeImage className="slot-overlay-image" path={slotArt.thirstyOverlayPath} />
+                    <DecorativeImage className="slot-overlay-image" path={slotArt.weedOverlayPath} />
+                  </span>
+                  <span className="slot-number">{index + 1}</span>
+                  <span className="slot-status">{getCropStatusLabel(slot)}</span>
+                  {slot.isWatered ? <span className="slot-watered">Watered</span> : null}
+                  {slotVisualHint ? (
+                    <span className="slot-action-hint">{slotVisualHint.label}</span>
+                  ) : null}
+                  {slot.cropType ? (
+                    <div
+                      className="slot-progress"
+                      aria-label={`Growth progress ${formatProgress(slot.growthProgress)}`}
+                    >
+                      <span style={{ width: `${slot.growthProgress}%` }} />
+                    </div>
+                  ) : null}
+                  {slot.cropType ? (
+                    <span className="slot-progress-label">{formatProgress(slot.growthProgress)}</span>
+                  ) : null}
+                </button>
+              );
+            })}
           </div>
-        )}
-
-        <p className={`action-helper action-helper-${suggestedFarmAction.action}`}>
-          {suggestedFarmAction.message}
-        </p>
-
-        <div className="farm-actions">
-          <button
-            className={getActionClassName(
-              'primary-action',
-              plantIsValid,
-              plantButtonPath,
-              suggestedFarmAction.action === 'plant',
-            )}
-            style={getActionStyle(plantButtonPath)}
-            type="button"
-            aria-disabled={!plantIsValid}
-            onClick={handlePlantWheat}
-          >
-            <DecorativeImage className="action-icon" path={wheatSeedIconPath} />
-            <span className="action-text">Plant Wheat</span>
-          </button>
-          <button
-            className={getActionClassName(
-              'secondary-action',
-              waterIsValid,
-              waterButtonPath,
-              suggestedFarmAction.action === 'water',
-            )}
-            style={getActionStyle(waterButtonPath)}
-            type="button"
-            aria-disabled={!waterIsValid}
-            onClick={handleWaterCrop}
-          >
-            <DecorativeImage className="action-icon" path={waterIconPath} />
-            <span className="action-text">Water</span>
-          </button>
-          <button
-            className={getActionClassName(
-              'harvest-action',
-              harvestIsValid,
-              harvestButtonPath,
-              suggestedFarmAction.action === 'harvest',
-            )}
-            style={getActionStyle(harvestButtonPath)}
-            type="button"
-            aria-disabled={!harvestIsValid}
-            onClick={handleHarvestWheat}
-          >
-            <DecorativeImage className="action-icon" path={wheatIconPath} />
-            <span className="action-text">Harvest</span>
-          </button>
+          <div className="farm-note">
+            After watering, wheat grows in real time and keeps progressing after refresh. Wheat
+            that is ready to harvest gives 1 wheat. Pawn Shop buy/sell actions stay on the Pawn
+            Shop page.
+          </div>
         </div>
 
-        <p className="feedback-message">{feedbackMessage}</p>
-      </aside>
+        <aside className="selected-slot-panel crop-detail-panel" aria-live="polite">
+          <div className="crop-detail-header">
+            <div>
+              <p className="eyebrow">Selected Crop Slot</p>
+              <h3>{selectedSlot ? `Slot ${selectedSlotIndex + 1} Details` : 'Choose a soil slot'}</h3>
+              <p className="crop-detail-summary">{selectedCropSummary}</p>
+            </div>
+            <DecorativeImage className="crop-detail-icon" path={selectedCropIconPath} />
+          </div>
+
+          {selectedSlot ? (
+            <>
+              <dl className="slot-detail-grid crop-detail-grid">
+                <div>
+                  <dt>Status</dt>
+                  <dd>
+                    <span className="crop-status-pill">{selectedCropStatus}</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Crop</dt>
+                  <dd>{getCropName(selectedSlot)}</dd>
+                </div>
+                <div>
+                  <dt>Stage</dt>
+                  <dd>{selectedCropStage}</dd>
+                </div>
+                <div>
+                  <dt>Progress</dt>
+                  <dd>{formatProgress(selectedSlot.growthProgress)}</dd>
+                </div>
+                <div>
+                  <dt>Watered</dt>
+                  <dd>{selectedSlot.isWatered ? 'Yes' : 'No'}</dd>
+                </div>
+                <div className="crop-detail-next-action">
+                  <dt>Next action</dt>
+                  <dd>{selectedCropNextAction}</dd>
+                </div>
+                <div className="crop-detail-ready-time">
+                  <dt>Ready time</dt>
+                  <dd>{selectedCropReadyTime}</dd>
+                </div>
+              </dl>
+
+              <div
+                className="crop-detail-progress"
+                aria-label={`Selected crop growth progress ${formatProgress(selectedSlot.growthProgress)}`}
+              >
+                <div className="crop-detail-progress-header">
+                  <span>Growth Progress</span>
+                  <strong>{formatProgress(selectedSlot.growthProgress)}</strong>
+                </div>
+                <div className="crop-detail-progress-track">
+                  <span style={{ width: `${selectedSlot.growthProgress}%` }} />
+                </div>
+              </div>
+
+              <details className="crop-detail-timing-panel">
+                <summary className="crop-detail-mini-heading">Timing details</summary>
+                <dl className="crop-detail-times">
+                  <div>
+                    <dt>Planted</dt>
+                    <dd>{formatTimestamp(selectedSlot.plantedAt)}</dd>
+                  </div>
+                  <div>
+                    <dt>Growth Started</dt>
+                    <dd>{formatTimestamp(selectedSlot.growthStartedAt)}</dd>
+                  </div>
+                  <div>
+                    <dt>Last Watered</dt>
+                    <dd>{formatTimestamp(selectedSlot.lastWateredAt)}</dd>
+                  </div>
+                </dl>
+              </details>
+            </>
+          ) : (
+            <div className="crop-detail-empty-message">
+              <strong>{selectedCropReadyTime}</strong>
+            </div>
+          )}
+
+          <p className={`action-helper action-helper-${suggestedFarmAction.action}`}>
+            {suggestedFarmAction.message}
+          </p>
+
+          <div className="farm-actions">
+            <button
+              className={getActionClassName(
+                'primary-action',
+                plantIsValid,
+                plantButtonPath,
+                suggestedFarmAction.action === 'plant',
+              )}
+              style={getActionStyle(plantButtonPath)}
+              type="button"
+              aria-disabled={!plantIsValid}
+              onClick={handlePlantWheat}
+            >
+              <DecorativeImage className="action-icon" path={wheatSeedIconPath} />
+              <span className="action-text">Plant Wheat</span>
+            </button>
+            <button
+              className={getActionClassName(
+                'secondary-action',
+                waterIsValid,
+                waterButtonPath,
+                suggestedFarmAction.action === 'water',
+              )}
+              style={getActionStyle(waterButtonPath)}
+              type="button"
+              aria-disabled={!waterIsValid}
+              onClick={handleWaterCrop}
+            >
+              <DecorativeImage className="action-icon" path={waterIconPath} />
+              <span className="action-text">Water</span>
+            </button>
+            <button
+              className={getActionClassName(
+                'harvest-action',
+                harvestIsValid,
+                harvestButtonPath,
+                suggestedFarmAction.action === 'harvest',
+              )}
+              style={getActionStyle(harvestButtonPath)}
+              type="button"
+              aria-disabled={!harvestIsValid}
+              onClick={handleHarvestWheat}
+            >
+              <DecorativeImage className="action-icon" path={wheatIconPath} />
+              <span className="action-text">Harvest</span>
+            </button>
+          </div>
+
+          <p className="feedback-message">{feedbackMessage}</p>
+        </aside>
+      </div>
     </section>
   );
 }
