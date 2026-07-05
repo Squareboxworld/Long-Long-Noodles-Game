@@ -1,12 +1,14 @@
 # Art Asset Manifest
 
-Status: Version 0.1 farm PNG integration active under Version 0.2 guidance polish
+Status: Farm PNG integration active; Version 0.6 art audit added for replacement planning
 
 The Farm page now uses the PNG assets listed in `src/data/assetManifest.js` where available. The asset manifest keeps stable IDs and public paths so art can be replaced later without changing gameplay logic.
 
-These PNG assets are temporary test assets for layout and integration. Final handmade art may replace them later. Some transparency or background imperfections are acceptable during Version 0.1 as long as the UI remains readable, crop slots remain clickable, and the farming loop remains stable.
+These PNG assets are temporary test assets for layout and integration. Final handmade art may replace them later. Some transparency or background imperfections are acceptable during layout testing as long as the UI remains readable, crop slots remain clickable, and the farming loop remains stable.
 
-Version 0.2 guidance and QA work keeps the same manifest IDs and filenames. Replacing final art later should not require gameplay changes, backend work, account systems, online save, or a localStorage key change.
+Version 0.6 begins with an asset audit before final farm art replacement. See `docs/version-0.6-art-audit.md` for current file dimensions, transparency notes, active/future-facing usage, replacement requirements, and web optimization notes.
+
+Replacing final art later should not require gameplay changes, backend work, account systems, online save, or a localStorage key change when filenames and manifest IDs stay stable.
 
 ## Where Assets Go
 
@@ -75,7 +77,7 @@ Wheat stage mapping:
 
 Dry wheat art exists in the manifest but is not used yet because dry crop logic is not active in Version 0.1.
 
-## Current Version 0.1 Asset List
+## Current Manifest Asset List
 
 | Asset ID | Current Path | Status |
 | --- | --- | --- |

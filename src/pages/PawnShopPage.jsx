@@ -1,12 +1,35 @@
 import { useState } from 'react';
 import { canBuyWheatSeed, canSellWheat } from '../game/gameActions.js';
 import { PAWN_SHOP_WHEAT_SELL_PRICE, WHEAT_SEED_COST } from '../game/gameConstants.js';
+import { getAssetPath } from '../utils/assets.js';
 
 const shopInventoryItems = [
-  ['gold', 'Gold'],
-  ['wheatSeeds', 'Wheat Seeds'],
-  ['wheat', 'Wheat'],
+  ['gold', 'Gold', 'icon_gold_coin'],
+  ['wheatSeeds', 'Wheat Seeds', 'icon_wheat_seed'],
+  ['wheat', 'Wheat', 'icon_wheat'],
 ];
+
+function hideBrokenImage(event) {
+  event.currentTarget.hidden = true;
+}
+
+function ShopIcon({ assetId, className = 'shop-resource-icon' }) {
+  const iconPath = getAssetPath(assetId);
+
+  if (!iconPath) {
+    return null;
+  }
+
+  return (
+    <img
+      alt=""
+      className={className}
+      draggable="false"
+      onError={hideBrokenImage}
+      src={iconPath}
+    />
+  );
+}
 
 function getShopGuidance(buyIsValid, sellIsValid) {
   if (sellIsValid && buyIsValid) {
@@ -73,9 +96,12 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
       <div className="shop-board game-panel">
         <div className="shop-roof">Pawn Shop</div>
         <div className="shop-inventory-summary" aria-label="Current inventory">
-          {shopInventoryItems.map(([key, label]) => (
-            <article className="game-card" key={key}>
-              <span>{label}</span>
+          {shopInventoryItems.map(([key, label, assetId]) => (
+            <article className="game-card shop-inventory-card" key={key}>
+              <span className="shop-inventory-label">
+                <ShopIcon assetId={assetId} />
+                <span>{label}</span>
+              </span>
               <strong>{inventory[key]}</strong>
             </article>
           ))}
@@ -91,11 +117,17 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
           </div>
           <ul className="shop-helper-list">
             <li>
-              <span>Sell 1 wheat</span>
+              <span>
+                <ShopIcon assetId="icon_wheat" className="shop-helper-icon" />
+                Sell 1 wheat
+              </span>
               <strong>+{PAWN_SHOP_WHEAT_SELL_PRICE} gold</strong>
             </li>
             <li>
-              <span>Buy 1 wheat seed</span>
+              <span>
+                <ShopIcon assetId="icon_wheat_seed" className="shop-helper-icon" />
+                Buy 1 wheat seed
+              </span>
               <strong>-{WHEAT_SEED_COST} gold</strong>
             </li>
           </ul>
@@ -106,7 +138,10 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
         <div className="shop-counter">
           <article className={sellIsValid ? 'shop-offer game-card shop-offer-suggested' : 'shop-offer game-card'}>
             {sellIsValid ? <span className="shop-offer-cue">Useful now</span> : null}
-            <h3>Sell Wheat</h3>
+            <div className="shop-offer-heading">
+              <ShopIcon assetId="icon_wheat" className="shop-offer-icon" />
+              <h3>Sell Wheat</h3>
+            </div>
             <p>Sell 1 wheat for {PAWN_SHOP_WHEAT_SELL_PRICE} gold.</p>
             <p className="shop-offer-status">
               {sellIsValid ? 'Ready to sell 1 wheat.' : 'Need at least 1 wheat to sell.'}
@@ -117,12 +152,16 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
               data-action-unavailable={!sellIsValid ? 'true' : undefined}
               onClick={handleSellWheat}
             >
-              Sell 1 Wheat
+              <ShopIcon assetId="icon_wheat" className="shop-button-icon" />
+              <span>Sell 1 Wheat</span>
             </button>
           </article>
           <article className={buyIsValid ? 'shop-offer game-card shop-offer-suggested' : 'shop-offer game-card'}>
             {buyIsValid ? <span className="shop-offer-cue">Available</span> : null}
-            <h3>Buy Wheat Seed</h3>
+            <div className="shop-offer-heading">
+              <ShopIcon assetId="icon_wheat_seed" className="shop-offer-icon" />
+              <h3>Buy Wheat Seed</h3>
+            </div>
             <p>Buy 1 wheat seed for {WHEAT_SEED_COST} gold.</p>
             <p className="shop-offer-status">
               {buyIsValid ? 'Ready to buy 1 wheat seed.' : `Need ${WHEAT_SEED_COST} gold to buy.`}
@@ -133,7 +172,8 @@ export default function PawnShopPage({ gameState, onBuyWheatSeed, onSellWheat })
               data-action-unavailable={!buyIsValid ? 'true' : undefined}
               onClick={handleBuyWheatSeed}
             >
-              Buy 1 Wheat Seed
+              <ShopIcon assetId="icon_wheat_seed" className="shop-button-icon" />
+              <span>Buy 1 Wheat Seed</span>
             </button>
           </article>
         </div>

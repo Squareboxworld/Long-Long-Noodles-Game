@@ -1,3 +1,5 @@
+import { getAssetPath } from '../utils/assets.js';
+
 const welcomeLoopSteps = [
   'Plant wheat seeds.',
   'Water wheat.',
@@ -7,7 +9,13 @@ const welcomeLoopSteps = [
   'Buy more wheat seeds.',
 ];
 
+function hideBrokenImage(event) {
+  event.currentTarget.hidden = true;
+}
+
 export default function WelcomePage({ onNavigate }) {
+  const squareboxIdlePath = getAssetPath('character_squarebox_idle');
+
   return (
     <section className="welcome-page page-grid">
       <div className="intro-panel game-panel welcome-intro-panel">
@@ -36,6 +44,15 @@ export default function WelcomePage({ onNavigate }) {
         <div className="sun-dot" />
         <div className="preview-cloud preview-cloud-one" />
         <div className="preview-cloud preview-cloud-two" />
+        {squareboxIdlePath ? (
+          <img
+            alt=""
+            className="welcome-helper-character"
+            draggable="false"
+            onError={hideBrokenImage}
+            src={squareboxIdlePath}
+          />
+        ) : null}
         <div className="welcome-loop-card game-card">
           <p className="eyebrow">First-time path</p>
           <h3>Basic wheat loop</h3>

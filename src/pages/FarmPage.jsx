@@ -44,6 +44,12 @@ const objectiveCueAssetIds = {
   water: 'icon_water_drop',
 };
 
+const squareboxPoseAssetIds = {
+  harvest: 'character_squarebox_harvesting',
+  plant: 'character_squarebox_planting',
+  water: 'character_squarebox_watering',
+};
+
 const beginnerLoopSteps = [
   'Plant wheat seeds.',
   'Water wheat to start growth.',
@@ -188,7 +194,7 @@ function getSuggestedFarmAction(selectedSlot, plantIsValid, waterIsValid, harves
   if (!selectedSlot) {
     return {
       action: 'select',
-      message: 'Select a soil slot first.',
+      message: 'Select a crop slot first.',
     };
   }
 
@@ -222,7 +228,52 @@ function getSuggestedFarmAction(selectedSlot, plantIsValid, waterIsValid, harves
 
   return {
     action: 'none',
-    message: 'This soil slot has no farm action ready right now.',
+    message: 'This crop slot has no farm action ready right now.',
+  };
+}
+
+function getNoSelectedCropCopy(currentObjective) {
+  if (currentObjective.action === 'harvest') {
+    return {
+      heading: 'Choose ready wheat',
+      summary: 'Select a ready wheat slot to harvest it.',
+      readyTime: 'Ready time: Select ready wheat first.',
+      helper: 'Select a ready wheat slot to harvest.',
+    };
+  }
+
+  if (currentObjective.action === 'water') {
+    return {
+      heading: 'Choose planted wheat',
+      summary: 'Select planted wheat to water it and start growth.',
+      readyTime: 'Ready time: Select planted wheat first.',
+      helper: 'Select planted wheat to water.',
+    };
+  }
+
+  if (currentObjective.action === 'plant') {
+    return {
+      heading: 'Choose an empty crop slot',
+      summary: 'Select an empty soil slot to plant wheat seed.',
+      readyTime: 'Ready time: Select an empty crop slot first.',
+      helper: 'Select an empty soil slot to plant.',
+    };
+  }
+
+  if (currentObjective.action === 'stuck') {
+    return {
+      heading: 'Test build restart',
+      summary: 'This test build can get stuck here. Use Reset Dev State to restart.',
+      readyTime: 'Ready time: Reset Dev State can restart this test build.',
+      helper: 'Use Reset Dev State to restart this test build.',
+    };
+  }
+
+  return {
+    heading: 'Choose a crop slot',
+    summary: 'Select a crop slot to see status, ready time, and the next useful action.',
+    readyTime: 'Ready time: Select a crop slot first.',
+    helper: 'Select a crop slot first.',
   };
 }
 
@@ -236,7 +287,7 @@ function getSelectedCropStage(slot) {
 
 function getSelectedCropNextAction(slot, inventory) {
   if (!slot) {
-    return 'Select a soil slot first.';
+    return 'Select a crop slot first.';
   }
 
   if (slot.status === CROP_SLOT_STATUS.EMPTY) {
@@ -262,7 +313,7 @@ function getSelectedCropNextAction(slot, inventory) {
 
 function getSelectedCropReadyTime(slot, currentTimeMs = Date.now()) {
   if (!slot) {
-    return 'Ready time: Select a soil slot first.';
+    return 'Ready time: Select a crop slot first.';
   }
 
   if (slot.status === CROP_SLOT_STATUS.EMPTY) {
@@ -299,7 +350,7 @@ function getSelectedCropReadyTime(slot, currentTimeMs = Date.now()) {
 
 function getSelectedCropSummary(slot, inventory) {
   if (!slot) {
-    return 'Select a soil slot to see details.';
+    return 'Select a crop slot to see details.';
   }
 
   if (slot.status === CROP_SLOT_STATUS.EMPTY) {
@@ -333,6 +384,10 @@ function getSelectedCropIconAssetId(slot) {
   }
 
   return 'icon_wheat';
+}
+
+function getSquareboxHelperAssetId(currentObjectiveAction) {
+  return squareboxPoseAssetIds[currentObjectiveAction] ?? 'character_squarebox_idle';
 }
 
 function getPlantBlockedMessage(gameState, selectedSlot) {
@@ -403,6 +458,18 @@ function getWheatStageAssetId(slot) {
   return 'crop_wheat_stage_03_growing';
 }
 
+function getWheatStageClassName(wheatStageAssetId) {
+  const stageClassNames = {
+    crop_wheat_stage_00_seed: 'slot-wheat-stage-seed',
+    crop_wheat_stage_01_sprout: 'slot-wheat-stage-sprout',
+    crop_wheat_stage_02_small: 'slot-wheat-stage-small',
+    crop_wheat_stage_03_growing: 'slot-wheat-stage-growing',
+    crop_wheat_stage_04_mature: 'slot-wheat-stage-mature',
+  };
+
+  return stageClassNames[wheatStageAssetId] ?? '';
+}
+
 function getCropSlotArt(slot) {
   const wheatStageAssetId = getWheatStageAssetId(slot);
 
@@ -410,6 +477,7 @@ function getCropSlotArt(slot) {
     soilPath: getAssetPath(slot.status === 'empty' ? 'crop_soil_empty' : 'crop_soil_tilled'),
     thirstyOverlayPath: slot.isThirsty ? getAssetPath('crop_overlay_thirsty') : '',
     weedOverlayPath: slot.hasWeed ? getAssetPath('crop_overlay_weed') : '',
+    wheatClassName: getWheatStageClassName(wheatStageAssetId),
     wheatPath: wheatStageAssetId ? getAssetPath(wheatStageAssetId) : '',
   };
 }
@@ -470,9 +538,7 @@ export default function FarmPage({
 }) {
   const { farm, inventory } = gameState;
   const [selectedSlotId, setSelectedSlotId] = useState(null);
-  const [feedbackMessage, setFeedbackMessage] = useState(
-    'Select a soil slot, then plant or water wheat.',
-  );
+  const [feedbackMessage, setFeedbackMessage] = useState('');
   const [feedbackTone, setFeedbackTone] = useState('info');
   const selectedSlot = farm.cropSlots.find((slot) => slot.slotId === selectedSlotId) ?? null;
   const selectedSlotIndex = selectedSlot
@@ -484,6 +550,7 @@ export default function FarmPage({
   const selectedCropReadyTime = getSelectedCropReadyTime(selectedSlot);
   const selectedCropSummary = getSelectedCropSummary(selectedSlot, inventory);
   const currentObjective = getCurrentObjective(gameState);
+  const noSelectedCropCopy = getNoSelectedCropCopy(currentObjective);
   const plantIsValid = canPlantWheat(gameState, selectedSlot?.slotId);
   const waterIsValid = canWaterCrop(gameState, selectedSlot?.slotId);
   const harvestIsValid = canHarvestWheat(gameState, selectedSlot?.slotId);
@@ -493,8 +560,16 @@ export default function FarmPage({
     waterIsValid,
     harvestIsValid,
   );
+  const selectedCropPanelHeading = selectedSlot
+    ? `Slot ${selectedSlotIndex + 1} Details`
+    : noSelectedCropCopy.heading;
+  const selectedCropPanelSummary = selectedSlot ? selectedCropSummary : noSelectedCropCopy.summary;
+  const selectedCropPanelReadyTime = selectedSlot ? selectedCropReadyTime : noSelectedCropCopy.readyTime;
+  const selectedCropActionMessage = selectedSlot ? suggestedFarmAction.message : noSelectedCropCopy.helper;
+  const displayedFeedbackMessage = feedbackMessage || selectedCropActionMessage;
+  const displayedFeedbackTone = feedbackMessage ? feedbackTone : 'info';
   const farmBackgroundPath = getAssetPath('bg_farm_main');
-  const squareboxIdlePath = getAssetPath('character_squarebox_idle');
+  const squareboxHelperPath = getAssetPath(getSquareboxHelperAssetId(currentObjective.action));
   const plantButtonPath = getAssetPath(actionAssetIds.plantButton);
   const waterButtonPath = getAssetPath(actionAssetIds.waterButton);
   const harvestButtonPath = getAssetPath(actionAssetIds.harvestButton);
@@ -612,7 +687,7 @@ export default function FarmPage({
               <p className="eyebrow">Beginner loop</p>
               <h3>Squarebox says: keep it simple.</h3>
             </div>
-            <DecorativeImage className="beginner-guide-avatar" path={squareboxIdlePath} />
+            <DecorativeImage className="beginner-guide-avatar" path={squareboxHelperPath} />
           </div>
           <ol className="beginner-guide-steps">
             {beginnerLoopSteps.map((step) => (
@@ -635,11 +710,6 @@ export default function FarmPage({
             <span />
             <span />
           </div>
-          {squareboxIdlePath ? (
-            <div className="farm-character-perch" aria-hidden="true">
-              <DecorativeImage className="farm-character-image" path={squareboxIdlePath} />
-            </div>
-          ) : null}
           <div className="crop-grid" aria-label="Crop slots">
             {farm.cropSlots.map((slot, index) => {
               const slotArt = getCropSlotArt(slot);
@@ -664,7 +734,12 @@ export default function FarmPage({
                 >
                   <span className="crop-slot-art" aria-hidden="true">
                     <DecorativeImage className="slot-soil-image" path={slotArt.soilPath} />
-                    <DecorativeImage className="slot-wheat-image" path={slotArt.wheatPath} />
+                    <DecorativeImage
+                      className={['slot-wheat-image', slotArt.wheatClassName]
+                        .filter(Boolean)
+                        .join(' ')}
+                      path={slotArt.wheatPath}
+                    />
                     <DecorativeImage className="slot-overlay-image" path={slotArt.thirstyOverlayPath} />
                     <DecorativeImage className="slot-overlay-image" path={slotArt.weedOverlayPath} />
                   </span>
@@ -688,8 +763,8 @@ export default function FarmPage({
           <div className="crop-detail-header">
             <div>
               <p className="eyebrow">Selected Crop Slot</p>
-              <h3>{selectedSlot ? `Slot ${selectedSlotIndex + 1} Details` : 'Choose a soil slot'}</h3>
-              <p className="crop-detail-summary">{selectedCropSummary}</p>
+              <h3>{selectedCropPanelHeading}</h3>
+              <p className="crop-detail-summary">{selectedCropPanelSummary}</p>
             </div>
             <DecorativeImage className="crop-detail-icon" path={selectedCropIconPath} />
           </div>
@@ -763,12 +838,12 @@ export default function FarmPage({
           ) : (
             <div className="crop-detail-empty-message empty-state-card">
               <p>Select a crop slot to see status, ready time, and the next useful action.</p>
-              <strong>{selectedCropReadyTime}</strong>
+              <strong>{selectedCropPanelReadyTime}</strong>
             </div>
           )}
 
           <p className={`action-helper action-helper-${suggestedFarmAction.action}`}>
-            {suggestedFarmAction.message}
+            {selectedCropActionMessage}
           </p>
 
           <div className="farm-actions">
@@ -819,8 +894,8 @@ export default function FarmPage({
             </button>
           </div>
 
-          <p className={`feedback-message feedback-${feedbackTone}`} aria-live="polite">
-            {feedbackMessage}
+          <p className={`feedback-message feedback-${displayedFeedbackTone}`} aria-live="polite">
+            {displayedFeedbackMessage}
           </p>
         </aside>
       </div>

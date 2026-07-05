@@ -276,7 +276,7 @@ export default function HelpPage() {
               next action.
             </p>
             <ul>
-              <li>The panel helps explain what is happening in the selected soil slot.</li>
+              <li>The panel helps explain what is happening in the selected crop slot.</li>
               <li>Empty soil points players toward planting or buying wheat seeds.</li>
               <li>Wheat that needs water clearly shows `Needs Water` before growth can start.</li>
               <li>

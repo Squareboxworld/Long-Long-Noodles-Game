@@ -110,7 +110,7 @@ Status: Version 0.5 local manual test checklist
 
 - Farm page shows a `Selected Crop Slot` panel.
 - With no slot selected, the panel says `Select a soil slot to see details.`
-- With no slot selected, the panel shows `Ready time: Select a soil slot first.`
+- With no slot selected, the panel shows general `crop slot` guidance or current-goal guidance such as selecting ready wheat, planted wheat, or empty soil.
 - Selecting an empty slot shows Status `Empty Soil`, Crop `None`, Progress `0%`, Watered `No`, Next action `Plant wheat seed here.`, and `Ready time: Plant wheat seed first.` when wheat seeds are available.
 - Selecting an empty slot with no wheat seeds shows Next action `Buy wheat seeds at the Pawn Shop.`
 - Selecting wheat that needs water shows Status `Needs Water`, Stage `Seed Planted`, Progress `0%`, Watered `No`, Next action `Water this wheat to start growth.`, and `Ready time: Water this wheat to start growth.`
@@ -228,6 +228,51 @@ Status: Version 0.5 local manual test checklist
 - Inventory statistics, Farm Milestones, and Farm Activity Log still update from successful actions only.
 - Final UI shell QA does not add actions, pages, rewards, quests, backend, account, online save, or future systems.
 - Final UI shell QA does not change inventory values, prices, growth timing, harvest output, save key, or crop behavior.
+
+## Version 0.6 Art Fit Checks
+
+- Confirm all temporary Farm PNG files remain in place and no PNG files were edited, renamed, moved, or replaced.
+- Confirm the Farm background fills the scene without visible distortion and keeps the crop grid readable.
+- Confirm the crop grid remains exactly 4x4 with 16 clickable crop slots.
+- Confirm the crop grid sits intentionally inside the Farm scene and does not overflow the scene.
+- Confirm empty soil, planted wheat, growing wheat, and ready-to-harvest wheat images use contained sizing and do not stretch.
+- Confirm newly planted 0% wheat shows the seed stage clearly.
+- Confirm unwatered planted wheat remains at `0%` and still looks planted.
+- Confirm early sprout wheat is visible during low progress.
+- Confirm small wheat and growing wheat are readable without overflowing the crop slot.
+- Confirm mature wheat is visually different from growing wheat and clearly ready to harvest.
+- Confirm mature wheat emphasis stays subtle and does not use flashing or aggressive animation.
+- Confirm crop tile labels stay minimal: slot number, one main status label, and progress percentage only when wheat is present.
+- Confirm detailed crop information still appears in the Selected Crop Slot panel instead of being added back to crop tiles.
+- Confirm the selected crop slot outline is visible but does not cover too much crop art.
+- Confirm the Farm scene and crop grid do not overlap or cover the Selected Crop Slot panel.
+- Confirm desktop Farm scene proportions feel compact instead of like a huge wallpaper block.
+- Confirm the Selected Crop Slot panel and Plant, Water, Harvest action buttons are near the Farm scene and fully readable.
+- Confirm Squarebox appears as a small helper decoration without a large translucent box on desktop.
+- Confirm desktop 100% zoom has no Farm scene/detail panel overlap.
+- Confirm desktop 80% zoom has no Farm scene/detail panel overlap.
+- Confirm Squarebox decoration and Farm background do not block crop slot clicks or taps.
+- Confirm 360px and 390px mobile widths have no horizontal scrolling.
+- Confirm crop labels fit and crop art remains visible at 360px and 390px widths.
+- Confirm Plant, Water, and Harvest action buttons remain tappable below or near the Farm scene on mobile.
+- Confirm HUD resource icons for Gold, Wheat Seeds, and Wheat align with numbers without making chips too tall.
+- Confirm Farm resource summary icons for Gold, Wheat Seeds, and Wheat remain contained and readable.
+- Confirm Inventory resource cards show balanced icon badges, prominent numbers, and clean mobile stacking.
+- Confirm Pawn Shop inventory cards, helper rows, offer headings, and buy/sell buttons use contained resource/action icons.
+- Confirm Pawn Shop prices still read `Sell 1 wheat for 110 gold` and `Buy 1 wheat seed for 100 gold`.
+- Confirm Farm Plant, Water, and Harvest button PNG art stays decorative and does not compete with the HTML text labels.
+- Confirm unavailable Farm and Pawn Shop actions remain readable and visually softened rather than broken.
+- Confirm no-slot Farm wording says `crop slot` instead of only `soil slot` where the player may need to select planted or ready wheat.
+- Confirm ready-to-harvest guidance tells the player to select ready wheat when no slot is selected.
+- Confirm Welcome page shows Squarebox as a small decorative helper without crowding the first-time path or Start Farming button.
+- Confirm Farm page uses one Squarebox helper spot in the beginner guide instead of adding another character inside the Farm scene.
+- Confirm Squarebox helper poses for planting, watering, and harvesting are display-only and do not change action rules.
+- Confirm Squarebox does not cover crop slots, Selected Crop Slot details, or Plant / Water / Harvest buttons.
+- Confirm Squarebox is hidden or compact enough on 360px and 390px widths to avoid horizontal scrolling.
+- Confirm Inventory, Pawn Shop, and Help still render after the Farm fit pass.
+- Confirm the full loop still works: plant, water, grow, harvest, sell wheat, buy wheat seed, refresh, and load.
+- Confirm Version 0.6 art fit changes do not add actions, pages, rewards, quests, backend, account, online save, or future systems.
+- Confirm Version 0.6 art fit changes do not change inventory values, prices, growth timing, harvest output, save key, or crop behavior.
 
 ## Navigation
 

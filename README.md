@@ -4,7 +4,7 @@ A calm, cute, frontend-only farming prototype about slow progress and daily chec
 
 ## Current Status
 
-Version 0.5 continues UI shell polish on top of the stable Version 0.4 farming prototype. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, Farm UX polish, a local Farm Activity Log, a compact top resource HUD, shared card/panel styling, mobile HUD/navigation refinements, button/feedback polish, and final UI shell QA cleanup across the real current pages.
+Version 0.6 continues art-integration preparation on top of the stable Version 0.5 UI shell. The app has the React + Vite structure, placeholder screens, navigation, asset folders, GitHub-style Help / Manual / FAQ documentation, local React game state, planting, watering, localStorage save/load, timestamp-based wheat growth, basic harvesting, Pawn Shop buy/sell, clearer player guidance, lifetime progress fields, farm statistics summaries, read-only Farm Milestones, Local Save Info, a read-only selected crop detail panel, estimated ready time, friendly crop state wording, Farm UX polish, a local Farm Activity Log, a compact top resource HUD, shared card/panel styling, mobile HUD/navigation refinements, button/feedback polish, final UI shell QA cleanup, a temporary art audit, improved Farm background/crop tile fit, wheat stage readability polish, a compact non-overlapping Farm scene/detail layout, and resource icon/button asset fit polish across the real current pages.
 
 ## Run Locally
 
@@ -150,6 +150,26 @@ Version 0.5 starts by making the existing real pages feel more like one coherent
 - Final UI shell QA tightened mobile HUD sizing, reviewed navigation, shared panels, buttons, feedback, and phone-width layouts.
 - The HUD is local-only and does not add accounts, backend, online save, premium currency, XP, levels, rewards, or unavailable pages.
 - No gameplay balance, economy values, growth duration, save key, or crop behavior changed.
+
+## Version 0.6 Art Fit
+
+Version 0.6 begins with an audit of the temporary PNG art pipeline before final farm art replacement. Most assets can be replaced later by keeping the same folder, filename, and `.png` extension. See [docs/version-0.6-art-audit.md](docs/version-0.6-art-audit.md) and [docs/version-0.6-plan.md](docs/version-0.6-plan.md).
+
+- Farm background presentation was tightened so the image fills the scene without distorting and keeps the crop grid readable.
+- The crop grid stays 4x4, sits intentionally inside the Farm scene, and remains clickable/tappable.
+- Soil and wheat images use bounded containment so temporary PNGs are less likely to stretch or overflow.
+- Seed, sprout, small wheat, growing wheat, and mature wheat now use display-only stage sizing so each temporary PNG reads more clearly in the crop slot.
+- Mature wheat gets subtle ready-to-harvest emphasis while keeping labels readable.
+- The Farm scene uses compact desktop proportions with the Selected Crop Slot and action buttons nearby, then stacks safely on mobile.
+- The Farm background decorates the scene without becoming an oversized wallpaper block.
+- Squarebox is a small decorative helper instead of sitting inside a large translucent box.
+- HUD, Farm, Inventory, and Pawn Shop resource icons use consistent contained sizing so temporary PNGs do not crowd labels or numbers.
+- Farm action button art stays decorative while HTML text remains the readable button label.
+- Selected Crop Slot and bottom helper guidance now say `crop slot` generally and point players toward ready wheat, planted wheat, or empty soil when that is the useful next step.
+- Squarebox is used as a small decorative/helper character on Welcome and in the Farm beginner guide, with display-only Farm helper poses for planting, watering, and harvesting guidance.
+- Crop tile text stays minimal: slot number, one status label, and progress percentage when wheat is present.
+- Detailed crop information remains in the `Selected Crop Slot` panel.
+- No PNG files were modified for this fit pass, and no gameplay balance or future systems were added.
 
 ## Growth Mode
 
