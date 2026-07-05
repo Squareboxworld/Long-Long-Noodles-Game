@@ -61,7 +61,7 @@ export default function AppShell({
           <p className="eyebrow">Squarebox Farm</p>
           <h1>Road to Long Long Noodles</h1>
           <div className="shell-status-row" aria-label="Prototype status">
-            <span className="version-status-label">Version 0.5 Prototype</span>
+            <span className="version-status-label">Version 0.6 Prototype</span>
             <span className="shell-id-chip">Local Prototype</span>
             <span className="shell-mode-chip">{ACTIVE_GROWTH_MODE_LABEL} active</span>
           </div>

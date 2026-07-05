@@ -21,6 +21,7 @@ const sectionLinks = [
   ['version-0-5-page-cards', 'Version 0.5 Page Cards'],
   ['version-0-5-mobile-hud', 'Version 0.5 Mobile HUD'],
   ['version-0-5-feedback', 'Version 0.5 Feedback'],
+  ['version-0-6-visual-foundation', 'Version 0.6 Visual Foundation'],
   ['farming-basics', 'Farming Basics'],
   ['crop-growth', 'Crop Growth'],
   ['harvesting', 'Harvesting'],
@@ -134,9 +135,9 @@ export default function HelpPage() {
           <p className="eyebrow">GitHub-style documentation</p>
           <h2>Help / Manual</h2>
           <p>Read the guide if you are unsure what to do next.</p>
-          <p>Status: Version 0.5 local prototype guide. Last updated: July 5, 2026.</p>
+          <p>Status: Version 0.6 local prototype guide. Last updated: July 6, 2026.</p>
         </div>
-        <span className="manual-status-label">Version 0.5 guide</span>
+        <span className="manual-status-label">Version 0.6 guide</span>
       </header>
 
       <div className="manual-layout">
@@ -326,8 +327,8 @@ export default function HelpPage() {
             <h3>Version 0.5 Game HUD / UI Shell</h3>
             <p>
               Version 0.5 starts by making the existing pages feel more like one cozy local
-              farming game. The top shell now shows the game name, Squarebox Farm identity,
-              Version 0.5 Prototype status, Dev Fast Growth Mode, and current resources.
+              farming game. It introduced the top shell with the game name, Squarebox Farm
+              identity, prototype status, Dev Fast Growth Mode, and current resources.
             </p>
             <ul>
               <li>The HUD resource bar shows real gold, wheat seed, and wheat values.</li>
@@ -380,6 +381,22 @@ export default function HelpPage() {
               <li>Pawn Shop buy/sell cards show useful and unavailable states without changing prices.</li>
               <li>Reset Dev State is styled as a development/testing reset action.</li>
               <li>No new gameplay actions, rewards, backend, account, or online save were added.</li>
+            </ul>
+          </section>
+
+          <section className="manual-section" id="version-0-6-visual-foundation">
+            <h3>Version 0.6 Visual Foundation</h3>
+            <p>
+              Version 0.6 focuses on temporary art fit and final visual QA for the current
+              real pages. It keeps the farming loop, prices, save key, and local-only scope
+              unchanged.
+            </p>
+            <ul>
+              <li>Farm background, crop tile, wheat stage, resource icon, and button art fit were tightened with CSS/page polish.</li>
+              <li>Squarebox appears only as a small decorative helper and does not block crop slots or buttons.</li>
+              <li>Temporary PNG assets remain replaceable later by using the same filenames and manifest IDs.</li>
+              <li>No PNG files were replaced or generated during this visual foundation pass.</li>
+              <li>No Noodles, soup, customers, rewards, backend, account system, online save, or future systems were added.</li>
             </ul>
           </section>
 

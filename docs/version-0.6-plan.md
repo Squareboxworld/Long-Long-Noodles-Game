@@ -1,6 +1,6 @@
 # Road to Long Long Noodles - Version 0.6 Plan
 
-Status: Art audit and Farm visual fit preparation.
+Status: Final visual foundation QA completed.
 
 Version 0.6 is focused on making the existing temporary art pipeline easier to test and safer to replace later. It does not add gameplay systems, change balance, replace PNG files, or change the localStorage save key.
 
@@ -65,6 +65,13 @@ See `docs/version-0.6-art-audit.md` for the detailed asset audit.
 - Removed the separate Squarebox character from the Farm scene so it no longer competes with crop slots or the action panel.
 - Kept one Farm helper spot in the beginner guide card and uses existing Squarebox planting, watering, and harvesting poses as display-only guidance based on the current objective.
 - Left crop rules, action rules, progress counters, prices, PNG files, save behavior, and future systems unchanged.
+
+## Prompt 6: Final Visual QA And Cleanup
+
+- Updated current visible prototype labels from Version 0.5 to Version 0.6 where appropriate.
+- Reviewed Welcome, Farm, Inventory, Pawn Shop, and Help for small visual, wording, responsive, and documentation issues.
+- Confirmed Version 0.6 remains a visual foundation/art-fit milestone with temporary PNG assets.
+- Kept PNG files, gameplay balance, localStorage key, backend/account/online-save scope, and future systems unchanged.
 
 ## Replacement Guidance
 

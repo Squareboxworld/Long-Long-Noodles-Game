@@ -172,7 +172,7 @@ function getLocalSaveInfo(gameState) {
     ['Save location', 'This browser/device only'],
     ['Online account', 'Not available in this prototype'],
     ['Backend', 'Not connected'],
-    ['Version', 'Version 0.5 local prototype'],
+    ['Version', 'Version 0.6 local prototype'],
     ['Dev mode', `${ACTIVE_GROWTH_MODE_LABEL} active`],
     ['Created', formatSaveDate(gameState.createdAt)],
     ['Last saved', formatSaveDate(gameState.updatedAt)],

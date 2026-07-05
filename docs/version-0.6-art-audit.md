@@ -1,8 +1,8 @@
 # Road to Long Long Noodles - Version 0.6 Art Asset Audit
 
-Status: Version 0.6 Prompt 1 audit, Prompt 2 Farm visual fit, Prompt 3 wheat stage readability pass, and Prompt 4 resource icon/button fit polish.
+Status: Version 0.6 visual foundation audit and fit notes through final visual QA.
 
-This document audits the current temporary PNG asset setup before final farm visual replacement. Prompt 2 improves CSS-only Farm background and crop tile fit around these same assets. Prompt 3 improves CSS-only wheat stage readability. Prompt 4 improves CSS/page-level resource icon and button asset fit. It does not activate new gameplay, replace art, rename files, move assets, change balance, or change the localStorage save key.
+This document audits the current temporary PNG asset setup before final farm visual replacement. Prompt 2 improves CSS-only Farm background and crop tile fit around these same assets. Prompt 3 improves CSS-only wheat stage readability. Prompt 4 improves CSS/page-level resource icon and button asset fit. Prompt 6 completes final visual QA without changing the art files. It does not activate new gameplay, replace art, rename files, move assets, change balance, or change the localStorage save key.
 
 ## Replacement Rule
 

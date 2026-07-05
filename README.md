@@ -106,7 +106,7 @@ Version 0.3 starts a safe progress data foundation. The saved game state now inc
 - `Progress Summary` shows derived totals such as total wheat cycle actions, net gold from trading, and current farming capacity.
 - `Farm Milestones` show read-only progress markers derived from existing progress counters.
 - `Local Save Info` explains that saves are local browser/device data, not online account data.
-- Version 0.3 introduced a prototype status label; the current app shell now shows `Version 0.5 Prototype`.
+- Version 0.3 introduced a prototype status label; the current app shell now shows `Version 0.6 Prototype`.
 - Reset Dev State now clearly warns that it restarts this browser's prototype test state and may erase local progress here.
 - No rewards, XP, levels, unlocks, achievement logic, quests, account system, online save, or backend were added.
 
@@ -133,7 +133,7 @@ Version 0.4 starts with Farm page clarity. Selecting a crop slot now shows a com
 
 Version 0.5 starts by making the existing real pages feel more like one coherent cozy farming game.
 
-- The app shell now shows `Road to Long Long Noodles`, `Squarebox Farm`, `Version 0.5 Prototype`, `Local Prototype`, and Dev Fast Growth Mode status.
+- Version 0.5 introduced the app shell with `Road to Long Long Noodles`, `Squarebox Farm`, a prototype version label, `Local Prototype`, and Dev Fast Growth Mode status.
 - A compact top resource HUD shows real current values for gold, wheat seeds, and wheat.
 - The resource HUD updates from existing local game state when planting, harvesting, selling wheat, and buying wheat seeds.
 - Navigation still includes only Welcome, Farm, Inventory, Pawn Shop, and Help.
@@ -169,7 +169,9 @@ Version 0.6 begins with an audit of the temporary PNG art pipeline before final 
 - Squarebox is used as a small decorative/helper character on Welcome and in the Farm beginner guide, with display-only Farm helper poses for planting, watering, and harvesting guidance.
 - Crop tile text stays minimal: slot number, one status label, and progress percentage when wheat is present.
 - Detailed crop information remains in the `Selected Crop Slot` panel.
-- No PNG files were modified for this fit pass, and no gameplay balance or future systems were added.
+- Final Version 0.6 visual QA completed the visual foundation pass across Welcome, Farm, Inventory, Pawn Shop, and Help.
+- PNG assets remain temporary and were not modified for this fit pass. Final art can still replace the same filenames later.
+- No gameplay balance, backend/account/online save, or future systems were added.
 
 ## Growth Mode
 
@@ -181,7 +183,7 @@ Version 0.6 begins with an audit of the temporary PNG art pipeline before final 
 
 ## Help / Manual
 
-The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Version 0.5 Page Cards, Version 0.5 Mobile HUD, Version 0.5 Feedback, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
+The Help page is a GitHub-style tester guide with sections for Getting Started, First-Time Player Path, Version 0.2 Guidance, Version 0.3 Statistics, Version 0.3 Milestones, Version 0.4 Crop Detail, Version 0.4 Activity Log, Version 0.4 Farm UX, Version 0.5 HUD, Version 0.5 Page Cards, Version 0.5 Mobile HUD, Version 0.5 Feedback, Version 0.6 Visual Foundation, Farming Basics, Crop Growth, Harvesting, Inventory, Pawn Shop, Saving / localStorage, FAQ, Version 0.1 Scope, and Known Exclusions.
 
 ## Art Assets
 
